@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="QBF-Rp-PB9">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="KFp-Vm-K4s">
+            <objects>
+                <navigationController id="QBF-Rp-PB9" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ozy-CH-Lu2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="geS-fr-ReB" kind="relationship" relationship="rootViewController" id="EMz-iF-tU4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="avt-Ud-Iy2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="266" y="107"/>
+        </scene>
+        <!--Popover-->
+        <scene sceneID="DAI-sZ-Mja">
+            <objects>
+                <viewController id="geS-fr-ReB" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ixD-XH-j9U"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fy8-B8-FAY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4BN-3b-jmf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CC4-QJ-l9N">
+                                <rect key="frame" x="254" y="285" width="93" height="30"/>
+                                <state key="normal" title="showPopover"/>
+                                <connections>
+                                    <action selector="inShowPopover:" destination="geS-fr-ReB" eventType="touchUpInside" id="EM3-XX-iea"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择弹窗回调" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRK-Gu-3Ky">
+                                <rect key="frame" x="249" y="190" width="102" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="M5o-qW-q5z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CC4-QJ-l9N" firstAttribute="centerX" secondItem="4BN-3b-jmf" secondAttribute="centerX" id="4in-U8-RTN"/>
+                            <constraint firstItem="CC4-QJ-l9N" firstAttribute="centerY" secondItem="4BN-3b-jmf" secondAttribute="centerY" id="Qqa-Ga-Bn3"/>
+                            <constraint firstItem="nRK-Gu-3Ky" firstAttribute="centerX" secondItem="CC4-QJ-l9N" secondAttribute="centerX" id="XYh-YX-Zcx"/>
+                            <constraint firstItem="CC4-QJ-l9N" firstAttribute="top" secondItem="nRK-Gu-3Ky" secondAttribute="bottom" constant="74" id="tZ0-TW-CDK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Popover" id="xXS-78-Yrl">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="NlC-iH-Zda">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="O0W-VH-ph1">
+                                <rect key="frame" x="20" y="9" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="navigationItem_menu"/>
+                                <connections>
+                                    <action selector="showPopover:" destination="geS-fr-ReB" eventType="touchUpInside" id="1Y2-SV-aiq"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="HkD-ni-VFq">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yDx-1B-vCI">
+                                <rect key="frame" x="555" y="9" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="navigationItem_menu"/>
+                                <connections>
+                                    <action selector="showPopover:" destination="geS-fr-ReB" eventType="touchUpInside" id="tII-gN-4g6"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="label" destination="nRK-Gu-3Ky" id="y0Z-hd-aoN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rCP-RK-tfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="682" y="129"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="navigationItem_menu" width="25" height="25"/>
+    </resources>
+</document>
