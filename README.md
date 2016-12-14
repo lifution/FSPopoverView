@@ -8,7 +8,8 @@
 黑色风格: `PopoverViewStyleDark`
 ![Alt text][image-2]<p>
 可以设置图片也可以不设置图片
-```- (IBAction)showWithoutImage:(UIButton *)sender {
+```objc 
+- (IBAction)showWithoutImage:(UIButton *)sender {
     PopoverAction *action1 = [PopoverAction actionWithTitle:@"Title" handler:^(PopoverAction *action) {
         // 该Block不会导致内存泄露, Block内代码无需刻意去设置弱引用.
     }];
@@ -20,7 +21,8 @@
 ```
 ![Alt text][image-4]<p>
 也可以设置在弹出窗口时显示背景阴影层
-```- (IBAction)rightButtonAction:(UIButton *)sender {
+```objc
+- (IBAction)rightButtonAction:(UIButton *)sender {
     PopoverView *popoverView = [PopoverView popoverView];
     popoverView.showShade = YES; // 显示阴影背景
     [popoverView showToView:sender withActions:@[...]];
@@ -28,7 +30,8 @@
 ```
 ![Alt text][image-3]<p>
 使用方法:
-```// 附带左边图标的
+```objc 
+// 附带左边图标的
 PopoverAction *action1 = [PopoverAction actionWithImage:Image title:@"Title" handler:^(PopoverAction *action) {
     // 该Block不会导致内存泄露, Block内代码无需刻意去设置弱引用.
 }];
@@ -51,6 +54,4 @@ PopoverView is available under the MIT license. See the LICENSE file for more in
 [image-3]:http://oeysrv69b.bkt.clouddn.com/3.png
 [image-4]:http://oeysrv69b.bkt.clouddn.com/4.png
 [image-5]:http://oeysrv69b.bkt.clouddn.com/Popover.gif
-
-
 
