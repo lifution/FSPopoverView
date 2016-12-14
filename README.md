@@ -30,7 +30,7 @@
 }
 ```
 ![Alt text][image-3]<p>
-使用方法:
+使用方法: (将PopoverView文件夹拖到你的项目中然后 `#import "PopoverView.h"` )
 ```objc 
 // 附带左边图标的
 PopoverAction *action1 = [PopoverAction actionWithImage:Image title:@"Title" handler:^(PopoverAction *action) {
