@@ -71,6 +71,7 @@
     
     PopoverView *popoverView = [PopoverView popoverView];
     popoverView.style = PopoverViewStyleDark;
+    // 在没有系统控件的情况下调用可以使用显示在指定的点坐标的方法弹出菜单控件.
     [popoverView showToPoint:CGPointMake(20, 64) withActions:@[action1, action2, action3, action4]];
 }
 
