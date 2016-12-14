@@ -7,16 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B057A05C1E013E180076287C /* PopoverAction.m in Sources */ = {isa = PBXBuildFile; fileRef = B057A0571E013E180076287C /* PopoverAction.m */; };
+		B057A05D1E013E180076287C /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = B057A0591E013E180076287C /* PopoverView.m */; };
+		B057A05E1E013E180076287C /* PopoverViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B057A05B1E013E180076287C /* PopoverViewCell.m */; };
 		DEF76E691C3B863C00CC7AF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF76E681C3B863C00CC7AF9 /* main.m */; };
 		DEF76E6C1C3B863C00CC7AF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF76E6B1C3B863C00CC7AF9 /* AppDelegate.m */; };
 		DEF76E6F1C3B863C00CC7AF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF76E6E1C3B863C00CC7AF9 /* ViewController.m */; };
 		DEF76E721C3B863C00CC7AF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEF76E701C3B863C00CC7AF9 /* Main.storyboard */; };
 		DEF76E741C3B863C00CC7AF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEF76E731C3B863C00CC7AF9 /* Assets.xcassets */; };
 		DEF76E771C3B863C00CC7AF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEF76E751C3B863C00CC7AF9 /* LaunchScreen.storyboard */; };
-		DEF76E811C3BE2D100CC7AF9 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF76E801C3BE2D100CC7AF9 /* PopoverView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B057A0561E013E180076287C /* PopoverAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverAction.h; sourceTree = "<group>"; };
+		B057A0571E013E180076287C /* PopoverAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverAction.m; sourceTree = "<group>"; };
+		B057A0581E013E180076287C /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView.h; sourceTree = "<group>"; };
+		B057A0591E013E180076287C /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView.m; sourceTree = "<group>"; };
+		B057A05A1E013E180076287C /* PopoverViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverViewCell.h; sourceTree = "<group>"; };
+		B057A05B1E013E180076287C /* PopoverViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverViewCell.m; sourceTree = "<group>"; };
 		DEF76E641C3B863C00CC7AF9 /* Popover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Popover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEF76E681C3B863C00CC7AF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DEF76E6A1C3B863C00CC7AF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -27,8 +35,6 @@
 		DEF76E731C3B863C00CC7AF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEF76E761C3B863C00CC7AF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DEF76E781C3B863C00CC7AF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DEF76E7F1C3BE2D100CC7AF9 /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView.h; sourceTree = "<group>"; };
-		DEF76E801C3BE2D100CC7AF9 /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +48,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B057A0551E013E180076287C /* PopoverView */ = {
+			isa = PBXGroup;
+			children = (
+				B057A0581E013E180076287C /* PopoverView.h */,
+				B057A0591E013E180076287C /* PopoverView.m */,
+				B057A05A1E013E180076287C /* PopoverViewCell.h */,
+				B057A05B1E013E180076287C /* PopoverViewCell.m */,
+				B057A0561E013E180076287C /* PopoverAction.h */,
+				B057A0571E013E180076287C /* PopoverAction.m */,
+			);
+			path = PopoverView;
+			sourceTree = "<group>";
+		};
 		DEF76E5B1C3B863C00CC7AF9 = {
 			isa = PBXGroup;
 			children = (
@@ -61,7 +80,7 @@
 		DEF76E661C3B863C00CC7AF9 /* Popover */ = {
 			isa = PBXGroup;
 			children = (
-				DEF76E7E1C3BE2BD00CC7AF9 /* PopoverView */,
+				B057A0551E013E180076287C /* PopoverView */,
 				DEF76E6A1C3B863C00CC7AF9 /* AppDelegate.h */,
 				DEF76E6B1C3B863C00CC7AF9 /* AppDelegate.m */,
 				DEF76E6D1C3B863C00CC7AF9 /* ViewController.h */,
@@ -81,15 +100,6 @@
 				DEF76E681C3B863C00CC7AF9 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DEF76E7E1C3BE2BD00CC7AF9 /* PopoverView */ = {
-			isa = PBXGroup;
-			children = (
-				DEF76E7F1C3BE2D100CC7AF9 /* PopoverView.h */,
-				DEF76E801C3BE2D100CC7AF9 /* PopoverView.m */,
-			);
-			path = PopoverView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +133,8 @@
 				TargetAttributes = {
 					DEF76E631C3B863C00CC7AF9 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = Q5668NKEBD;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -162,10 +174,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B057A05E1E013E180076287C /* PopoverViewCell.m in Sources */,
 				DEF76E6F1C3B863C00CC7AF9 /* ViewController.m in Sources */,
+				B057A05D1E013E180076287C /* PopoverView.m in Sources */,
 				DEF76E6C1C3B863C00CC7AF9 /* AppDelegate.m in Sources */,
-				DEF76E811C3BE2D100CC7AF9 /* PopoverView.m in Sources */,
 				DEF76E691C3B863C00CC7AF9 /* main.m in Sources */,
+				B057A05C1E013E180076287C /* PopoverAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,7 +241,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -264,7 +278,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -275,8 +289,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = Q5668NKEBD;
 				INFOPLIST_FILE = Popover/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lifution.Popover;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -287,8 +303,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = Q5668NKEBD;
 				INFOPLIST_FILE = Popover/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lifution.Popover;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -314,6 +332,7 @@
 				DEF76E7D1C3B863C00CC7AF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

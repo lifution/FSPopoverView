@@ -25,7 +25,6 @@ float DegreesToRadians(float angle) {
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIView *shadeView; ///< 遮罩层
 @property (nonatomic, weak) CAShapeLayer *borderLayer; ///< 边框Layer
-@property (nonatomic, weak) UITapGestureRecognizer *tapGesture; ///< 点击背景阴影的手势
 
 #pragma mark - Data
 @property (nonatomic, copy) NSArray<PopoverAction *> *actions;
@@ -55,10 +54,14 @@ float DegreesToRadians(float angle) {
     _tableView.frame = CGRectMake(0, _isUpward ? kPopoverViewArrowHeight : 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - kPopoverViewArrowHeight);
 }
 
+- (void)dealloc {
+    NSLog(@"PopoverView dealloced");
+}
+
 #pragma mark - Setter
 - (void)setHideAfterTouchOutside:(BOOL)hideAfterTouchOutside {
     _hideAfterTouchOutside = hideAfterTouchOutside;
-    _tapGesture.enabled = _hideAfterTouchOutside;
+    _shadeView.userInteractionEnabled = _hideAfterTouchOutside;
 }
 
 - (void)setShowShade:(BOOL)showShade {
@@ -97,10 +100,8 @@ float DegreesToRadians(float angle) {
     
     // shadeView
     _shadeView = [[UIView alloc] initWithFrame:_keyWindow.bounds];
+    [_shadeView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hide)]];
     [self setShowShade:NO];
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hide)];
-    [_shadeView addGestureRecognizer:tapGesture];
-    _tapGesture = tapGesture;
     
     // tableView
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
