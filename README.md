@@ -1,13 +1,13 @@
 # Popover
-模拟QQ和微信消息页面的右上角弹窗效果
-所有效果如下图:
+模拟QQ和微信消息页面的右上角弹窗效果<p>
+所有效果如下图:<p>
 ![Alt text][image-5]<p>
-该弹窗有两种风格:
+该弹窗有两种风格:<p>
 白色风格: `PopoverViewStyleDefault` (默认为此风格)
 ![Alt text][image-1]<p>
-黑色风格: `PopoverViewStyleDark`
+黑色风格: `PopoverViewStyleDark`<p>
 ![Alt text][image-2]<p>
-可以设置图片也可以不设置图片
+可以设置图片也可以不设置图片:
 ```objc 
 - (IBAction)showWithoutImage:(UIButton *)sender {
     PopoverAction *action1 = [PopoverAction actionWithTitle:@"Title" handler:^(PopoverAction *action) {
@@ -20,7 +20,7 @@
 }
 ```
 ![Alt text][image-4]<p>
-也可以设置在弹出窗口时显示背景阴影层
+也可以设置在弹出窗口时显示背景阴影层:
 ```objc
 - (IBAction)rightButtonAction:(UIButton *)sender {
     PopoverView *popoverView = [PopoverView popoverView];
