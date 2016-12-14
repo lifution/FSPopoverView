@@ -38,7 +38,7 @@ PopoverAction *action1 = [PopoverAction actionWithImage:Image title:@"Title" han
 }];
 // 纯标题的
 PopoverAction *action1 = [PopoverAction actionWithTitle:@"Title" handler:^(PopoverAction *action) {
-        // 该Block不会导致内存泄露, Block内代码无需刻意去设置弱引用.
+    // 该Block不会导致内存泄露, Block内代码无需刻意去设置弱引用.
 }];
 ...
 PopoverView *popoverView = [PopoverView popoverView];
