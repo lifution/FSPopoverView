@@ -1,5 +1,6 @@
 # Popover
-模拟QQ和微信消息页面的右上角弹窗效果<p>
+###一款优雅好用的类似QQ和微信消息页面的右上角微型菜单弹窗, 最低支持iOS6<p>
+一款简单好用又优雅的子菜单弹窗, 你只要设定要指向的点(CGPoint)或者要指向的控件即可, 该弹窗控件会自动计算箭头指向和弹出位置<p>
 所有效果如下图:<p>
 ![Alt text][image-5]<p>
 该弹窗有两种风格:<p>
@@ -44,7 +45,11 @@ PopoverView *popoverView = [PopoverView popoverView];
 //popoverView.showShade = YES; // 显示阴影背景
 //popoverView.style = PopoverViewStyleDark; // 设置为黑色风格
 //popoverView.hideAfterTouchOutside = NO; // 点击外部时不允许隐藏
+// 有两种显示方法
+// 1. 显示在指定的控件
 [popoverView showToView:sender withActions:@[action1, ...]];
+// 2. 显示在指定的点(CGPoint), 该点的坐标是相对KeyWidnow的坐标.
+[popoverView showToPoint:CGPointMake(20, 64) withActions:@[action1, ...]];
 ```
 ## LICENSE
 PopoverView is available under the MIT license. See the LICENSE file for more info.
