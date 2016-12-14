@@ -3,7 +3,7 @@
 所有效果如下图:<p>
 ![Alt text][image-5]<p>
 该弹窗有两种风格:<p>
-白色风格: `PopoverViewStyleDefault` (默认为此风格)
+白色风格: `PopoverViewStyleDefault` (默认为此风格)<p>
 ![Alt text][image-1]<p>
 黑色风格: `PopoverViewStyleDark`<p>
 ![Alt text][image-2]<p>
