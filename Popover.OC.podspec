@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-	s.name = "Popover"
+	s.name = "Popover.OC"
 	s.version = "1.0"
 	s.summary = "A simple Popover of Menu"
 	s.license = { :type => "MIT", :file => "LICENSE" }
