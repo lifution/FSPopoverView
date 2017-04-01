@@ -1,5 +1,5 @@
 # Popover
-##一款优雅好用的类似QQ和微信消息页面的右上角微型菜单弹窗, 最低支持iOS6<p>
+#### 一款优雅好用的类似QQ和微信消息页面的右上角微型菜单弹窗, 最低支持iOS6<p>
 该弹窗控件有白色和黑色这两种风格, 使用方法也非常简单, 和系统的UIAlertController差不多的使用方法, 你只需要设置好对应的action和设定好弹窗箭头要指向的点(CGPoint)或者要指向的控件即可, 该弹窗控件会自动计算箭头指向和弹出位置<p>
 所有效果如下图:<p>
 ![Alt text][image-5]<p>
@@ -9,6 +9,7 @@
 黑色风格: `PopoverViewStyleDark`<p>
 ![Alt text][image-2]<p>
 可以设置图片也可以不设置图片:
+
 ```objc 
 - (IBAction)showWithoutImage:(UIButton *)sender {
     PopoverAction *action1 = [PopoverAction actionWithTitle:@"Title" handler:^(PopoverAction *action) {
@@ -20,8 +21,10 @@
     [popoverView showToView:sender withActions:@[action1, ...]];
 }
 ```
+
 ![Alt text][image-4]<p>
 也可以设置在弹出窗口时显示背景阴影层:
+
 ```objc
 - (IBAction)rightButtonAction:(UIButton *)sender {
     PopoverView *popoverView = [PopoverView popoverView];
@@ -29,8 +32,10 @@
     [popoverView showToView:sender withActions:@[...]];
 }
 ```
+
 ![Alt text][image-3]<p>
 使用方法: (将PopoverView文件夹拖到你的项目中然后 `#import "PopoverView.h"` )
+
 ```objc 
 // 附带左边图标的
 PopoverAction *action1 = [PopoverAction actionWithImage:Image title:@"Title" handler:^(PopoverAction *action) {
@@ -51,6 +56,7 @@ PopoverView *popoverView = [PopoverView popoverView];
 // 2. 显示在指定的点(CGPoint), 该点的坐标是相对KeyWidnow的坐标.
 [popoverView showToPoint:CGPointMake(20, 64) withActions:@[action1, ...]];
 ```
+
 ## LICENSE
 PopoverView is available under the MIT license. See the LICENSE file for more info.
 
