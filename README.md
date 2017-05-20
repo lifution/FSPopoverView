@@ -65,7 +65,7 @@ PopoverView *popoverView = [PopoverView popoverView];
 ```
 
 ## LICENSE
-PopoverView is available under the MIT license. See the LICENSE file for more info.
+PopoverView基于MIT许可开源. 更多许可信息可查看LICENSE文件.
 
 [image-1]:http://oeysrv69b.bkt.clouddn.com/1.png
 [image-2]:http://oeysrv69b.bkt.clouddn.com/2.png
