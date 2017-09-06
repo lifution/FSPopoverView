@@ -119,10 +119,8 @@ float DegreesToRadians(float angle) {
     NSAssert(_actions.count > 0, @"actions must not be nil or empty !");
     
     // 截取弹窗时相关数据
-    float arrowWidth = 28;
+    float arrowWidth = 22;
     float cornerRadius = 6.f;
-    float arrowCornerRadius = 2.5f;
-    float arrowBottomCornerRadius = 4.f;
     
     // 如果箭头指向的点过于偏左或者过于偏右则需要重新调整箭头 x 轴的坐标
     CGFloat minHorizontalEdge = kPopoverViewMargin + cornerRadius + arrowWidth/2 + 2;
@@ -183,13 +181,10 @@ float DegreesToRadians(float angle) {
                      clockwise:YES];
     // 箭头向上时的箭头位置
     if (_isUpward) {
+        
         [maskPath addLineToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, kPopoverViewArrowHeight)];
-        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowCornerRadius, arrowCornerRadius)
-                         controlPoint:CGPointMake(arrowPoint.x - arrowWidth/2 + arrowBottomCornerRadius, kPopoverViewArrowHeight)];
-        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowCornerRadius, arrowCornerRadius)
-                         controlPoint:arrowPoint];
-        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, kPopoverViewArrowHeight)
-                         controlPoint:CGPointMake(arrowPoint.x + arrowWidth/2 - arrowBottomCornerRadius, kPopoverViewArrowHeight)];
+        [maskPath addLineToPoint:arrowPoint];
+        [maskPath addLineToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, kPopoverViewArrowHeight)];
     }
     // 右上圆角
     [maskPath addLineToPoint:CGPointMake(currentW - cornerRadius, maskTop)];
@@ -207,13 +202,10 @@ float DegreesToRadians(float angle) {
                      clockwise:YES];
     // 箭头向下时的箭头位置
     if (!_isUpward) {
+        
         [maskPath addLineToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, currentH - kPopoverViewArrowHeight)];
-        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowCornerRadius, currentH - arrowCornerRadius)
-                         controlPoint:CGPointMake(arrowPoint.x + arrowWidth/2 - arrowBottomCornerRadius, currentH - kPopoverViewArrowHeight)];
-        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowCornerRadius, currentH - arrowCornerRadius)
-                         controlPoint:arrowPoint];
-        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, currentH - kPopoverViewArrowHeight)
-                         controlPoint:CGPointMake(arrowPoint.x - arrowWidth/2 + arrowBottomCornerRadius, currentH - kPopoverViewArrowHeight)];
+        [maskPath addLineToPoint:arrowPoint];
+        [maskPath addLineToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, currentH - kPopoverViewArrowHeight)];
     }
     // 左下圆角
     [maskPath addLineToPoint:CGPointMake(cornerRadius, maskBottom)];
