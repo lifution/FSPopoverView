@@ -1,10 +1,4 @@
-//
-//  PopoverAction.h
-//  Popover
-//
-//  Created by StevenLee on 2016/12/10.
-//  Copyright © 2016年 lifution. All rights reserved.
-//
+
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>

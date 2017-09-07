@@ -52,6 +52,7 @@
 
 - (IBAction)buttonAction:(UIButton *)sender {
     PopoverView *popoverView = [PopoverView popoverView];
+    popoverView.arrowStyle = PopoverViewArrowStyleTriangle;
     [popoverView showToView:sender withActions:[self QQActions]];
 }
 
