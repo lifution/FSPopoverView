@@ -65,6 +65,12 @@
       "idiom" : "iphone",
       "filename" : "Icon-60@3x.png",
       "scale" : "3x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "appstore.png",
+      "scale" : "1x"
     }
   ],
   "info" : {
