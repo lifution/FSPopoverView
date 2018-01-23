@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9760BDB2201715140006A2E3 /* PopoverAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 9760BDAF201715130006A2E3 /* PopoverAction.m */; };
-		9760BDB3201715140006A2E3 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9760BDB0201715130006A2E3 /* PopoverView.m */; };
-		9760BDB4201715140006A2E3 /* PopoverViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9760BDB1201715130006A2E3 /* PopoverViewCell.m */; };
+		B057A05C1E013E180076287C /* PopoverAction.m in Sources */ = {isa = PBXBuildFile; fileRef = B057A0571E013E180076287C /* PopoverAction.m */; };
+		B057A05D1E013E180076287C /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = B057A0591E013E180076287C /* PopoverView.m */; };
+		B057A05E1E013E180076287C /* PopoverViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B057A05B1E013E180076287C /* PopoverViewCell.m */; };
 		DEF76E691C3B863C00CC7AF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF76E681C3B863C00CC7AF9 /* main.m */; };
 		DEF76E6C1C3B863C00CC7AF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF76E6B1C3B863C00CC7AF9 /* AppDelegate.m */; };
 		DEF76E6F1C3B863C00CC7AF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF76E6E1C3B863C00CC7AF9 /* ViewController.m */; };
@@ -19,12 +19,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9760BDAC201715130006A2E3 /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView.h; sourceTree = "<group>"; };
-		9760BDAD201715130006A2E3 /* PopoverViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverViewCell.h; sourceTree = "<group>"; };
-		9760BDAE201715130006A2E3 /* PopoverAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverAction.h; sourceTree = "<group>"; };
-		9760BDAF201715130006A2E3 /* PopoverAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverAction.m; sourceTree = "<group>"; };
-		9760BDB0201715130006A2E3 /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView.m; sourceTree = "<group>"; };
-		9760BDB1201715130006A2E3 /* PopoverViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverViewCell.m; sourceTree = "<group>"; };
+		B057A0561E013E180076287C /* PopoverAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverAction.h; sourceTree = "<group>"; };
+		B057A0571E013E180076287C /* PopoverAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverAction.m; sourceTree = "<group>"; };
+		B057A0581E013E180076287C /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView.h; sourceTree = "<group>"; };
+		B057A0591E013E180076287C /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView.m; sourceTree = "<group>"; };
+		B057A05A1E013E180076287C /* PopoverViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverViewCell.h; sourceTree = "<group>"; };
+		B057A05B1E013E180076287C /* PopoverViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverViewCell.m; sourceTree = "<group>"; };
 		DEF76E641C3B863C00CC7AF9 /* Popover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Popover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEF76E681C3B863C00CC7AF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DEF76E6A1C3B863C00CC7AF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -48,18 +48,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9760BDAB201715130006A2E3 /* PopoverView */ = {
+		B057A0551E013E180076287C /* PopoverView */ = {
 			isa = PBXGroup;
 			children = (
-				9760BDAC201715130006A2E3 /* PopoverView.h */,
-				9760BDB0201715130006A2E3 /* PopoverView.m */,
-				9760BDAE201715130006A2E3 /* PopoverAction.h */,
-				9760BDAF201715130006A2E3 /* PopoverAction.m */,
-				9760BDAD201715130006A2E3 /* PopoverViewCell.h */,
-				9760BDB1201715130006A2E3 /* PopoverViewCell.m */,
+				B057A0581E013E180076287C /* PopoverView.h */,
+				B057A0591E013E180076287C /* PopoverView.m */,
+				B057A05A1E013E180076287C /* PopoverViewCell.h */,
+				B057A05B1E013E180076287C /* PopoverViewCell.m */,
+				B057A0561E013E180076287C /* PopoverAction.h */,
+				B057A0571E013E180076287C /* PopoverAction.m */,
 			);
 			path = PopoverView;
-			sourceTree = SOURCE_ROOT;
+			sourceTree = "<group>";
 		};
 		DEF76E5B1C3B863C00CC7AF9 = {
 			isa = PBXGroup;
@@ -80,7 +80,7 @@
 		DEF76E661C3B863C00CC7AF9 /* Popover */ = {
 			isa = PBXGroup;
 			children = (
-				9760BDAB201715130006A2E3 /* PopoverView */,
+				B057A0551E013E180076287C /* PopoverView */,
 				DEF76E6A1C3B863C00CC7AF9 /* AppDelegate.h */,
 				DEF76E6B1C3B863C00CC7AF9 /* AppDelegate.m */,
 				DEF76E6D1C3B863C00CC7AF9 /* ViewController.h */,
@@ -174,12 +174,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9760BDB4201715140006A2E3 /* PopoverViewCell.m in Sources */,
+				B057A05E1E013E180076287C /* PopoverViewCell.m in Sources */,
 				DEF76E6F1C3B863C00CC7AF9 /* ViewController.m in Sources */,
-				9760BDB3201715140006A2E3 /* PopoverView.m in Sources */,
+				B057A05D1E013E180076287C /* PopoverView.m in Sources */,
 				DEF76E6C1C3B863C00CC7AF9 /* AppDelegate.m in Sources */,
 				DEF76E691C3B863C00CC7AF9 /* main.m in Sources */,
-				9760BDB2201715140006A2E3 /* PopoverAction.m in Sources */,
+				B057A05C1E013E180076287C /* PopoverAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

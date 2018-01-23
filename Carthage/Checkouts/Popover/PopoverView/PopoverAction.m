@@ -1,11 +1,17 @@
-
+//
+//  PopoverAction.m
+//  Popover
+//
+//  Created by StevenLee on 2016/12/10.
+//  Copyright © 2016年 lifution. All rights reserved.
+//
 
 #import "PopoverAction.h"
 
 @interface PopoverAction ()
 
 @property (nonatomic, strong, readwrite) UIImage *image; ///< 图标
-@property (nonatomic, copy, readwrite) NSString *title; ///< 标题
+@property (nonatomic, copy, readwrite) NSString *title; ///< 风格
 @property (nonatomic, copy, readwrite) void(^handler)(PopoverAction *action); ///< 选择回调
 
 @end
