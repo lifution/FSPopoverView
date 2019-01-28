@@ -22,6 +22,10 @@ float PopoverViewDegreesToRadians(float angle)
 @property (nonatomic, strong) UIView *shadeView;                ///< 遮罩层
 @property (nonatomic, weak) CAShapeLayer *borderLayer;          ///< 边框Layer
 @property (nonatomic, weak) UITapGestureRecognizer *tapGesture; ///< 点击背景阴影的手势
+@property (nonatomic, weak) UISwipeGestureRecognizer *swipeGesture_Up; // 为了更好的体验，添加4个方向的手势来隐藏背景阴影
+@property (nonatomic, weak) UISwipeGestureRecognizer *swipeGesture_Down;
+@property (nonatomic, weak) UISwipeGestureRecognizer *swipeGesture_Left;
+@property (nonatomic, weak) UISwipeGestureRecognizer *swipeGesture_Right;
 
 #pragma mark - Data
 @property (nonatomic, copy) NSArray<PopoverAction *> *actions;
@@ -54,6 +58,10 @@ float PopoverViewDegreesToRadians(float angle)
 {
     _hideAfterTouchOutside = hideAfterTouchOutside;
     _tapGesture.enabled = _hideAfterTouchOutside;
+    _swipeGesture_Up.enabled = _hideAfterTouchOutside;
+    _swipeGesture_Down.enabled = _hideAfterTouchOutside;
+    _swipeGesture_Left.enabled = _hideAfterTouchOutside;
+    _swipeGesture_Right.enabled = _hideAfterTouchOutside;
 }
 
 - (void)setShowShade:(BOOL)showShade
@@ -105,9 +113,30 @@ float PopoverViewDegreesToRadians(float angle)
     // shadeView
     _shadeView = [[UIView alloc] initWithFrame:_keyWindow.bounds];
     [self setShowShade:NO];
+    
+    // add some GestureRecognizers, support 4 directions
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hide)];
+    UISwipeGestureRecognizer  *swipeGesture_Up =[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(hide)];
+    swipeGesture_Up.direction=UISwipeGestureRecognizerDirectionUp;
+    UISwipeGestureRecognizer  *swipeGesture_Down =[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(hide)];
+    swipeGesture_Down.direction=UISwipeGestureRecognizerDirectionDown;
+    UISwipeGestureRecognizer  *swipeGesture_Left =[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(hide)];
+    swipeGesture_Left.direction=UISwipeGestureRecognizerDirectionLeft;
+    UISwipeGestureRecognizer  *swipeGesture_Right =[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(hide)];
+    swipeGesture_Right.direction=UISwipeGestureRecognizerDirectionRight;
+    
     [_shadeView addGestureRecognizer:tapGesture];
+    [_shadeView addGestureRecognizer:swipeGesture_Up];
+    [_shadeView addGestureRecognizer:swipeGesture_Down];
+    [_shadeView addGestureRecognizer:swipeGesture_Left];
+    [_shadeView addGestureRecognizer:swipeGesture_Right];
+    [_shadeView addGestureRecognizer:tapGesture];
+
     _tapGesture = tapGesture;
+    _swipeGesture_Up = swipeGesture_Up;
+    _swipeGesture_Down = swipeGesture_Down;
+    _swipeGesture_Left = swipeGesture_Left;
+    _swipeGesture_Right = swipeGesture_Right;
     
     // tableView
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
