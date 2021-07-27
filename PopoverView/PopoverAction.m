@@ -6,6 +6,7 @@
 
 @property (nonatomic, strong, readwrite) UIImage *image; ///< 图标
 @property (nonatomic, copy, readwrite) NSString *title; ///< 标题
+@property (nonatomic, copy, readwrite) BOOL isDisabled;
 @property (nonatomic, copy, readwrite) void(^handler)(PopoverAction *action); ///< 选择回调
 
 @end
