@@ -1,0 +1,16 @@
+PODS:
+  - FSPopoverView (1.0.0)
+
+DEPENDENCIES:
+  - FSPopoverView (from `../`)
+
+EXTERNAL SOURCES:
+  FSPopoverView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FSPopoverView: cfdef9a75c8b19101a1b01d88b0d72587cae64f4
+
+PODFILE CHECKSUM: f52a009f658ffe343269478d40a7c4170152f1cb
+
+COCOAPODS: 1.11.2

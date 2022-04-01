@@ -1,0 +1,6 @@
+framework module FSPopoverView {
+  umbrella header "FSPopoverView-umbrella.h"
+
+  export *
+  module * { export * }
+}
