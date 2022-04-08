@@ -138,7 +138,7 @@ private extension FSPopoverView {
     
     /// Invoked after initialization.
     func p_didInitialize() {
-        backgroundColor = .cyan
+        backgroundColor = .clear
     }
     
     /// Reset all contents to default values.
@@ -164,7 +164,38 @@ private extension FSPopoverView {
         
         p_resetContents()
         
+        // size
+        let contentSize = dataSource?.contentSize(for: self) ?? .zero
+        let size: CGSize = {
+            var width: CGFloat = 0.0, height: CGFloat = 0.0
+            width = contentSize.width
+            height = _Consts.arrowSize.height + contentSize.height
+            width = max(width, _Consts.minimumSize.width)
+            height = max(height, _Consts.minimumSize.height)
+            return .init(width: width, height: height)
+        }()
         
+        // frame of the popover view
+        self.frame.size = size
+        
+        // background view
+        if let view = dataSource?.backgroundView(for: self) {
+            backgroundView = view
+            addSubview(view)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", metrics: nil, views: ["view": view]))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", metrics: nil, views: ["view": view]))
+        }
+        
+        // content view
+        if let view = dataSource?.contentView(for: self) {
+            contentView = view
+            addSubview(view)
+            #warning("TEST")
+            view.frame = .zero
+            view.frame.origin.y = _Consts.arrowSize.height
+            view.frame.size = contentSize
+        }
     }
 }
 
@@ -177,7 +208,7 @@ public extension FSPopoverView {
         
         reloadDataIfNeeded()
         
-        var frame = CGRect(x: 0.0, y: 0.0, width: 200.0, height: 200.0)
+        var frame = self.frame
         frame.origin.x = (displayWindow.bounds.width - frame.width) / 2
         frame.origin.y = {
             guard let superview = view.superview else { return 0.0 }

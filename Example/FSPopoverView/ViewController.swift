@@ -11,8 +11,12 @@ import FSPopoverView
 
 class ViewController: UIViewController {
     
-    private lazy var smileView: UIImageView = {
-        return UIImageView(image: .init(named: "smile"))
+    private lazy var ghostView: UIView = {
+        let label = UILabel()
+        label.text = "👻"
+        label.font = .systemFont(ofSize: 150.0)
+        label.textAlignment = .center
+        return label
     }()
     
     override func viewDidLoad() {
@@ -31,14 +35,16 @@ class ViewController: UIViewController {
 extension ViewController: FSPopoverViewDataSource {
     
     func backgroundView(for popoverView: FSPopoverView) -> UIView? {
-        return nil
+        let view = UIView()
+        view.backgroundColor = .cyan
+        return view
     }
     
     func contentView(for popoverView: FSPopoverView) -> UIView? {
-        return smileView
+        return ghostView
     }
     
     func contentSize(for popoverView: FSPopoverView) -> CGSize {
-        return smileView.image?.size ?? .zero
+        return ghostView.sizeThatFits(.init(width: 100.0, height: 100.0))
     }
 }
