@@ -11,6 +11,10 @@ import FSPopoverView
 
 class ViewController: UIViewController {
     
+    private lazy var smileView: UIImageView = {
+        return UIImageView(image: .init(named: "smile"))
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,6 +23,22 @@ class ViewController: UIViewController {
     @IBAction func onDidTap(_ sender: Any) {
         guard let button = sender as? UIButton else { return }
         let popoverView = FSPopoverView()
+        popoverView.dataSource = self
         popoverView.showTo(button)
+    }
+}
+
+extension ViewController: FSPopoverViewDataSource {
+    
+    func backgroundView(for popoverView: FSPopoverView) -> UIView? {
+        return nil
+    }
+    
+    func contentView(for popoverView: FSPopoverView) -> UIView? {
+        return smileView
+    }
+    
+    func contentSize(for popoverView: FSPopoverView) -> CGSize {
+        return smileView.image?.size ?? .zero
     }
 }

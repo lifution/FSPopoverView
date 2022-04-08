@@ -7,23 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A2664E7B21DAAB97A6CD73C0C5BC947 /* FSPopoverCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6666627C21A932DD2B4F5241A558144 /* FSPopoverCollectionView.swift */; };
 		0AAB427AC8420F1D98DEC6817EABF186 /* Pods-FSPopoverView_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DA1D0391B0D04025EFAC029C8A9D88A9 /* Pods-FSPopoverView_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0F532D18144B214A817874F143F87233 /* FSPopoverView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAB33C79CF17774F76400792B2C6DC1 /* FSPopoverView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1AED054D068F3F5901035ECFAC75CB16 /* FSPopoverView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 050BB5A1DF7E58F9A266AFF34C9B96E6 /* FSPopoverView-dummy.m */; };
+		0B7AF6ED1022FF9004F55959AD5F01F1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE2AD31F00D0EF9C522211BDDBF6C3C /* UIKit.framework */; };
+		1ECFFBE781E4AF72405D1414B0C078EB /* FSPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA44FAEFA702C3510F571605D05F1BA3 /* FSPopoverView.swift */; };
 		202C092848B3AFBEE8E65B0E09FE5FB9 /* Pods-FSPopoverView_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0997049362A8F84267B55AB49189F1AF /* Pods-FSPopoverView_Example-dummy.m */; };
-		27F935819C2A04D4E6CE88B25A431586 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
-		2EF97823C949E5EB59A2943BE48E77D6 /* FSPopoverCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957E11D53243E39FC96EB122F5E969D2 /* FSPopoverCollectionView.swift */; };
 		368208AA449DF588899D52067747A0E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
-		524B9810C12055E33628834E72335680 /* FSPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB683B2419EC4F788A78F89AB060B4F9 /* FSPopoverView.swift */; };
-		6CF1B7A7A6C5AB4B91CF08F4496C0822 /* FSPopoverViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA7A10A6FD5B82E04C2B0BB1EB5247 /* FSPopoverViewDataSource.swift */; };
-		818E732E2AB70D16930F9000589DE3DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE46B11FEBCBB7C689EB07A5E57BD38 /* QuartzCore.framework */; };
-		905FD5DCED488C1EE73F6C8B62E787FE /* FSPopoverTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BA4C8596A5109CECC7902ECC69CA79 /* FSPopoverTableView.swift */; };
-		CCAE65779A06445928DA3A68B4DAFF3D /* FSPopoverContainerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FE28F7CA06D6AF4649FBA52D4D79F0 /* FSPopoverContainerDataSource.swift */; };
-		CDD9F91997BB7A3024B76430D459C8C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE2AD31F00D0EF9C522211BDDBF6C3C /* UIKit.framework */; };
+		5202802D07D55F331AFA95D7D3DF22AE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE46B11FEBCBB7C689EB07A5E57BD38 /* QuartzCore.framework */; };
+		610153F9BC116AACCAD6374AC0E27057 /* FSPopoverViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6C8626766DE0680DFACFE3E46C30C7 /* FSPopoverViewDataSource.swift */; };
+		7A785B99F68018A4DCF46906737C95AD /* FSPopoverTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177D542A69913D62E47407DE25FF9A8B /* FSPopoverTableView.swift */; };
+		ADD93120EED3BD27FE214C02F3BD170A /* FSPopoverView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B0076BE9A39B4651973294AE3C2FDD /* FSPopoverView-dummy.m */; };
+		BB70F09851BCB76D7F3B40406DEFF633 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
+		E8EF02D6D5A25A80E554535B76BB2433 /* FSPopoverView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D6343069FC2AF3A38D001937F97A40F /* FSPopoverView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5BBF5B21F2CBC0FB6FE154E6FA19E10D /* PBXContainerItemProxy */ = {
+		FCB96986AA9CD69A5A4B3B0D7313B27B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -34,45 +33,44 @@
 
 /* Begin PBXFileReference section */
 		04C4443884F69BB6DE84760020CDBEEE /* Pods-FSPopoverView_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FSPopoverView_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		050BB5A1DF7E58F9A266AFF34C9B96E6 /* FSPopoverView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FSPopoverView-dummy.m"; sourceTree = "<group>"; };
 		0997049362A8F84267B55AB49189F1AF /* Pods-FSPopoverView_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FSPopoverView_Example-dummy.m"; sourceTree = "<group>"; };
+		0DAD26869AF6CFC81838C0F14A057DAB /* FSPopoverView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FSPopoverView-Info.plist"; sourceTree = "<group>"; };
 		15D5D9CDBD25200AB6E2C4A6154E7D68 /* Pods-FSPopoverView_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FSPopoverView_Example-Info.plist"; sourceTree = "<group>"; };
-		32443765247C9D3ABE97B24B80E0F0A1 /* FSPopoverView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = FSPopoverView.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		33EA7A10A6FD5B82E04C2B0BB1EB5247 /* FSPopoverViewDataSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSPopoverViewDataSource.swift; path = FSPopoverView/Classes/FSPopoverViewDataSource.swift; sourceTree = "<group>"; };
+		177D542A69913D62E47407DE25FF9A8B /* FSPopoverTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FSPopoverTableView.swift; sourceTree = "<group>"; };
+		21AE3585B9BF12FC703E197120F3ABAF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		29B0076BE9A39B4651973294AE3C2FDD /* FSPopoverView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FSPopoverView-dummy.m"; sourceTree = "<group>"; };
+		2D6343069FC2AF3A38D001937F97A40F /* FSPopoverView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSPopoverView-umbrella.h"; sourceTree = "<group>"; };
 		4208E765A1F72EB7317599323D808939 /* Pods-FSPopoverView_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FSPopoverView_Example.modulemap"; sourceTree = "<group>"; };
 		4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		59E540B5415C0A75000CEFE20A8C60C1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		670295D71223B33B1CC068575DB9E733 /* Pods-FSPopoverView_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-FSPopoverView_Example"; path = Pods_FSPopoverView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		77FE28F7CA06D6AF4649FBA52D4D79F0 /* FSPopoverContainerDataSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FSPopoverContainerDataSource.swift; sourceTree = "<group>"; };
+		6A9EC84173D249A61F39D89A067A28AC /* FSPopoverView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = FSPopoverView.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8B2C6142263F4CD11AD5CA3B3D87B597 /* FSPopoverView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FSPopoverView.debug.xcconfig; sourceTree = "<group>"; };
 		8CE2AD31F00D0EF9C522211BDDBF6C3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		8F14C7B9E8122BDC1B1E477F8F0065B0 /* FSPopoverView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FSPopoverView-Info.plist"; sourceTree = "<group>"; };
-		94735F3AC1E3988F045D01076A364568 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		8D31B3422EB626AFF3767FB5F6DF883C /* FSPopoverView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FSPopoverView.modulemap; sourceTree = "<group>"; };
 		950C6F8B5972459626ECE59405D863AD /* Pods-FSPopoverView_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FSPopoverView_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		957E11D53243E39FC96EB122F5E969D2 /* FSPopoverCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FSPopoverCollectionView.swift; sourceTree = "<group>"; };
 		959C0DB664138DB148838344DB00BF75 /* Pods-FSPopoverView_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FSPopoverView_Example-frameworks.sh"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9E3E75C63CD5FA8AE886B4562C8F2C9A /* FSPopoverView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FSPopoverView.modulemap; sourceTree = "<group>"; };
 		9FE46B11FEBCBB7C689EB07A5E57BD38 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		A3BA4C8596A5109CECC7902ECC69CA79 /* FSPopoverTableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FSPopoverTableView.swift; sourceTree = "<group>"; };
-		B915A4E8769D02829CB08B8051E9BB72 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		CD78048EEDE4409BAFA312E851C37C0D /* FSPopoverView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FSPopoverView.release.xcconfig; sourceTree = "<group>"; };
+		AA6C8626766DE0680DFACFE3E46C30C7 /* FSPopoverViewDataSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSPopoverViewDataSource.swift; path = FSPopoverView/Classes/FSPopoverViewDataSource.swift; sourceTree = "<group>"; };
+		B6666627C21A932DD2B4F5241A558144 /* FSPopoverCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FSPopoverCollectionView.swift; sourceTree = "<group>"; };
+		CA44FAEFA702C3510F571605D05F1BA3 /* FSPopoverView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSPopoverView.swift; path = FSPopoverView/Classes/FSPopoverView.swift; sourceTree = "<group>"; };
 		DA1D0391B0D04025EFAC029C8A9D88A9 /* Pods-FSPopoverView_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FSPopoverView_Example-umbrella.h"; sourceTree = "<group>"; };
+		DE809EB00EBF83DE09425C7336B03D24 /* FSPopoverView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSPopoverView-prefix.pch"; sourceTree = "<group>"; };
 		E171AD233D6B243D43ED051D9355DBB5 /* FSPopoverView */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FSPopoverView; path = FSPopoverView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E17CE003A7FDD62AEC9A2F11BD7136B1 /* FSPopoverView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FSPopoverView.debug.xcconfig; sourceTree = "<group>"; };
-		E3FFBA2CB8339100506396A04E112D01 /* FSPopoverView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSPopoverView-prefix.pch"; sourceTree = "<group>"; };
 		E7E3ABE1C331AB1F56C5F39BC694192E /* Pods-FSPopoverView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FSPopoverView_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		EAAB33C79CF17774F76400792B2C6DC1 /* FSPopoverView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSPopoverView-umbrella.h"; sourceTree = "<group>"; };
 		EB0A6F1D05D9883E3CA0F7D0A1112AF9 /* Pods-FSPopoverView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FSPopoverView_Example.release.xcconfig"; sourceTree = "<group>"; };
-		FB683B2419EC4F788A78F89AB060B4F9 /* FSPopoverView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSPopoverView.swift; path = FSPopoverView/Classes/FSPopoverView.swift; sourceTree = "<group>"; };
+		FFD4F976DC0D5FCEC985A64F4B5B7ECD /* FSPopoverView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FSPopoverView.release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		33F31D892C4E2687C9C58005B37517B2 /* Frameworks */ = {
+		09A9664DD47B2E77FF59F55CF028C1AF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27F935819C2A04D4E6CE88B25A431586 /* Foundation.framework in Frameworks */,
-				818E732E2AB70D16930F9000589DE3DE /* QuartzCore.framework in Frameworks */,
-				CDD9F91997BB7A3024B76430D459C8C3 /* UIKit.framework in Frameworks */,
+				BB70F09851BCB76D7F3B40406DEFF633 /* Foundation.framework in Frameworks */,
+				5202802D07D55F331AFA95D7D3DF22AE /* QuartzCore.framework in Frameworks */,
+				0B7AF6ED1022FF9004F55959AD5F01F1 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,70 +93,69 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0ED46A3F673DC796A280B777CAB7A9C3 /* Development Pods */ = {
+		324E8351A7BA151548E9B775C8C3C39C /* Collection */ = {
 			isa = PBXGroup;
 			children = (
-				3B671804B0F414E03101F16D64FEBA27 /* FSPopoverView */,
+				B6666627C21A932DD2B4F5241A558144 /* FSPopoverCollectionView.swift */,
+			);
+			name = Collection;
+			path = FSPopoverView/Classes/Collection;
+			sourceTree = "<group>";
+		};
+		5D2F97CA0D85150F59D17839DAC81F2E /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				6A9EC84173D249A61F39D89A067A28AC /* FSPopoverView.podspec */,
+				21AE3585B9BF12FC703E197120F3ABAF /* LICENSE */,
+				59E540B5415C0A75000CEFE20A8C60C1 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		60E21B60A33957688C459DFCAA73AFD0 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A91D9CBE59EA29FB9924987C07CCEB43 /* FSPopoverView */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		3B671804B0F414E03101F16D64FEBA27 /* FSPopoverView */ = {
+		972AC41649CD0BC6B56AB5C3ABE16488 /* Table */ = {
 			isa = PBXGroup;
 			children = (
-				FB683B2419EC4F788A78F89AB060B4F9 /* FSPopoverView.swift */,
-				33EA7A10A6FD5B82E04C2B0BB1EB5247 /* FSPopoverViewDataSource.swift */,
-				893C56C20535288DDEF1C6E131C4304D /* Collection */,
-				DC428F997D05D6D63D22FAEF977E0992 /* Container */,
-				7EEEE12CA5FCF74740DD2C9148792925 /* Pod */,
-				869EF347BAFCEE64F245AB011584DE69 /* Support Files */,
-				7625921CF5806BFCCD9B984C68522DC9 /* Table */,
-			);
-			name = FSPopoverView;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		7625921CF5806BFCCD9B984C68522DC9 /* Table */ = {
-			isa = PBXGroup;
-			children = (
-				A3BA4C8596A5109CECC7902ECC69CA79 /* FSPopoverTableView.swift */,
+				177D542A69913D62E47407DE25FF9A8B /* FSPopoverTableView.swift */,
 			);
 			name = Table;
 			path = FSPopoverView/Classes/Table;
 			sourceTree = "<group>";
 		};
-		7EEEE12CA5FCF74740DD2C9148792925 /* Pod */ = {
+		A91D9CBE59EA29FB9924987C07CCEB43 /* FSPopoverView */ = {
 			isa = PBXGroup;
 			children = (
-				32443765247C9D3ABE97B24B80E0F0A1 /* FSPopoverView.podspec */,
-				94735F3AC1E3988F045D01076A364568 /* LICENSE */,
-				B915A4E8769D02829CB08B8051E9BB72 /* README.md */,
+				CA44FAEFA702C3510F571605D05F1BA3 /* FSPopoverView.swift */,
+				AA6C8626766DE0680DFACFE3E46C30C7 /* FSPopoverViewDataSource.swift */,
+				324E8351A7BA151548E9B775C8C3C39C /* Collection */,
+				5D2F97CA0D85150F59D17839DAC81F2E /* Pod */,
+				AA1ADC7288FBC651002C8F444253C198 /* Support Files */,
+				972AC41649CD0BC6B56AB5C3ABE16488 /* Table */,
 			);
-			name = Pod;
+			name = FSPopoverView;
+			path = ../..;
 			sourceTree = "<group>";
 		};
-		869EF347BAFCEE64F245AB011584DE69 /* Support Files */ = {
+		AA1ADC7288FBC651002C8F444253C198 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				9E3E75C63CD5FA8AE886B4562C8F2C9A /* FSPopoverView.modulemap */,
-				050BB5A1DF7E58F9A266AFF34C9B96E6 /* FSPopoverView-dummy.m */,
-				8F14C7B9E8122BDC1B1E477F8F0065B0 /* FSPopoverView-Info.plist */,
-				E3FFBA2CB8339100506396A04E112D01 /* FSPopoverView-prefix.pch */,
-				EAAB33C79CF17774F76400792B2C6DC1 /* FSPopoverView-umbrella.h */,
-				E17CE003A7FDD62AEC9A2F11BD7136B1 /* FSPopoverView.debug.xcconfig */,
-				CD78048EEDE4409BAFA312E851C37C0D /* FSPopoverView.release.xcconfig */,
+				8D31B3422EB626AFF3767FB5F6DF883C /* FSPopoverView.modulemap */,
+				29B0076BE9A39B4651973294AE3C2FDD /* FSPopoverView-dummy.m */,
+				0DAD26869AF6CFC81838C0F14A057DAB /* FSPopoverView-Info.plist */,
+				DE809EB00EBF83DE09425C7336B03D24 /* FSPopoverView-prefix.pch */,
+				2D6343069FC2AF3A38D001937F97A40F /* FSPopoverView-umbrella.h */,
+				8B2C6142263F4CD11AD5CA3B3D87B597 /* FSPopoverView.debug.xcconfig */,
+				FFD4F976DC0D5FCEC985A64F4B5B7ECD /* FSPopoverView.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/FSPopoverView";
-			sourceTree = "<group>";
-		};
-		893C56C20535288DDEF1C6E131C4304D /* Collection */ = {
-			isa = PBXGroup;
-			children = (
-				957E11D53243E39FC96EB122F5E969D2 /* FSPopoverCollectionView.swift */,
-			);
-			name = Collection;
-			path = FSPopoverView/Classes/Collection;
 			sourceTree = "<group>";
 		};
 		CE799A485962FC56B28746557B7567DF /* Pods-FSPopoverView_Example */ = {
@@ -182,7 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				0ED46A3F673DC796A280B777CAB7A9C3 /* Development Pods */,
+				60E21B60A33957688C459DFCAA73AFD0 /* Development Pods */,
 				03C5C200A0787E300053CFA8F53CA094 /* Frameworks */,
 				F94E3DE0FE6EDFFC1F0C204D9D1AC0C4 /* Products */,
 				D04EE9BDF700C377F08502E8B58DCD63 /* Targets Support Files */,
@@ -195,15 +192,6 @@
 				CE799A485962FC56B28746557B7567DF /* Pods-FSPopoverView_Example */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		DC428F997D05D6D63D22FAEF977E0992 /* Container */ = {
-			isa = PBXGroup;
-			children = (
-				77FE28F7CA06D6AF4649FBA52D4D79F0 /* FSPopoverContainerDataSource.swift */,
-			);
-			name = Container;
-			path = FSPopoverView/Classes/Container;
 			sourceTree = "<group>";
 		};
 		F0A778C0229E9BF1FD97896B93F3272B /* iOS */ = {
@@ -228,14 +216,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		208DDB45EFFB97AB6558BC2D58018B86 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0F532D18144B214A817874F143F87233 /* FSPopoverView-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AADE2741C216B22EB1108AAC233039D6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -244,17 +224,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D38AED61BED1497D5DAB9583BCF498A9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8EF02D6D5A25A80E554535B76BB2433 /* FSPopoverView-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		13679A596750EEFFE124D17E109491E5 /* FSPopoverView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B00D63652BD69943E6A43575BC91EA71 /* Build configuration list for PBXNativeTarget "FSPopoverView" */;
+			buildConfigurationList = 63F0F9C8B4E78A9BE5B9B643B0BC7BB1 /* Build configuration list for PBXNativeTarget "FSPopoverView" */;
 			buildPhases = (
-				208DDB45EFFB97AB6558BC2D58018B86 /* Headers */,
-				4A5920F3AF4F4213106D2B685D310092 /* Sources */,
-				33F31D892C4E2687C9C58005B37517B2 /* Frameworks */,
-				EB941F9B0B8F0FE9F55E9539F5005449 /* Resources */,
+				D38AED61BED1497D5DAB9583BCF498A9 /* Headers */,
+				E3BCF14ED661AE0268665DA783066408 /* Sources */,
+				09A9664DD47B2E77FF59F55CF028C1AF /* Frameworks */,
+				A01F39288DCE7AF2BFAF52974117FABC /* Resources */,
 			);
 			buildRules = (
 			);
@@ -277,7 +265,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				8D5649BC21B2BADD548438B53BDA4008 /* PBXTargetDependency */,
+				81BC954DAD7B31236D1B03A3F5071444 /* PBXTargetDependency */,
 			);
 			name = "Pods-FSPopoverView_Example";
 			productName = Pods_FSPopoverView_Example;
@@ -321,7 +309,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EB941F9B0B8F0FE9F55E9539F5005449 /* Resources */ = {
+		A01F39288DCE7AF2BFAF52974117FABC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -331,19 +319,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4A5920F3AF4F4213106D2B685D310092 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2EF97823C949E5EB59A2943BE48E77D6 /* FSPopoverCollectionView.swift in Sources */,
-				CCAE65779A06445928DA3A68B4DAFF3D /* FSPopoverContainerDataSource.swift in Sources */,
-				905FD5DCED488C1EE73F6C8B62E787FE /* FSPopoverTableView.swift in Sources */,
-				524B9810C12055E33628834E72335680 /* FSPopoverView.swift in Sources */,
-				1AED054D068F3F5901035ECFAC75CB16 /* FSPopoverView-dummy.m in Sources */,
-				6CF1B7A7A6C5AB4B91CF08F4496C0822 /* FSPopoverViewDataSource.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CDC61ACF5CD899FD4239FC7A89D94E44 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -352,18 +327,62 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E3BCF14ED661AE0268665DA783066408 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A2664E7B21DAAB97A6CD73C0C5BC947 /* FSPopoverCollectionView.swift in Sources */,
+				7A785B99F68018A4DCF46906737C95AD /* FSPopoverTableView.swift in Sources */,
+				1ECFFBE781E4AF72405D1414B0C078EB /* FSPopoverView.swift in Sources */,
+				ADD93120EED3BD27FE214C02F3BD170A /* FSPopoverView-dummy.m in Sources */,
+				610153F9BC116AACCAD6374AC0E27057 /* FSPopoverViewDataSource.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8D5649BC21B2BADD548438B53BDA4008 /* PBXTargetDependency */ = {
+		81BC954DAD7B31236D1B03A3F5071444 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FSPopoverView;
 			target = 13679A596750EEFFE124D17E109491E5 /* FSPopoverView */;
-			targetProxy = 5BBF5B21F2CBC0FB6FE154E6FA19E10D /* PBXContainerItemProxy */;
+			targetProxy = FCB96986AA9CD69A5A4B3B0D7313B27B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		2BC9038DEB8FBF1E1E273F624EA4A401 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B2C6142263F4CD11AD5CA3B3D87B597 /* FSPopoverView.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FSPopoverView/FSPopoverView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FSPopoverView/FSPopoverView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FSPopoverView/FSPopoverView.modulemap";
+				PRODUCT_MODULE_NAME = FSPopoverView;
+				PRODUCT_NAME = FSPopoverView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		4A9BEBDABEB490171F13DE3D4D665357 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E7E3ABE1C331AB1F56C5F39BC694192E /* Pods-FSPopoverView_Example.debug.xcconfig */;
@@ -397,6 +416,39 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		737CB71CC7BA8EF3805DD9AD87F314A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFD4F976DC0D5FCEC985A64F4B5B7ECD /* FSPopoverView.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FSPopoverView/FSPopoverView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FSPopoverView/FSPopoverView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FSPopoverView/FSPopoverView.modulemap";
+				PRODUCT_MODULE_NAME = FSPopoverView;
+				PRODUCT_NAME = FSPopoverView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		74B1381E433D2C097B848B7C8BEDBC3F /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -561,71 +613,6 @@
 			};
 			name = Debug;
 		};
-		E370EF5FC1A42E375A299FD6016F4CFF /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD78048EEDE4409BAFA312E851C37C0D /* FSPopoverView.release.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/FSPopoverView/FSPopoverView-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FSPopoverView/FSPopoverView-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FSPopoverView/FSPopoverView.modulemap";
-				PRODUCT_MODULE_NAME = FSPopoverView;
-				PRODUCT_NAME = FSPopoverView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		E3DE19E66B418A1B19F907A54C2776EB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E17CE003A7FDD62AEC9A2F11BD7136B1 /* FSPopoverView.debug.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/FSPopoverView/FSPopoverView-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FSPopoverView/FSPopoverView-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FSPopoverView/FSPopoverView.modulemap";
-				PRODUCT_MODULE_NAME = FSPopoverView;
-				PRODUCT_NAME = FSPopoverView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -647,11 +634,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B00D63652BD69943E6A43575BC91EA71 /* Build configuration list for PBXNativeTarget "FSPopoverView" */ = {
+		63F0F9C8B4E78A9BE5B9B643B0BC7BB1 /* Build configuration list for PBXNativeTarget "FSPopoverView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E3DE19E66B418A1B19F907A54C2776EB /* Debug */,
-				E370EF5FC1A42E375A299FD6016F4CFF /* Release */,
+				2BC9038DEB8FBF1E1E273F624EA4A401 /* Debug */,
+				737CB71CC7BA8EF3805DD9AD87F314A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
