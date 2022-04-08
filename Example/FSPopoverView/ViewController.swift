@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FSPopoverView
 
 class ViewController: UIViewController {
     
@@ -14,5 +15,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
     }
+    
+    @IBAction func onDidTap(_ sender: Any) {
+        guard let button = sender as? UIButton else { return }
+        let popoverView = FSPopoverView()
+        popoverView.showTo(button)
+    }
 }
-

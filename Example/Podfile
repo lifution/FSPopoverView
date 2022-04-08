@@ -3,3 +3,7 @@ target 'FSPopoverView_Example' do
   use_frameworks!
   pod 'FSPopoverView', :path => '../'
 end
+
+post_install do |installer|
+  installer.pods_project.root_object.attributes["ORGANIZATIONNAME"] = "Sheng"
+end
