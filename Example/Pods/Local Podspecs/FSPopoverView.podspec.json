@@ -15,7 +15,7 @@
   "frameworks": [
     "UIKit",
     "Foundation",
-    "QuartzCore"
+    "CoreGraphics"
   ],
   "swift_versions": "5",
   "platforms": {

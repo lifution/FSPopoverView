@@ -10,6 +10,12 @@ import UIKit
 
 open class FSPopoverView: UIView {
     
+    // MARK: ArrowDirection
+    
+    public enum ArrowDirection {
+        case up, down, left, right
+    }
+    
     // MARK: Properties/Open
     
     /// The object that acts as the data source of the popover view.
@@ -23,6 +29,57 @@ open class FSPopoverView: UIView {
         }
     }
     
+    /// The direction the arrow points to.
+    ///
+    /// * You can change this property even though the popover view is displaying.
+    /// * A reload request will be set when this property is changed.
+    /// * View `autosetsArrowDirection` property for more information about this
+    ///   property.
+    ///
+    open var arrowDirection = FSPopoverView.ArrowDirection.up {
+        didSet {
+            if arrowDirection != oldValue {
+                setNeedsReload()
+            }
+        }
+    }
+    
+    /// Whether to set the arrow direction automatically.
+    /// Default is true.
+    ///
+    /// * When this property is true, the popover view will determine the direction
+    ///   of the arrow and update the `arrowDirection` property automatically.
+    /// * When this property is false, The popover view will calculate it's position
+    ///   according to the `arrowDirection` property, and the `arrowDirection` property
+    ///   will never be changed by inside.
+    ///
+    /// - Important
+    ///     - When this property is true, the popover view will calculate the appropriate
+    ///       position based on the size of it's container and the position of the arrow.
+    ///       So, when you set this property to false, you should ensure that there is enough
+    ///       space in the container for the popover view to appear, otherwise the popover
+    ///       view may be in the wrong place.
+    ///
+    open var autosetsArrowDirection = true
+    
+    // MARK: Properties/Public
+    
+    /// The point the arrow points to.
+    /// Default is (0, 0).
+    ///
+    /// * This point is in the coordinate system of `containerView`. (same as the popover view)
+    /// * This point will be recalculated on every reload operation.
+    ///
+    public private(set) var arrowPoint: CGPoint = .zero
+    
+    /// The container view in which the popover view is displayed.
+    ///
+    /// * If there is no specified container view, a window will be automatically created
+    ///   inside the popover view as a container view, and this window will be the same
+    ///   size as the current screen.
+    ///
+    weak public private(set) var containerView: UIView?
+    
     // MARK: Properties/Private
     
     private var needsReload = false
@@ -31,11 +88,16 @@ open class FSPopoverView: UIView {
     
     private var contentView: UIView?
     
-    #warning("TEST")
+    /// Size of `containerView`.
+    private var containerSize: CGSize = .zero
+    
+    /// This rect is in the coordinate system of `containerView`.
+    private var arrowReferRect: CGRect = .zero
+    
     private lazy var displayWindow: UIWindow = {
-        let window = UIWindow(frame: UIScreen.main.bounds)
+        let window = UIWindow()
         window.windowLevel = .statusBar - 1
-        window.backgroundColor = .init(white: 0.0, alpha: 0.38)
+        window.backgroundColor = .clear
         return window
     }()
     
@@ -104,17 +166,15 @@ open class FSPopoverView: UIView {
         }
     }
     
-    /// Reload all contents of the popover view.
+    /// Reload the contents immediately, even without any reload requests.
     ///
     /// - Requires
     ///     * Subclasses **must** call `super.reloadData()` when overriding this method,
     ///       otherwise some bugs may occur.
     ///
     /// - Note
-    ///     * This method will force the view to reload its contents immediately, even
-    ///       without any reload requests.
     ///     * Calling this method will not have any animation, even if some contents are
-    ///       changed, like size of container and point of anchor and so on.
+    ///       changed, like size of content and point of anchor and so on.
     ///     * You should call this method on the main thread.
     ///
     @objc dynamic open func reloadData() {
@@ -143,10 +203,10 @@ private extension FSPopoverView {
     
     /// Reset all contents to default values.
     func p_resetContents() {
-        backgroundView?.removeFromSuperview()
-        backgroundView = nil
         contentView?.removeFromSuperview()
+        backgroundView?.removeFromSuperview()
         contentView = nil
+        backgroundView = nil
     }
     
     /// Reload all contents and recalculate the position and size of the popover view.
@@ -162,26 +222,137 @@ private extension FSPopoverView {
         
         needsReload = false
         
+        // clear old contents
         p_resetContents()
         
-        // size
+        // content size
         let contentSize = dataSource?.contentSize(for: self) ?? .zero
-        let size: CGSize = {
-            var width: CGFloat = 0.0, height: CGFloat = 0.0
-            width = contentSize.width
-            height = _Consts.arrowSize.height + contentSize.height
-            width = max(width, _Consts.minimumSize.width)
-            height = max(height, _Consts.minimumSize.height)
-            return .init(width: width, height: height)
-        }()
+        
+        // container safe area insets
+        let safeAreaInsets = dataSource?.containerSafeAreaInsets(for: self) ?? .zero
+        let safeContainerRect = CGRect(origin: .zero, size: containerSize).inset(by: safeAreaInsets)
+        
+        // arrow direction
+        if autosetsArrowDirection {
+            let referRect = arrowReferRect.insetBy(dx: -_Consts.arrowSize.height, dy: -_Consts.arrowSize.height)
+            let topSpace    = CGSize(width: safeContainerRect.width, height: max(0.0, referRect.minY - safeContainerRect.minY))
+            let leftSpace   = CGSize(width: max(0.0, referRect.minX - safeContainerRect.minX), height: safeContainerRect.height)
+            let bottomSpace = CGSize(width: safeContainerRect.width, height: max(0.0, safeContainerRect.maxY - referRect.maxY))
+            let rightSpace  = CGSize(width: max(0.0, safeContainerRect.maxX - referRect.maxX), height: safeContainerRect.height)
+            // priority: up > down > left > right
+            if bottomSpace.width >= contentSize.width && bottomSpace.height >= contentSize.height {
+                arrowDirection = .up
+            } else if topSpace.width >= contentSize.width && topSpace.height >= contentSize.height {
+                arrowDirection = .down
+            } else if rightSpace.width >= contentSize.width && rightSpace.height >= contentSize.height {
+                arrowDirection = .left
+            } else if leftSpace.width >= contentSize.width && leftSpace.height >= contentSize.height {
+                arrowDirection = .right
+            } else {
+                // `up` will be set if there is not enough space to show popover view.
+                arrowDirection = .up
+                #if DEBUG
+                let message = """
+                ⚠️ Not enough space to show popover view, \
+                you may need to check if the popover view is showing on the wrong view. ⚠️
+                """
+                print(message)
+                #endif
+            }
+        }
+        
+        // arrow point
+        do {
+            var point = CGPoint.zero
+            switch arrowDirection {
+            case .up:
+                point.x = arrowReferRect.midX
+                point.y = arrowReferRect.maxY
+            case .down:
+                point.x = arrowReferRect.midX
+                point.y = arrowReferRect.minY
+            case .left:
+                point.x = arrowReferRect.maxX
+                point.y = arrowReferRect.midY
+            case .right:
+                point.x = arrowReferRect.minX
+                point.y = arrowReferRect.midY
+            }
+            // If the point is on the edge, a little adjustment is required for improving the visual effect.
+            let arrowPointSafeRect: CGRect = {
+                var rect = safeContainerRect.insetBy(dx: _Consts.cornerRadius, dy: _Consts.cornerRadius)
+                rect = rect.insetBy(dx: 3.0, dy: 3.0)
+                rect = rect.insetBy(dx: _Consts.arrowSize.width / 2, dy: _Consts.arrowSize.width / 2)
+                return rect
+            }()
+            if !arrowPointSafeRect.contains(point) {
+                switch arrowDirection {
+                case .up, .down:
+                    if point.x < arrowPointSafeRect.minX {
+                        point.x = arrowPointSafeRect.minX
+                    }
+                    if point.x > arrowPointSafeRect.maxX {
+                        point.x = arrowPointSafeRect.maxX
+                    }
+                case .left, .right:
+                    if point.y < arrowPointSafeRect.minY {
+                        point.y = arrowPointSafeRect.minY
+                    }
+                    if point.y > arrowPointSafeRect.maxY {
+                        point.y = arrowPointSafeRect.maxY
+                    }
+                }
+            }
+            arrowPoint = point
+        }
         
         // frame of the popover view
-        self.frame.size = size
+        let frame: CGRect = {
+            let size: CGSize = {
+                var width: CGFloat = contentSize.width, height: CGFloat = contentSize.height
+                switch arrowDirection {
+                case .up, .down:
+                    height += _Consts.arrowSize.height
+                case .left, .right:
+                    width += _Consts.arrowSize.height
+                }
+                width = max(width, _Consts.minimumSize.width)
+                height = max(height, _Consts.minimumSize.height)
+                return .init(width: width, height: height)
+            }()
+            var origin = CGPoint.zero
+            switch arrowDirection {
+            case .up, .down:
+                origin.x = {
+                    var x = arrowPoint.x - size.width / 2
+                    x = max(safeContainerRect.minX, min(safeContainerRect.maxX, x))
+                    return x
+                }()
+            case .left, .right:
+                origin.y = {
+                    var y = arrowPoint.y - size.height / 2
+                    y = max(safeContainerRect.minY, min(safeContainerRect.maxY, y))
+                    return y
+                }()
+            }
+            switch arrowDirection {
+            case .up:
+                origin.y = arrowPoint.y
+            case .down:
+                origin.y = arrowPoint.y - size.height
+            case .left:
+                origin.x = arrowPoint.x
+            case .right:
+                origin.x = arrowPoint.x - size.width
+            }
+            return .init(origin: origin, size: size)
+        }()
+        self.frame = frame
         
         // background view
         if let view = dataSource?.backgroundView(for: self) {
-            backgroundView = view
             addSubview(view)
+            backgroundView = view
             view.translatesAutoresizingMaskIntoConstraints = false
             addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", metrics: nil, views: ["view": view]))
             addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", metrics: nil, views: ["view": view]))
@@ -191,10 +362,200 @@ private extension FSPopoverView {
         if let view = dataSource?.contentView(for: self) {
             contentView = view
             addSubview(view)
-            #warning("TEST")
-            view.frame = .zero
-            view.frame.origin.y = _Consts.arrowSize.height
-            view.frame.size = contentSize
+            var frame = CGRect.zero
+            frame.size = contentSize
+            switch arrowDirection {
+            case .up:
+                frame.origin.y =  _Consts.arrowSize.height
+            case .left:
+                frame.origin.x =  _Consts.arrowSize.height
+            case .down, .right:
+                frame.origin = .zero
+            }
+            view.frame = frame
+        }
+        
+        // anchor point
+        layer.anchorPoint = {
+            var x: CGFloat = 0.0, y: CGFloat = 0.0
+            let anchorPoint: CGPoint = {
+                guard let containerView = containerView else { return .zero }
+                var point = containerView.convert(arrowPoint, to: self)
+                point.x = max(0.0, min(frame.width, point.x))
+                point.y = max(0.0, min(frame.height, point.y))
+                return point
+            }()
+            switch arrowDirection {
+            case .up:
+                x = anchorPoint.x / frame.width
+            case .down:
+                x = anchorPoint.x / frame.width
+                y = 1.0
+            case .left:
+                y = anchorPoint.y / frame.height
+            case .right:
+                x = 1.0
+                y = anchorPoint.y / frame.height
+            }
+            return .init(x: x, y: y)
+        }()
+        
+        // Needs to reset frame again after updating layer.anchorPoint,
+        // or the popover view will be in the wrong place.
+        self.frame = frame
+        
+        // popover view bezier path
+        if let containerView = containerView {
+            
+            let arrowPointInPopover = containerView.convert(arrowPoint, to: self)
+            let maskPath = UIBezierPath()
+            // top-left
+            do {
+                do {
+                    var point = CGPoint.zero
+                    switch arrowDirection {
+                    case .up:
+                        point.x = 0.0
+                        point.y = _Consts.arrowSize.height + _Consts.cornerRadius
+                    case .down:
+                        point.x = 0.0
+                        point.y = _Consts.cornerRadius
+                    case .left:
+                        point.x = _Consts.arrowSize.height
+                        point.y = _Consts.cornerRadius
+                    case .right:
+                        point.x = 0.0
+                        point.y = _Consts.cornerRadius
+                    }
+                    maskPath.move(to: point)
+                }
+                do {
+                    var point = CGPoint.zero
+                    switch arrowDirection {
+                    case .up:
+                        point.x = _Consts.cornerRadius
+                        point.y = _Consts.arrowSize.height
+                    case .down:
+                        point.x = _Consts.cornerRadius
+                        point.y = _Consts.cornerRadius
+                    case .left:
+                        point.x = _Consts.arrowSize.height + _Consts.cornerRadius
+                        point.y = 0.0
+                    case .right:
+                        point.x = _Consts.cornerRadius
+                        point.y = 0.0
+                    }
+                    maskPath.addArc(withCenter: point,
+                                    radius: _Consts.cornerRadius,
+                                    startAngle: .pi,
+                                    endAngle: .pi * 1.5,
+                                    clockwise: true)
+                }
+            }
+            // arrow.up/arrow
+            if arrowDirection == .up {
+                do {
+                    var point = arrowPointInPopover
+                    point.x -= _Consts.arrowSize.width / 2
+                    point.y = _Consts.arrowSize.height
+                    maskPath.addLine(to: point)
+                }
+                do {
+                    let controlPoint1 = CGPoint(x: arrowPointInPopover.x - _Consts.arrowSize.width / 4,
+                                                y: arrowPointInPopover.y + _Consts.arrowSize.height)
+                    let controlPoint2 = CGPoint(x: arrowPointInPopover.x - _Consts.arrowSize.width / 6,
+                                                y: arrowPointInPopover.y)
+                    maskPath.addCurve(to: arrowPoint, controlPoint1: controlPoint1, controlPoint2: controlPoint2)
+                }
+                do {
+                    let toPoint = CGPoint(x: arrowPointInPopover.x + _Consts.arrowSize.width / 2,
+                                          y: arrowPointInPopover.y + _Consts.arrowSize.height)
+                    let controlPoint1 = CGPoint(x: arrowPointInPopover.x + _Consts.arrowSize.width / 6,
+                                                y: arrowPointInPopover.y)
+                    let controlPoint2 = CGPoint(x: arrowPointInPopover.x + _Consts.arrowSize.width * 3 / 4,
+                                                y: arrowPointInPopover.y + _Consts.arrowSize.height)
+                    maskPath.addCurve(to: toPoint, controlPoint1: controlPoint1, controlPoint2: controlPoint2)
+                }
+            }
+            // top-right
+            do {
+                do {
+                    var point = CGPoint.zero
+                    if arrowDirection == .right {
+                        point.x = frame.width - _Consts.arrowSize.height - _Consts.cornerRadius
+                    } else {
+                        point.x = frame.width - _Consts.cornerRadius
+                    }
+                    if arrowDirection == .up {
+                        point.y = _Consts.arrowSize.height
+                    }
+                    maskPath.move(to: point)
+                }
+                do {
+                    var point = CGPoint.zero
+                    if arrowDirection == .right {
+                        point.x = frame.width - _Consts.arrowSize.height
+                    } else {
+                        point.x = frame.width
+                    }
+                    if arrowDirection == .up {
+                        point.y = _Consts.arrowSize.height + _Consts.cornerRadius
+                    } else {
+                        point.y = _Consts.cornerRadius
+                    }
+                    maskPath.addArc(withCenter: point,
+                                    radius: _Consts.cornerRadius,
+                                    startAngle: .pi * 1.5,
+                                    endAngle: 0.0,
+                                    clockwise: true)
+                }
+            }
+            // arrow.right/arrow
+            if arrowDirection == .right {
+                
+            }
+            // bottom-right
+            do {
+                do {
+                    var point = CGPoint.zero
+                    
+                    
+                    if arrowDirection == .up {
+                        point.y = _Consts.arrowSize.height
+                    }
+                    maskPath.move(to: point)
+                }
+                do {
+                    var point = CGPoint.zero
+                    point.x = frame.width
+                    if arrowDirection == .up {
+                        point.y = _Consts.arrowSize.height + _Consts.cornerRadius
+                    } else {
+                        point.y = _Consts.cornerRadius
+                    }
+                    maskPath.addArc(withCenter: point,
+                                    radius: _Consts.cornerRadius,
+                                    startAngle: .pi * 1.5,
+                                    endAngle: 0.0,
+                                    clockwise: true)
+                }
+            }
+            // arrow.down/arrow
+            if arrowDirection == .right {
+                
+            }
+            // bottom-left
+            do {
+                
+            }
+            // arrow.left/arrow
+            if arrowDirection == .right {
+                
+            }
+            maskPath.close()
+            
+        } else {
+            
         }
     }
 }
@@ -206,23 +567,21 @@ public extension FSPopoverView {
     #warning("TEST")
     func showTo(_ view: UIView) {
         
-        reloadDataIfNeeded()
-        
-        var frame = self.frame
-        frame.origin.x = (displayWindow.bounds.width - frame.width) / 2
-        frame.origin.y = {
-            guard let superview = view.superview else { return 0.0 }
-            let viewFrame = superview.convert(view.frame, to: displayWindow)
-            return viewFrame.maxY + 3.0
+        containerView = displayWindow
+        containerSize = UIScreen.main.bounds.size
+        displayWindow.bounds = .init(origin: .zero, size: containerSize)
+        arrowReferRect = {
+            guard let superview = view.superview else { return .zero }
+            return superview.convert(view.frame, to: displayWindow)
         }()
+        
+        reloadDataIfNeeded()
         
         displayWindow.addSubview(self)
         displayWindow.isHidden = false
         
-        layer.anchorPoint = .init(x: 0.5, y: 0.0)
-        self.frame = frame
         transform = .init(scaleX: 0.01, y: 0.01)
-        UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.18, delay: 0.0, options: .curveEaseOut) {
             self.transform = .identity
         }
     }
@@ -234,7 +593,7 @@ private struct _Consts {
     static let cornerRadius: CGFloat = 6.0
     static let arrowTopCornerRadius: CGFloat = 3.0
     static let arrowBottomCornerRadius: CGFloat = 4.0
-    static let arrowSize = CGSize(width: 28.0, height: 14.0)
+    static let arrowSize = CGSize(width: 30.0, height: 14.0)
     static let minimumSize = CGSize(width: arrowSize.width + cornerRadius * 2 + 10.0,
                                     height: arrowSize.height + 10.0)
 }

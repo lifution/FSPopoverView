@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		0A2664E7B21DAAB97A6CD73C0C5BC947 /* FSPopoverCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6666627C21A932DD2B4F5241A558144 /* FSPopoverCollectionView.swift */; };
 		0AAB427AC8420F1D98DEC6817EABF186 /* Pods-FSPopoverView_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DA1D0391B0D04025EFAC029C8A9D88A9 /* Pods-FSPopoverView_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0B7AF6ED1022FF9004F55959AD5F01F1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE2AD31F00D0EF9C522211BDDBF6C3C /* UIKit.framework */; };
+		12A794D632B03AF0ED251A3B442B0788 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFAC17E35C4C855B7DD30B7CFD8A28A0 /* UIKit.framework */; };
 		1ECFFBE781E4AF72405D1414B0C078EB /* FSPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA44FAEFA702C3510F571605D05F1BA3 /* FSPopoverView.swift */; };
 		202C092848B3AFBEE8E65B0E09FE5FB9 /* Pods-FSPopoverView_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0997049362A8F84267B55AB49189F1AF /* Pods-FSPopoverView_Example-dummy.m */; };
-		368208AA449DF588899D52067747A0E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
-		5202802D07D55F331AFA95D7D3DF22AE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE46B11FEBCBB7C689EB07A5E57BD38 /* QuartzCore.framework */; };
+		360FC0E65EFD815BFE475F9C2E7A3143 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553F02396820467C46BFBDBFD5A82BB7 /* CoreGraphics.framework */; };
+		368208AA449DF588899D52067747A0E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A0BCC50A12B61F847D207DBB8CFF0AF /* Foundation.framework */; };
 		610153F9BC116AACCAD6374AC0E27057 /* FSPopoverViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6C8626766DE0680DFACFE3E46C30C7 /* FSPopoverViewDataSource.swift */; };
 		7A785B99F68018A4DCF46906737C95AD /* FSPopoverTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177D542A69913D62E47407DE25FF9A8B /* FSPopoverTableView.swift */; };
+		92A0AC9D46EF74B269A62B7850AB861A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A0BCC50A12B61F847D207DBB8CFF0AF /* Foundation.framework */; };
 		ADD93120EED3BD27FE214C02F3BD170A /* FSPopoverView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B0076BE9A39B4651973294AE3C2FDD /* FSPopoverView-dummy.m */; };
-		BB70F09851BCB76D7F3B40406DEFF633 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
 		E8EF02D6D5A25A80E554535B76BB2433 /* FSPopoverView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D6343069FC2AF3A38D001937F97A40F /* FSPopoverView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -41,22 +41,22 @@
 		29B0076BE9A39B4651973294AE3C2FDD /* FSPopoverView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FSPopoverView-dummy.m"; sourceTree = "<group>"; };
 		2D6343069FC2AF3A38D001937F97A40F /* FSPopoverView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSPopoverView-umbrella.h"; sourceTree = "<group>"; };
 		4208E765A1F72EB7317599323D808939 /* Pods-FSPopoverView_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FSPopoverView_Example.modulemap"; sourceTree = "<group>"; };
-		4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		553F02396820467C46BFBDBFD5A82BB7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		59E540B5415C0A75000CEFE20A8C60C1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		670295D71223B33B1CC068575DB9E733 /* Pods-FSPopoverView_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-FSPopoverView_Example"; path = Pods_FSPopoverView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A9EC84173D249A61F39D89A067A28AC /* FSPopoverView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = FSPopoverView.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8A0BCC50A12B61F847D207DBB8CFF0AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		8B2C6142263F4CD11AD5CA3B3D87B597 /* FSPopoverView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FSPopoverView.debug.xcconfig; sourceTree = "<group>"; };
-		8CE2AD31F00D0EF9C522211BDDBF6C3C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		8D31B3422EB626AFF3767FB5F6DF883C /* FSPopoverView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FSPopoverView.modulemap; sourceTree = "<group>"; };
 		950C6F8B5972459626ECE59405D863AD /* Pods-FSPopoverView_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FSPopoverView_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		959C0DB664138DB148838344DB00BF75 /* Pods-FSPopoverView_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FSPopoverView_Example-frameworks.sh"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9FE46B11FEBCBB7C689EB07A5E57BD38 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		AA6C8626766DE0680DFACFE3E46C30C7 /* FSPopoverViewDataSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSPopoverViewDataSource.swift; path = FSPopoverView/Classes/FSPopoverViewDataSource.swift; sourceTree = "<group>"; };
 		B6666627C21A932DD2B4F5241A558144 /* FSPopoverCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FSPopoverCollectionView.swift; sourceTree = "<group>"; };
 		CA44FAEFA702C3510F571605D05F1BA3 /* FSPopoverView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSPopoverView.swift; path = FSPopoverView/Classes/FSPopoverView.swift; sourceTree = "<group>"; };
 		DA1D0391B0D04025EFAC029C8A9D88A9 /* Pods-FSPopoverView_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FSPopoverView_Example-umbrella.h"; sourceTree = "<group>"; };
 		DE809EB00EBF83DE09425C7336B03D24 /* FSPopoverView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSPopoverView-prefix.pch"; sourceTree = "<group>"; };
+		DFAC17E35C4C855B7DD30B7CFD8A28A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		E171AD233D6B243D43ED051D9355DBB5 /* FSPopoverView */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FSPopoverView; path = FSPopoverView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7E3ABE1C331AB1F56C5F39BC694192E /* Pods-FSPopoverView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FSPopoverView_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		EB0A6F1D05D9883E3CA0F7D0A1112AF9 /* Pods-FSPopoverView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FSPopoverView_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -64,13 +64,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		09A9664DD47B2E77FF59F55CF028C1AF /* Frameworks */ = {
+		CAE7D3D9336D2EEF34DD44D21366AE60 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB70F09851BCB76D7F3B40406DEFF633 /* Foundation.framework in Frameworks */,
-				5202802D07D55F331AFA95D7D3DF22AE /* QuartzCore.framework in Frameworks */,
-				0B7AF6ED1022FF9004F55959AD5F01F1 /* UIKit.framework in Frameworks */,
+				360FC0E65EFD815BFE475F9C2E7A3143 /* CoreGraphics.framework in Frameworks */,
+				92A0AC9D46EF74B269A62B7850AB861A /* Foundation.framework in Frameworks */,
+				12A794D632B03AF0ED251A3B442B0788 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,9 +88,19 @@
 		03C5C200A0787E300053CFA8F53CA094 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F0A778C0229E9BF1FD97896B93F3272B /* iOS */,
+				20D8528256A7AF28D53631225E57465A /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		20D8528256A7AF28D53631225E57465A /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				553F02396820467C46BFBDBFD5A82BB7 /* CoreGraphics.framework */,
+				8A0BCC50A12B61F847D207DBB8CFF0AF /* Foundation.framework */,
+				DFAC17E35C4C855B7DD30B7CFD8A28A0 /* UIKit.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		324E8351A7BA151548E9B775C8C3C39C /* Collection */ = {
@@ -194,16 +204,6 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		F0A778C0229E9BF1FD97896B93F3272B /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */,
-				9FE46B11FEBCBB7C689EB07A5E57BD38 /* QuartzCore.framework */,
-				8CE2AD31F00D0EF9C522211BDDBF6C3C /* UIKit.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
 		F94E3DE0FE6EDFFC1F0C204D9D1AC0C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,7 +241,7 @@
 			buildPhases = (
 				D38AED61BED1497D5DAB9583BCF498A9 /* Headers */,
 				E3BCF14ED661AE0268665DA783066408 /* Sources */,
-				09A9664DD47B2E77FF59F55CF028C1AF /* Frameworks */,
+				CAE7D3D9336D2EEF34DD44D21366AE60 /* Frameworks */,
 				A01F39288DCE7AF2BFAF52974117FABC /* Resources */,
 			);
 			buildRules = (

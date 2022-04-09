@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
     :git => 'git@github.com:lifution/Popover.git',
     :tag => s.version.to_s
   }
-  s.frameworks = 'UIKit', 'Foundation', 'QuartzCore'
+  s.frameworks = 'UIKit', 'Foundation', 'CoreGraphics'
   s.swift_version = '5'
   s.ios.deployment_target = '11.0'
   s.source_files = 'FSPopoverView/Classes/**/*'

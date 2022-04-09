@@ -14,20 +14,22 @@ class ViewController: UIViewController {
     private lazy var ghostView: UIView = {
         let label = UILabel()
         label.text = "👻"
-        label.font = .systemFont(ofSize: 150.0)
+        label.font = .systemFont(ofSize: 120.0)
         label.textAlignment = .center
+        label.backgroundColor = .lightGray
         return label
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     @IBAction func onDidTap(_ sender: Any) {
         guard let button = sender as? UIButton else { return }
         let popoverView = FSPopoverView()
         popoverView.dataSource = self
+//        popoverView.arrowDirection = .right
+//        popoverView.autosetsArrowDirection = false
         popoverView.showTo(button)
     }
 }

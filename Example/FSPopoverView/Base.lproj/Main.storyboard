@@ -30,14 +30,14 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="xfz-lV-QsB" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="US7-2P-gzG"/>
-                            <constraint firstItem="xfz-lV-QsB" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="dCO-wr-IOf"/>
+                            <constraint firstItem="xfz-lV-QsB" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="RKB-P9-qVh"/>
+                            <constraint firstItem="xfz-lV-QsB" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="kof-h8-bt1"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="134"/>
+            <point key="canvasLocation" x="140" y="133.5832083958021"/>
         </scene>
     </scenes>
 </document>
