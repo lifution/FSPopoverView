@@ -408,6 +408,8 @@ private extension FSPopoverView {
         if let containerView = containerView {
             
             let arrowPointInPopover = containerView.convert(arrowPoint, to: self)
+            
+            
             let maskPath = UIBezierPath()
             // top-left
             do {
