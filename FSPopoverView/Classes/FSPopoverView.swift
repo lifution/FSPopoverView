@@ -408,153 +408,27 @@ private extension FSPopoverView {
         if let containerView = containerView {
             
             let arrowPointInPopover = containerView.convert(arrowPoint, to: self)
-            
-            
-            let maskPath = UIBezierPath()
-            // top-left
-            do {
-                do {
-                    var point = CGPoint.zero
-                    switch arrowDirection {
-                    case .up:
-                        point.x = 0.0
-                        point.y = _Consts.arrowSize.height + _Consts.cornerRadius
-                    case .down:
-                        point.x = 0.0
-                        point.y = _Consts.cornerRadius
-                    case .left:
-                        point.x = _Consts.arrowSize.height
-                        point.y = _Consts.cornerRadius
-                    case .right:
-                        point.x = 0.0
-                        point.y = _Consts.cornerRadius
-                    }
-                    maskPath.move(to: point)
+            let context = FSPopoverDrawContext(arrowSize: _Consts.arrowSize,
+                                               arrowPoint: arrowPointInPopover,
+                                               cornerRadius: _Consts.cornerRadius,
+                                               contentSize: contentSize,
+                                               popoverSize: frame.size)
+            let drawer: FSPopoverDrawer = {
+                switch arrowDirection {
+                case .up:
+                    return FSPopoverDrawUp()
+                case .down:
+                    return FSPopoverDrawDown()
+                case .left:
+                    return FSPopoverDrawLeft()
+                case .right:
+                    return FSPopoverDrawRight()
                 }
-                do {
-                    var point = CGPoint.zero
-                    switch arrowDirection {
-                    case .up:
-                        point.x = _Consts.cornerRadius
-                        point.y = _Consts.arrowSize.height
-                    case .down:
-                        point.x = _Consts.cornerRadius
-                        point.y = _Consts.cornerRadius
-                    case .left:
-                        point.x = _Consts.arrowSize.height + _Consts.cornerRadius
-                        point.y = 0.0
-                    case .right:
-                        point.x = _Consts.cornerRadius
-                        point.y = 0.0
-                    }
-                    maskPath.addArc(withCenter: point,
-                                    radius: _Consts.cornerRadius,
-                                    startAngle: .pi,
-                                    endAngle: .pi * 1.5,
-                                    clockwise: true)
-                }
-            }
-            // arrow.up/arrow
-            if arrowDirection == .up {
-                do {
-                    var point = arrowPointInPopover
-                    point.x -= _Consts.arrowSize.width / 2
-                    point.y = _Consts.arrowSize.height
-                    maskPath.addLine(to: point)
-                }
-                do {
-                    let controlPoint1 = CGPoint(x: arrowPointInPopover.x - _Consts.arrowSize.width / 4,
-                                                y: arrowPointInPopover.y + _Consts.arrowSize.height)
-                    let controlPoint2 = CGPoint(x: arrowPointInPopover.x - _Consts.arrowSize.width / 6,
-                                                y: arrowPointInPopover.y)
-                    maskPath.addCurve(to: arrowPoint, controlPoint1: controlPoint1, controlPoint2: controlPoint2)
-                }
-                do {
-                    let toPoint = CGPoint(x: arrowPointInPopover.x + _Consts.arrowSize.width / 2,
-                                          y: arrowPointInPopover.y + _Consts.arrowSize.height)
-                    let controlPoint1 = CGPoint(x: arrowPointInPopover.x + _Consts.arrowSize.width / 6,
-                                                y: arrowPointInPopover.y)
-                    let controlPoint2 = CGPoint(x: arrowPointInPopover.x + _Consts.arrowSize.width * 3 / 4,
-                                                y: arrowPointInPopover.y + _Consts.arrowSize.height)
-                    maskPath.addCurve(to: toPoint, controlPoint1: controlPoint1, controlPoint2: controlPoint2)
-                }
-            }
-            // top-right
-            do {
-                do {
-                    var point = CGPoint.zero
-                    if arrowDirection == .right {
-                        point.x = frame.width - _Consts.arrowSize.height - _Consts.cornerRadius
-                    } else {
-                        point.x = frame.width - _Consts.cornerRadius
-                    }
-                    if arrowDirection == .up {
-                        point.y = _Consts.arrowSize.height
-                    }
-                    maskPath.move(to: point)
-                }
-                do {
-                    var point = CGPoint.zero
-                    if arrowDirection == .right {
-                        point.x = frame.width - _Consts.arrowSize.height
-                    } else {
-                        point.x = frame.width
-                    }
-                    if arrowDirection == .up {
-                        point.y = _Consts.arrowSize.height + _Consts.cornerRadius
-                    } else {
-                        point.y = _Consts.cornerRadius
-                    }
-                    maskPath.addArc(withCenter: point,
-                                    radius: _Consts.cornerRadius,
-                                    startAngle: .pi * 1.5,
-                                    endAngle: 0.0,
-                                    clockwise: true)
-                }
-            }
-            // arrow.right/arrow
-            if arrowDirection == .right {
-                
-            }
-            // bottom-right
-            do {
-                do {
-                    var point = CGPoint.zero
-                    
-                    
-                    if arrowDirection == .up {
-                        point.y = _Consts.arrowSize.height
-                    }
-                    maskPath.move(to: point)
-                }
-                do {
-                    var point = CGPoint.zero
-                    point.x = frame.width
-                    if arrowDirection == .up {
-                        point.y = _Consts.arrowSize.height + _Consts.cornerRadius
-                    } else {
-                        point.y = _Consts.cornerRadius
-                    }
-                    maskPath.addArc(withCenter: point,
-                                    radius: _Consts.cornerRadius,
-                                    startAngle: .pi * 1.5,
-                                    endAngle: 0.0,
-                                    clockwise: true)
-                }
-            }
-            // arrow.down/arrow
-            if arrowDirection == .right {
-                
-            }
-            // bottom-left
-            do {
-                
-            }
-            // arrow.left/arrow
-            if arrowDirection == .right {
-                
-            }
-            maskPath.close()
+            }()
+            let maskPath = drawer.draw(with: context)
+            let maskLayer = CAShapeLayer()
+            maskLayer.path = maskPath.cgPath
+            layer.mask = maskLayer
             
         } else {
             
@@ -593,8 +467,6 @@ public extension FSPopoverView {
 
 private struct _Consts {
     static let cornerRadius: CGFloat = 6.0
-    static let arrowTopCornerRadius: CGFloat = 3.0
-    static let arrowBottomCornerRadius: CGFloat = 4.0
     static let arrowSize = CGSize(width: 30.0, height: 14.0)
     static let minimumSize = CGSize(width: arrowSize.width + cornerRadius * 2 + 10.0,
                                     height: arrowSize.height + 10.0)

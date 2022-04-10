@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         label.text = "👻"
         label.font = .systemFont(ofSize: 120.0)
         label.textAlignment = .center
-        label.backgroundColor = .lightGray
+//        label.backgroundColor = .lightGray
         return label
     }()
     
@@ -28,9 +28,19 @@ class ViewController: UIViewController {
         guard let button = sender as? UIButton else { return }
         let popoverView = FSPopoverView()
         popoverView.dataSource = self
-//        popoverView.arrowDirection = .right
-//        popoverView.autosetsArrowDirection = false
+        popoverView.arrowDirection = .right
+        popoverView.autosetsArrowDirection = false
         popoverView.showTo(button)
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//            popoverView.arrowDirection = .left
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//                popoverView.arrowDirection = .down
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//                    popoverView.arrowDirection = .up
+//                }
+//            }
+//        }
     }
 }
 
