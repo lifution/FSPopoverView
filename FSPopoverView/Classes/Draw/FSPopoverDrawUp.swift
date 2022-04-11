@@ -10,20 +10,107 @@ import UIKit
 
 struct FSPopoverDrawUp: FSPopoverDrawer {
     
-    func draw(with context: FSPopoverDrawContext) -> UIBezierPath {
+    let context: FSPopoverDrawContext
+    
+    init(context: FSPopoverDrawContext) {
+        self.context = context
+    }
+    
+    func generatePath() -> UIBezierPath {
+        return _generate(offset: .zero)
+    }
+    
+    func generateBorderImage(with color: UIColor?, width: CGFloat) -> UIImage? {
         
-        let rect = CGRect(origin: .zero, size: context.popoverSize)
-        let contentRect = CGRect(origin: .init(x: 0.0, y: context.arrowSize.height),
+        let borderWidth = width * 2
+        let size = CGSize(width: context.popoverSize.width + borderWidth * 2,
+                          height: context.popoverSize.height + borderWidth * 2)
+        
+        // border image
+        let borderImage: UIImage? = {
+            
+            UIGraphicsBeginImageContextWithOptions(size, false, 0)
+            
+            let path = _generate(offset: .init(x: borderWidth, y: borderWidth))
+            path.lineWidth = borderWidth
+            UIColor.red.setStroke()
+            path.stroke()
+            
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            return image
+        }()
+        
+        // mask image
+        let maskImage: UIImage? = {
+            
+            UIGraphicsBeginImageContextWithOptions(size, false, 0)
+            
+            let path = _generate(offset: .init(x: borderWidth, y: borderWidth))
+            UIColor.white.setFill()
+            path.fill()
+            
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            return image
+        }()
+        
+        // create image mask
+        
+        guard
+            let cgimage = maskImage?.cgImage,
+            let dataProvider = cgimage.dataProvider
+        else {
+            return nil
+        }
+        
+        let bytesPerRow = cgimage.bytesPerRow
+        let bitsPerPixel = cgimage.bitsPerPixel
+        let width = cgimage.width
+        let height = cgimage.height
+        let bitsPerComponent = cgimage.bitsPerComponent
+        
+        guard
+            let mask = CGImage(maskWidth: width,
+                               height: height,
+                               bitsPerComponent: bitsPerComponent,
+                               bitsPerPixel: bitsPerPixel,
+                               bytesPerRow: bytesPerRow,
+                               provider: dataProvider,
+                               decode: nil,
+                               shouldInterpolate: false),
+            let maskingCgImage = borderImage?.cgImage?.masking(mask)
+        else {
+            return nil
+        }
+        
+        return UIImage(cgImage: maskingCgImage, scale: UIScreen.main.scale, orientation: .up)
+    }
+    
+    func generateShadowImage(with color: UIColor?, radius: CGFloat, opacity: CGFloat) -> UIImage? {
+        
+        return nil
+    }
+}
+
+private extension FSPopoverDrawUp {
+    
+    func _generate(offset: CGPoint) -> UIBezierPath {
+        
+        let popoverRect = CGRect(origin: offset, size: context.popoverSize)
+        let contentRect = CGRect(origin: .init(x: popoverRect.minX, y: popoverRect.minY + context.arrowSize.height),
                                  size: context.contentSize)
         let arrowSize = context.arrowSize.inner.flattedValue
-        let arrowPoint = context.arrowPoint.inner.flattedValue
+        let arrowPoint = context.arrowPoint.inner.offset(offset).inner.flattedValue
         let cornerRadius = context.cornerRadius.inner.flattedValue
         
         let path = UIBezierPath()
         // top-left
         do {
-            path.move(to: .init(x: 0.0, y: contentRect.minY + cornerRadius))
-            path.addArc(withCenter: .init(x: cornerRadius, y: contentRect.minY + cornerRadius),
+            path.move(to: .init(x: contentRect.minX, y: contentRect.minY + cornerRadius))
+            path.addArc(withCenter: .init(x: contentRect.minX + cornerRadius, y: contentRect.minY + cornerRadius),
                         radius: cornerRadius,
                         startAngle: .pi,
                         endAngle: .pi * 1.5,
@@ -47,7 +134,7 @@ struct FSPopoverDrawUp: FSPopoverDrawer {
         }
         // top-right
         do {
-            path.addLine(to: .init(x: rect.width - cornerRadius, y: contentRect.minY))
+            path.addLine(to: .init(x: popoverRect.maxX - cornerRadius, y: contentRect.minY))
             path.addArc(withCenter: .init(x: contentRect.maxX - cornerRadius, y: contentRect.minY + cornerRadius),
                         radius: cornerRadius,
                         startAngle: .pi * 1.5,
@@ -56,8 +143,8 @@ struct FSPopoverDrawUp: FSPopoverDrawer {
         }
         // bottom-right
         do {
-            path.addLine(to: .init(x: contentRect.maxX, y: rect.height - cornerRadius))
-            path.addArc(withCenter: .init(x: contentRect.maxX - cornerRadius, y: rect.height - cornerRadius),
+            path.addLine(to: .init(x: contentRect.maxX, y: popoverRect.maxY - cornerRadius))
+            path.addArc(withCenter: .init(x: contentRect.maxX - cornerRadius, y: popoverRect.maxY - cornerRadius),
                         radius: cornerRadius,
                         startAngle: 0.0,
                         endAngle: .pi * 0.5,
@@ -65,8 +152,8 @@ struct FSPopoverDrawUp: FSPopoverDrawer {
         }
         // bottom-left
         do {
-            path.addLine(to: .init(x: cornerRadius, y: rect.height))
-            path.addArc(withCenter: .init(x: cornerRadius, y: rect.height - cornerRadius),
+            path.addLine(to: .init(x: popoverRect.minX + cornerRadius, y: popoverRect.maxY))
+            path.addArc(withCenter: .init(x: popoverRect.minX + cornerRadius, y: popoverRect.maxY - cornerRadius),
                         radius: cornerRadius,
                         startAngle: .pi * 0.5,
                         endAngle: .pi,

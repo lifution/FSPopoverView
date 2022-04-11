@@ -45,7 +45,7 @@ open class FSPopoverView: UIView {
     }
     
     /// Whether to set the arrow direction automatically.
-    /// Default is true.
+    /// Defaults to true.
     ///
     /// * When this property is true, the popover view will determine the direction
     ///   of the arrow and update the `arrowDirection` property automatically.
@@ -65,12 +65,12 @@ open class FSPopoverView: UIView {
     // MARK: Properties/Public
     
     /// The point the arrow points to.
-    /// Default is (0, 0).
+    /// Defaults to (0, 0).
     ///
     /// * This point is in the coordinate system of `containerView`. (same as the popover view)
     /// * This point will be recalculated on every reload operation.
     ///
-    public private(set) var arrowPoint: CGPoint = .zero
+    final public private(set) var arrowPoint: CGPoint = .zero
     
     /// The container view in which the popover view is displayed.
     ///
@@ -78,15 +78,41 @@ open class FSPopoverView: UIView {
     ///   inside the popover view as a container view, and this window will be the same
     ///   size as the current screen.
     ///
-    weak public private(set) var containerView: UIView?
+    final weak public private(set) var containerView: UIView?
+    
+    // MARK: Properties/Override
+    
+    /// It's objected to use this property to set the background color of popover view.
+    /// Use `backgroundView` of `dataSource` instead.
+    final public override var backgroundColor: UIColor? {
+        get { return popoverContainerView.backgroundColor }
+        set {
+            super.backgroundColor = .clear
+            popoverContainerView.backgroundColor = newValue
+        }
+    }
     
     // MARK: Properties/Private
     
     private var needsReload = false
     
-    private var backgroundView: UIView?
+    weak private var backgroundView: UIView?
     
-    private var contentView: UIView?
+    weak private var contentView: UIView?
+    
+    /// `backgroundView` and `contentView` will be added to this view.
+    ///
+    /// * This view will be the same size as the popover view.
+    ///
+    private lazy var popoverContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    weak private var borderLayer: CALayer?
+    weak private var shadowLayer: CALayer?
     
     /// Size of `containerView`.
     private var containerSize: CGSize = .zero
@@ -198,13 +224,26 @@ private extension FSPopoverView {
     
     /// Invoked after initialization.
     func p_didInitialize() {
+        
         backgroundColor = .clear
+        
+        addSubview(popoverContainerView)
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",
+                                                      metrics: nil,
+                                                      views: ["view": popoverContainerView]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",
+                                                      metrics: nil,
+                                                      views: ["view": popoverContainerView]))
     }
     
     /// Reset all contents to default values.
     func p_resetContents() {
+        borderLayer?.removeFromSuperlayer()
+        shadowLayer?.removeFromSuperlayer()
         contentView?.removeFromSuperview()
         backgroundView?.removeFromSuperview()
+        borderLayer = nil
+        shadowLayer = nil
         contentView = nil
         backgroundView = nil
     }
@@ -351,17 +390,21 @@ private extension FSPopoverView {
         
         // background view
         if let view = dataSource?.backgroundView(for: self) {
-            addSubview(view)
+            popoverContainerView.addSubview(view)
             backgroundView = view
             view.translatesAutoresizingMaskIntoConstraints = false
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", metrics: nil, views: ["view": view]))
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", metrics: nil, views: ["view": view]))
+            popoverContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",
+                                                                               metrics: nil,
+                                                                               views: ["view": view]))
+            popoverContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",
+                                                                               metrics: nil,
+                                                                               views: ["view": view]))
         }
         
         // content view
         if let view = dataSource?.contentView(for: self) {
+            popoverContainerView.addSubview(view)
             contentView = view
-            addSubview(view)
             var frame = CGRect.zero
             frame.size = contentSize
             switch arrowDirection {
@@ -404,7 +447,7 @@ private extension FSPopoverView {
         // or the popover view will be in the wrong place.
         self.frame = frame
         
-        // popover view bezier path
+        // draw popover view
         if let containerView = containerView {
             
             let arrowPointInPopover = containerView.convert(arrowPoint, to: self)
@@ -416,19 +459,49 @@ private extension FSPopoverView {
             let drawer: FSPopoverDrawer = {
                 switch arrowDirection {
                 case .up:
-                    return FSPopoverDrawUp()
-                case .down:
-                    return FSPopoverDrawDown()
-                case .left:
-                    return FSPopoverDrawLeft()
-                case .right:
-                    return FSPopoverDrawRight()
+                    return FSPopoverDrawUp(context: context)
+//                case .down:
+//                    return FSPopoverDrawDown(context: context)
+//                case .left:
+//                    return FSPopoverDrawLeft(context: context)
+//                case .right:
+//                    return FSPopoverDrawRight(context: context)
+                default:
+                    fatalError()
                 }
             }()
-            let maskPath = drawer.draw(with: context)
-            let maskLayer = CAShapeLayer()
-            maskLayer.path = maskPath.cgPath
-            layer.mask = maskLayer
+            // mask
+            do {
+                let path = drawer.generatePath()
+                let maskLayer = CAShapeLayer()
+                maskLayer.path = path.cgPath
+                popoverContainerView.layer.mask = maskLayer
+            }
+            // shadow
+//            do {
+//                let shadowLayer = CAShapeLayer()
+//                shadowLayer.path = path.cgPath
+//                shadowLayer.lineCap = .square
+//                shadowLayer.lineWidth = 0.0
+//                shadowLayer.fillColor = UIColor.white.cgColor
+//                shadowLayer.shadowColor = UIColor.green.cgColor
+//                shadowLayer.shadowRadius = 3.0
+//                shadowLayer.shadowOffset = .zero
+//                shadowLayer.shadowOpacity = 1.0
+//                shadowLayer.fillRule = .evenOdd
+//                layer.addSublayer(shadowLayer)
+//                self.shadowLayer = shadowLayer
+//            }
+            // border
+            if let image = drawer.generateBorderImage(with: .red, width: 2) {
+                let layer = CAShapeLayer()
+                layer.contents = image.cgImage
+                self.layer.addSublayer(layer)
+                self.borderLayer = layer
+                layer.frame.size = image.size
+                layer.frame.origin.x = (frame.width - image.size.width) / 2
+                layer.frame.origin.y = (frame.height - image.size.height) / 2
+            }
             
         } else {
             

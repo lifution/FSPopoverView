@@ -43,6 +43,10 @@ extension FSPopoverViewInternalWrapper where Base == CGPoint {
         return .init(x: base.x.inner.flattedValue,
                      y: base.y.inner.flattedValue)
     }
+    
+    func offset(_ offset: CGPoint) -> CGPoint {
+        return .init(x: base.x + offset.x, y: base.y + offset.y)
+    }
 }
 
 extension FSPopoverViewInternalWrapper where Base == CGFloat {

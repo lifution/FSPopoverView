@@ -9,5 +9,12 @@
 import UIKit
 
 protocol FSPopoverDrawer {
-    func draw(with context: FSPopoverDrawContext) -> UIBezierPath
+    
+    init(context: FSPopoverDrawContext)
+    
+    func generatePath() -> UIBezierPath
+    
+    func generateBorderImage(with color: UIColor?, width: CGFloat) -> UIImage?
+    
+    func generateShadowImage(with color: UIColor?, radius: CGFloat, opacity: CGFloat) -> UIImage?
 }
