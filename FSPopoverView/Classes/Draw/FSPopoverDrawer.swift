@@ -34,6 +34,8 @@ struct FSPopoverDrawer {
         }
     }
     
+    // MARK: Internal
+    
     func generatePath() -> UIBezierPath {
         drawable.generatePath(with: context, offset: .zero)
     }
