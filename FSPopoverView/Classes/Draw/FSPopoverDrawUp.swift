@@ -8,102 +8,15 @@
 
 import UIKit
 
-struct FSPopoverDrawUp: FSPopoverDrawer {
+struct FSPopoverDrawUp: FSPopoverDrawable {
     
-    let context: FSPopoverDrawContext
-    
-    init(context: FSPopoverDrawContext) {
-        self.context = context
-    }
-    
-    func generatePath() -> UIBezierPath {
-        return _generate(offset: .zero)
-    }
-    
-    func generateBorderImage(with color: UIColor?, width: CGFloat) -> UIImage? {
-        
-        let borderWidth = width * 2
-        let size = CGSize(width: context.popoverSize.width + borderWidth * 2,
-                          height: context.popoverSize.height + borderWidth * 2)
-        
-        // border image
-        let borderImage: UIImage? = {
-            
-            UIGraphicsBeginImageContextWithOptions(size, false, 0)
-            
-            let path = _generate(offset: .init(x: borderWidth, y: borderWidth))
-            path.lineWidth = borderWidth
-            UIColor.red.setStroke()
-            path.stroke()
-            
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            
-            return image
-        }()
-        
-        // mask image
-        let maskImage: UIImage? = {
-            
-            UIGraphicsBeginImageContextWithOptions(size, false, 0)
-            
-            let path = _generate(offset: .init(x: borderWidth, y: borderWidth))
-            UIColor.white.setFill()
-            path.fill()
-            
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            
-            return image
-        }()
-        
-        // create image mask
-        
-        guard
-            let cgimage = maskImage?.cgImage,
-            let dataProvider = cgimage.dataProvider
-        else {
-            return nil
-        }
-        
-        let bytesPerRow = cgimage.bytesPerRow
-        let bitsPerPixel = cgimage.bitsPerPixel
-        let width = cgimage.width
-        let height = cgimage.height
-        let bitsPerComponent = cgimage.bitsPerComponent
-        
-        guard
-            let mask = CGImage(maskWidth: width,
-                               height: height,
-                               bitsPerComponent: bitsPerComponent,
-                               bitsPerPixel: bitsPerPixel,
-                               bytesPerRow: bytesPerRow,
-                               provider: dataProvider,
-                               decode: nil,
-                               shouldInterpolate: false),
-            let maskingCgImage = borderImage?.cgImage?.masking(mask)
-        else {
-            return nil
-        }
-        
-        return UIImage(cgImage: maskingCgImage, scale: UIScreen.main.scale, orientation: .up)
-    }
-    
-    func generateShadowImage(with color: UIColor?, radius: CGFloat, opacity: CGFloat) -> UIImage? {
-        
-        return nil
-    }
-}
-
-private extension FSPopoverDrawUp {
-    
-    func _generate(offset: CGPoint) -> UIBezierPath {
+    func generatePath(with context: FSPopoverDrawContext, offset: CGPoint) -> UIBezierPath {
         
         let popoverRect = CGRect(origin: offset, size: context.popoverSize)
         let contentRect = CGRect(origin: .init(x: popoverRect.minX, y: popoverRect.minY + context.arrowSize.height),
                                  size: context.contentSize)
-        let arrowSize = context.arrowSize.inner.flattedValue
-        let arrowPoint = context.arrowPoint.inner.offset(offset).inner.flattedValue
+        let arrowSize    = context.arrowSize.inner.flattedValue
+        let arrowPoint   = context.arrowPoint.inner.offset(offset).inner.flattedValue
         let cornerRadius = context.cornerRadius.inner.flattedValue
         
         let path = UIBezierPath()

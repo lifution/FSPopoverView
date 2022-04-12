@@ -80,6 +80,49 @@ open class FSPopoverView: UIView {
     ///
     final weak public private(set) var containerView: UIView?
     
+    /// The color of the popover view border.
+    final public var borderColor: UIColor? {
+        didSet {
+            setNeedsReload()
+        }
+    }
+    
+    /// The width of the popover view border.
+    final public var borderWidth: CGFloat = 0.0 {
+        didSet {
+            if borderWidth != oldValue {
+                setNeedsReload()
+            }
+        }
+    }
+    
+    /// The color of the popover view shadow.
+    final public var shadowColor: UIColor? {
+        didSet {
+            setNeedsReload()
+        }
+    }
+    
+    /// The radius of the popover view shadow.
+    final public var shadowRadius: CGFloat = 0.0 {
+        didSet {
+            if shadowRadius != oldValue {
+                setNeedsReload()
+            }
+        }
+    }
+    
+    /// The opacity of the popover view shadow.
+    /// The value in this property must be in the range 0.0 (transparent) to 1.0 (opaque).
+    /// Defaults to 1.0.
+    final public var shadowOpacity: Float = 1.0 {
+        didSet {
+            if shadowOpacity != oldValue {
+                setNeedsReload()
+            }
+        }
+    }
+    
     // MARK: Properties/Override
     
     /// It's objected to use this property to set the background color of popover view.
@@ -451,25 +494,22 @@ private extension FSPopoverView {
         if let containerView = containerView {
             
             let arrowPointInPopover = containerView.convert(arrowPoint, to: self)
-            let context = FSPopoverDrawContext(arrowSize: _Consts.arrowSize,
-                                               arrowPoint: arrowPointInPopover,
-                                               cornerRadius: _Consts.cornerRadius,
-                                               contentSize: contentSize,
-                                               popoverSize: frame.size)
-            let drawer: FSPopoverDrawer = {
-                switch arrowDirection {
-                case .up:
-                    return FSPopoverDrawUp(context: context)
-//                case .down:
-//                    return FSPopoverDrawDown(context: context)
-//                case .left:
-//                    return FSPopoverDrawLeft(context: context)
-//                case .right:
-//                    return FSPopoverDrawRight(context: context)
-                default:
-                    fatalError()
-                }
-            }()
+            
+            var context = FSPopoverDrawContext()
+            context.arrowSize       = _Consts.arrowSize
+            context.arrowPoint      = arrowPointInPopover
+            context.arrowDirection  = arrowDirection
+            context.cornerRadius    = _Consts.cornerRadius
+            context.contentSize     = contentSize
+            context.popoverSize     = frame.size
+            context.borderWidth     = borderWidth
+            context.borderColor     = borderColor
+            context.shadowColor     = shadowColor
+            context.shadowRadius    = shadowRadius
+            context.shadowOpacity   = shadowOpacity
+            
+            let drawer = FSPopoverDrawer(context: context)
+            
             // mask
             do {
                 let path = drawer.generatePath()
@@ -477,24 +517,21 @@ private extension FSPopoverView {
                 maskLayer.path = path.cgPath
                 popoverContainerView.layer.mask = maskLayer
             }
+            
             // shadow
-//            do {
-//                let shadowLayer = CAShapeLayer()
-//                shadowLayer.path = path.cgPath
-//                shadowLayer.lineCap = .square
-//                shadowLayer.lineWidth = 0.0
-//                shadowLayer.fillColor = UIColor.white.cgColor
-//                shadowLayer.shadowColor = UIColor.green.cgColor
-//                shadowLayer.shadowRadius = 3.0
-//                shadowLayer.shadowOffset = .zero
-//                shadowLayer.shadowOpacity = 1.0
-//                shadowLayer.fillRule = .evenOdd
-//                layer.addSublayer(shadowLayer)
-//                self.shadowLayer = shadowLayer
-//            }
+            if let image = drawer.generateShadowImage() {
+                let layer = CALayer()
+                layer.contents = image.cgImage
+                self.layer.addSublayer(layer)
+                self.shadowLayer = layer
+                layer.frame.size = image.size
+                layer.frame.origin.x = (frame.width - image.size.width) / 2
+                layer.frame.origin.y = (frame.height - image.size.height) / 2
+            }
+            
             // border
-            if let image = drawer.generateBorderImage(with: .red, width: 2) {
-                let layer = CAShapeLayer()
+            if let image = drawer.generateBorderImage() {
+                let layer = CALayer()
                 layer.contents = image.cgImage
                 self.layer.addSublayer(layer)
                 self.borderLayer = layer

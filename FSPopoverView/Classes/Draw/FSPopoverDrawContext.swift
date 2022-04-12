@@ -9,9 +9,21 @@
 import UIKit
 
 struct FSPopoverDrawContext {
-    let arrowSize: CGSize
-    let arrowPoint: CGPoint
-    let cornerRadius: CGFloat
-    let contentSize: CGSize
-    let popoverSize: CGSize
+    
+    var arrowSize: CGSize = .zero
+    var arrowPoint: CGPoint = .zero
+    var arrowDirection: FSPopoverView.ArrowDirection = .up
+    
+    var cornerRadius: CGFloat = 0.0
+    var contentSize: CGSize = .zero
+    var popoverSize: CGSize = .zero
+    
+    var borderWidth: CGFloat = 0.0
+    var borderColor: UIColor?
+    
+    var shadowRadius: CGFloat = 0.0
+    var shadowOpacity: Float = 1.0
+    var shadowColor: UIColor?
+    
+    init () {}
 }
