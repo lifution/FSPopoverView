@@ -15,6 +15,18 @@ struct FSPopoverViewInternalWrapper<Base> {
     }
 }
 
+protocol FSPopoverViewInternalCompatible: AnyObject {}
+extension FSPopoverViewInternalCompatible {
+    public static var inner: FSPopoverViewInternalWrapper<Self>.Type {
+        get { return FSPopoverViewInternalWrapper<Self>.self }
+        set {}
+    }
+    public var inner: FSPopoverViewInternalWrapper<Self> {
+        get { return FSPopoverViewInternalWrapper(self) }
+        set {}
+    }
+}
+
 protocol FSPopoverViewInternalCompatibleValue {}
 extension FSPopoverViewInternalCompatibleValue {
     static var inner: FSPopoverViewInternalWrapper<Self>.Type {
@@ -26,6 +38,8 @@ extension FSPopoverViewInternalCompatibleValue {
         set {}
     }
 }
+
+extension UIView: FSPopoverViewInternalCompatible {}
 
 extension CGRect: FSPopoverViewInternalCompatibleValue {}
 extension CGSize: FSPopoverViewInternalCompatibleValue {}

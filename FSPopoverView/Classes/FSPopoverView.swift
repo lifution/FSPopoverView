@@ -97,11 +97,11 @@ open class FSPopoverView: UIView {
     
     /// The container view displaying the popover view.
     ///
-    /// If popover view is displaying in a specified view, the specified view will be the superview
-    /// of the container view. Otherwise, if there is no specified view, a window will be created
-    /// automatically inside the popover view as the superview of the container view, and this window
-    /// will be the same size as the current screen. So, either a specified view or an automatically
-    /// created window, they are just the superview of the container view.
+    /// If popover view is displaying in a specific view, the specific view will be the superview
+    /// of the container view. Otherwise, a window will be created automatically inside the popover
+    /// view as the superview of the container view, and this window will be the same size as the
+    /// current screen. And either the specific view or the window created automatically, they are
+    /// just the superview of the container view.
     ///
     final weak public private(set) var containerView: UIView?
     
@@ -194,7 +194,6 @@ open class FSPopoverView: UIView {
     private lazy var popoverContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -207,7 +206,7 @@ open class FSPopoverView: UIView {
     /// This rect is in the coordinate system of `containerView`.
     private var arrowReferRect: CGRect = .zero
     
-    /// If there is no specified view for displaying popover view,
+    /// If there is no specific view to display popover view,
     /// this window will be created.
     private var displayWindow: UIWindow?
     
@@ -217,7 +216,6 @@ open class FSPopoverView: UIView {
         view.isHidden = true
         view.backgroundColor = .init(white: 0.0, alpha: 0.25)
         view.isUserInteractionEnabled = false
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -226,7 +224,6 @@ open class FSPopoverView: UIView {
         let view = UIView()
         view.backgroundColor = .clear
         view.isUserInteractionEnabled = true
-        view.translatesAutoresizingMaskIntoConstraints = false
         do {
             let tap = UITapGestureRecognizer(target: self, action: #selector(p_handleTap))
             tap.delegate = delegateRouter
@@ -314,7 +311,7 @@ open class FSPopoverView: UIView {
     ///
     /// - Note
     ///     * Calling this method will not have any animation, even if some contents are
-    ///       changed, like size of content and point of anchor and so on.
+    ///       changed, like size of content and direction of arrow and so on.
     ///     * You should call this method on the main thread.
     ///
     @objc dynamic open func reloadData() {
@@ -326,7 +323,7 @@ open class FSPopoverView: UIView {
 
 extension FSPopoverView {
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         reloadDataIfNeeded()
     }
@@ -353,18 +350,12 @@ private extension FSPopoverView {
         }
         
         addSubview(popoverContainerView)
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",
-                                                      metrics: nil,
-                                                      views: ["view": popoverContainerView]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",
-                                                      metrics: nil,
-                                                      views: ["view": popoverContainerView]))
+        popoverContainerView.inner.makeMarginConstraints(to: self)
     }
     
     func p_createContainerView() -> UIView {
         let view = UIView()
         view.backgroundColor = .clear
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }
     
@@ -390,21 +381,11 @@ private extension FSPopoverView {
         
         dimBackgroundView.removeFromSuperview()
         view.addSubview(dimBackgroundView)
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",
-                                                           metrics: nil,
-                                                           views: ["view": dimBackgroundView]))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",
-                                                           metrics: nil,
-                                                           views: ["view": dimBackgroundView]))
+        dimBackgroundView.inner.makeMarginConstraints(to: view)
         
         userInteractionView.removeFromSuperview()
         view.addSubview(userInteractionView)
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",
-                                                           metrics: nil,
-                                                           views: ["view": userInteractionView]))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",
-                                                           metrics: nil,
-                                                           views: ["view": userInteractionView]))
+        userInteractionView.inner.makeMarginConstraints(to: view)
     }
     
     func p_destroyDisplayWindow() {
@@ -525,7 +506,7 @@ private extension FSPopoverView {
         }
         
         // arrow point
-        // arrow point is in the coordinate system of container view.
+        // This point is in the coordinate system of container view.
         do {
             var point = CGPoint.zero
             switch arrowDirection {
@@ -625,13 +606,7 @@ private extension FSPopoverView {
         if let view = dataSource?.backgroundView(for: self) {
             popoverContainerView.addSubview(view)
             backgroundView = view
-            view.translatesAutoresizingMaskIntoConstraints = false
-            popoverContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",
-                                                                               metrics: nil,
-                                                                               views: ["view": view]))
-            popoverContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",
-                                                                               metrics: nil,
-                                                                               views: ["view": view]))
+            view.inner.makeMarginConstraints(to: popoverContainerView)
         }
         
         // content view
@@ -741,7 +716,7 @@ private extension FSPopoverView {
         
         containerView?.isUserInteractionEnabled = false
         
-        UIView.animate(withDuration: 2.18, delay: 0.0, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.18, delay: 0.0, options: .curveEaseOut) {
             self.alpha = 0.0
             self.transform = .init(scaleX: 0.01, y: 0.01)
             self.dimBackgroundView.alpha = 0.0
@@ -788,12 +763,7 @@ public extension FSPopoverView {
         do {
             p_setContainerView(containerView)
             window.addSubview(containerView)
-            window.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",
-                                                                 metrics: nil,
-                                                                 views: ["view": containerView]))
-            window.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",
-                                                                 metrics: nil,
-                                                                 views: ["view": containerView]))
+            containerView.inner.makeMarginConstraints(to: window)
             window.layoutIfNeeded()
         }
         
@@ -803,13 +773,16 @@ public extension FSPopoverView {
             return superview.convert(view.frame, to: containerView)
         }()
         
-        // This operation will call `layoutSubviews()`, and then the method `reloadDataIfNeeded()`
-        // will be called, so it is unnecessary to call `reloadDataIfNeeded()` explicitly.
+        setNeedsReload()
+        
+        // This operation will cause the method `layoutSubviews()` to be called, and then
+        // the method `reloadDataIfNeeded()` will be called, so it's unnecessary to call
+        // `reloadDataIfNeeded()` explicitly here.
         containerView.addSubview(self)
         
         transform = .init(scaleX: 0.01, y: 0.01)
         dimBackgroundView.alpha = 0.0
-        UIView.animate(withDuration: 2.18, delay: 0.0, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.18, delay: 0.0, options: .curveEaseOut) {
             self.transform = .identity
             self.dimBackgroundView.alpha = 1.0
         } completion: { _ in
