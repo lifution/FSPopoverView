@@ -38,8 +38,10 @@ class ViewController: UIViewController {
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
 //            popoverView.arrowDirection = .left
+////            popoverView.isArrowEnabled = false
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
 //                popoverView.arrowDirection = .down
+////                popoverView.isArrowEnabled = true
 //                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
 //                    popoverView.arrowDirection = .up
 //                }

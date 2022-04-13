@@ -64,11 +64,25 @@ open class FSPopoverView: UIView {
     
     // MARK: Properties/Public
     
+    /// Arrow will be hidden when this property is set to false.
+    /// Defaults to true.
+    ///
+    /// * A reload request will be set when this property is changed.
+    ///
+    final public var isArrowEnabled = true {
+        didSet {
+            if isArrowEnabled != oldValue {
+                setNeedsReload()
+            }
+        }
+    }
+    
     /// The vertex of the arrow.
     /// Defaults to (0, 0).
     ///
     /// * This point is in the coordinate system of `containerView`. (same as the popover view)
     /// * This point will be recalculated on reload operation.
+    /// * The value of `isArrowEnabled` has no effect on this property.
     ///
     final public private(set) var arrowPoint: CGPoint = .zero
     
@@ -315,11 +329,14 @@ private extension FSPopoverView {
         let realContentSize = dataSource?.contentSize(for: self) ?? .zero
         let contentSize: CGSize
         
+        // arrow size
+        let arrowSize = isArrowEnabled ? _Consts.arrowSize : .zero
+        
         // arrow direction
         do {
             let horizontalContentSize: CGSize = {
                 var size = CGSize(width: _Consts.cornerRadius * 2 + 20.0,
-                                  height: _Consts.arrowSize.width + _Consts.cornerRadius * 2 + 20.0)
+                                  height: arrowSize.width + _Consts.cornerRadius * 2 + 20.0)
                 if realContentSize.width > size.width {
                     size.width = realContentSize.width
                 }
@@ -329,7 +346,7 @@ private extension FSPopoverView {
                 return size
             }()
             let verticalContentSize: CGSize = {
-                var size = CGSize(width: _Consts.arrowSize.width + _Consts.cornerRadius * 2 + 20.0,
+                var size = CGSize(width: arrowSize.width + _Consts.cornerRadius * 2 + 20.0,
                                   height: _Consts.cornerRadius * 2 + 20.0)
                 if realContentSize.width > size.width {
                     size.width = realContentSize.width
@@ -340,7 +357,7 @@ private extension FSPopoverView {
                 return size
             }()
             if autosetsArrowDirection {
-                let referRect   = arrowReferRect.insetBy(dx: -_Consts.arrowSize.height, dy: -_Consts.arrowSize.height)
+                let referRect   = arrowReferRect.insetBy(dx: -arrowSize.height, dy: -arrowSize.height)
                 let topSpace    = CGSize(width: safeContainerRect.width, height: max(0.0, referRect.minY - safeContainerRect.minY))
                 let leftSpace   = CGSize(width: max(0.0, referRect.minX - safeContainerRect.minX), height: safeContainerRect.height)
                 let bottomSpace = CGSize(width: safeContainerRect.width, height: max(0.0, safeContainerRect.maxY - referRect.maxY))
@@ -402,7 +419,7 @@ private extension FSPopoverView {
             let arrowPointSafeRect: CGRect = {
                 var rect = safeContainerRect.insetBy(dx: _Consts.cornerRadius, dy: _Consts.cornerRadius)
                 rect = rect.insetBy(dx: 3.0, dy: 3.0)
-                rect = rect.insetBy(dx: _Consts.arrowSize.width / 2, dy: _Consts.arrowSize.width / 2)
+                rect = rect.insetBy(dx: arrowSize.width / 2, dy: arrowSize.width / 2)
                 return rect
             }()
             if !arrowPointSafeRect.contains(point) {
@@ -432,9 +449,9 @@ private extension FSPopoverView {
                 var width: CGFloat = contentSize.width, height: CGFloat = contentSize.height
                 switch arrowDirection {
                 case .up, .down:
-                    height += _Consts.arrowSize.height
+                    height += arrowSize.height
                 case .left, .right:
-                    width += _Consts.arrowSize.height
+                    width += arrowSize.height
                 }
                 return .init(width: width, height: height)
             }()
@@ -499,9 +516,9 @@ private extension FSPopoverView {
             switch arrowDirection {
             case .up:
                 frame.origin.x = (contentSize.width - realContentSize.width) / 2
-                frame.origin.y = _Consts.arrowSize.height + (contentSize.height - realContentSize.height) / 2
+                frame.origin.y = arrowSize.height + (contentSize.height - realContentSize.height) / 2
             case .left:
-                frame.origin.x =  _Consts.arrowSize.height + (contentSize.width - realContentSize.width) / 2
+                frame.origin.x =  arrowSize.height + (contentSize.width - realContentSize.width) / 2
                 frame.origin.y = (contentSize.height - realContentSize.height) / 2
             case .down, .right:
                 frame.origin.x = (contentSize.width - realContentSize.width) / 2
@@ -543,7 +560,8 @@ private extension FSPopoverView {
                                               y: arrowPoint.y - frame.minY)
             
             var context = FSPopoverDrawContext()
-            context.arrowSize       = _Consts.arrowSize
+            context.isArrowEnabled  = isArrowEnabled
+            context.arrowSize       = arrowSize
             context.arrowPoint      = arrowPointInPopover
             context.arrowDirection  = arrowDirection
             context.cornerRadius    = _Consts.cornerRadius

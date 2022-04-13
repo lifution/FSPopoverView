@@ -30,7 +30,7 @@ struct FSPopoverDrawUp: FSPopoverDrawable {
                         clockwise: true)
         }
         // arrow
-        do {
+        if context.isArrowEnabled {
             path.addLine(to: .init(x: arrowPoint.x - arrowSize.width / 2, y: contentRect.minY))
             do {
                 let controlPoint1 = CGPoint(x: arrowPoint.x - arrowSize.width / 4, y: contentRect.minY).inner.flattedValue

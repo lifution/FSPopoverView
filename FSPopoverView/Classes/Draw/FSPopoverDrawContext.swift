@@ -10,6 +10,7 @@ import UIKit
 
 struct FSPopoverDrawContext {
     
+    var isArrowEnabled = true
     var arrowSize: CGSize = .zero
     var arrowPoint: CGPoint = .zero
     var arrowDirection: FSPopoverView.ArrowDirection = .up
