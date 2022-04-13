@@ -52,7 +52,7 @@ extension ViewController: FSPopoverViewDataSource {
     
     func backgroundView(for popoverView: FSPopoverView) -> UIView? {
         let view = UIView()
-        view.backgroundColor = .cyan
+        view.backgroundColor = .lightGray
         return view
     }
     
@@ -61,6 +61,13 @@ extension ViewController: FSPopoverViewDataSource {
     }
     
     func contentSize(for popoverView: FSPopoverView) -> CGSize {
-        return ghostView.sizeThatFits(.init(width: 100.0, height: 100.0))
+        return ghostView.sizeThatFits(.init(width: 1000.0, height: 1000.0))
+    }
+    
+    func containerSafeAreaInsets(for popoverView: FSPopoverView) -> UIEdgeInsets {
+        var insets = view.safeAreaInsets
+        insets.left = 15.0
+        insets.right = 15.0
+        return insets
     }
 }

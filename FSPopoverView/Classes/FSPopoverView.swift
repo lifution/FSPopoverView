@@ -64,11 +64,11 @@ open class FSPopoverView: UIView {
     
     // MARK: Properties/Public
     
-    /// The point the arrow points to.
+    /// The vertex of the arrow.
     /// Defaults to (0, 0).
     ///
     /// * This point is in the coordinate system of `containerView`. (same as the popover view)
-    /// * This point will be recalculated on every reload operation.
+    /// * This point will be recalculated on reload operation.
     ///
     final public private(set) var arrowPoint: CGPoint = .zero
     
@@ -307,43 +307,81 @@ private extension FSPopoverView {
         // clear old contents
         p_resetContents()
         
-        // content size
-        let contentSize = dataSource?.contentSize(for: self) ?? .zero
-        
         // container safe area insets
         let safeAreaInsets = dataSource?.containerSafeAreaInsets(for: self) ?? .zero
         let safeContainerRect = CGRect(origin: .zero, size: containerSize).inset(by: safeAreaInsets)
         
+        // content size
+        let realContentSize = dataSource?.contentSize(for: self) ?? .zero
+        let contentSize: CGSize
+        
         // arrow direction
-        if autosetsArrowDirection {
-            let referRect = arrowReferRect.insetBy(dx: -_Consts.arrowSize.height, dy: -_Consts.arrowSize.height)
-            let topSpace    = CGSize(width: safeContainerRect.width, height: max(0.0, referRect.minY - safeContainerRect.minY))
-            let leftSpace   = CGSize(width: max(0.0, referRect.minX - safeContainerRect.minX), height: safeContainerRect.height)
-            let bottomSpace = CGSize(width: safeContainerRect.width, height: max(0.0, safeContainerRect.maxY - referRect.maxY))
-            let rightSpace  = CGSize(width: max(0.0, safeContainerRect.maxX - referRect.maxX), height: safeContainerRect.height)
-            // priority: up > down > left > right
-            if bottomSpace.width >= contentSize.width && bottomSpace.height >= contentSize.height {
-                arrowDirection = .up
-            } else if topSpace.width >= contentSize.width && topSpace.height >= contentSize.height {
-                arrowDirection = .down
-            } else if rightSpace.width >= contentSize.width && rightSpace.height >= contentSize.height {
-                arrowDirection = .left
-            } else if leftSpace.width >= contentSize.width && leftSpace.height >= contentSize.height {
-                arrowDirection = .right
+        do {
+            let horizontalContentSize: CGSize = {
+                var size = CGSize(width: _Consts.cornerRadius * 2 + 20.0,
+                                  height: _Consts.arrowSize.width + _Consts.cornerRadius * 2 + 20.0)
+                if realContentSize.width > size.width {
+                    size.width = realContentSize.width
+                }
+                if realContentSize.height > size.height {
+                    size.height = realContentSize.height
+                }
+                return size
+            }()
+            let verticalContentSize: CGSize = {
+                var size = CGSize(width: _Consts.arrowSize.width + _Consts.cornerRadius * 2 + 20.0,
+                                  height: _Consts.cornerRadius * 2 + 20.0)
+                if realContentSize.width > size.width {
+                    size.width = realContentSize.width
+                }
+                if realContentSize.height > size.height {
+                    size.height = realContentSize.height
+                }
+                return size
+            }()
+            if autosetsArrowDirection {
+                let referRect   = arrowReferRect.insetBy(dx: -_Consts.arrowSize.height, dy: -_Consts.arrowSize.height)
+                let topSpace    = CGSize(width: safeContainerRect.width, height: max(0.0, referRect.minY - safeContainerRect.minY))
+                let leftSpace   = CGSize(width: max(0.0, referRect.minX - safeContainerRect.minX), height: safeContainerRect.height)
+                let bottomSpace = CGSize(width: safeContainerRect.width, height: max(0.0, safeContainerRect.maxY - referRect.maxY))
+                let rightSpace  = CGSize(width: max(0.0, safeContainerRect.maxX - referRect.maxX), height: safeContainerRect.height)
+                // priority: up > down > left > right
+                if bottomSpace.width >= verticalContentSize.width && bottomSpace.height >= verticalContentSize.height {
+                    contentSize = verticalContentSize
+                    arrowDirection = .up
+                } else if topSpace.width >= verticalContentSize.width && topSpace.height >= verticalContentSize.height {
+                    contentSize = verticalContentSize
+                    arrowDirection = .down
+                } else if rightSpace.width >= horizontalContentSize.width && rightSpace.height >= horizontalContentSize.height {
+                    contentSize = horizontalContentSize
+                    arrowDirection = .left
+                } else if leftSpace.width >= horizontalContentSize.width && leftSpace.height >= horizontalContentSize.height {
+                    contentSize = horizontalContentSize
+                    arrowDirection = .right
+                } else {
+                    // `up` will be set if there is not enough space to show popover view.
+                    arrowDirection = .up
+                    contentSize = verticalContentSize
+                    #if DEBUG
+                    let message = """
+                    ⚠️ Not enough space to show popover view, \
+                    you may need to check if the popover view is showing on the wrong view. ⚠️
+                    """
+                    print(message)
+                    #endif
+                }
             } else {
-                // `up` will be set if there is not enough space to show popover view.
-                arrowDirection = .up
-                #if DEBUG
-                let message = """
-                ⚠️ Not enough space to show popover view, \
-                you may need to check if the popover view is showing on the wrong view. ⚠️
-                """
-                print(message)
-                #endif
+                switch arrowDirection {
+                case .up, .down:
+                    contentSize = verticalContentSize
+                case .left, .right:
+                    contentSize = horizontalContentSize
+                }
             }
         }
         
         // arrow point
+        // arrow point is in the coordinate system of container view.
         do {
             var point = CGPoint.zero
             switch arrowDirection {
@@ -388,7 +426,7 @@ private extension FSPopoverView {
             arrowPoint = point
         }
         
-        // frame of the popover view
+        // The frame of the popover view in the container view.
         let frame: CGRect = {
             let size: CGSize = {
                 var width: CGFloat = contentSize.width, height: CGFloat = contentSize.height
@@ -398,8 +436,6 @@ private extension FSPopoverView {
                 case .left, .right:
                     width += _Consts.arrowSize.height
                 }
-                width = max(width, _Consts.minimumSize.width)
-                height = max(height, _Consts.minimumSize.height)
                 return .init(width: width, height: height)
             }()
             var origin = CGPoint.zero
@@ -407,13 +443,23 @@ private extension FSPopoverView {
             case .up, .down:
                 origin.x = {
                     var x = arrowPoint.x - size.width / 2
-                    x = max(safeContainerRect.minX, min(safeContainerRect.maxX, x))
+                    if arrowPoint.x <= safeContainerRect.midX {
+                        x = max(x, safeContainerRect.minX)
+                    }
+                    if arrowPoint.x > safeContainerRect.midX {
+                        x = min(x, safeContainerRect.maxX - size.width)
+                    }
                     return x
                 }()
             case .left, .right:
                 origin.y = {
                     var y = arrowPoint.y - size.height / 2
-                    y = max(safeContainerRect.minY, min(safeContainerRect.maxY, y))
+                    if arrowPoint.y <= safeContainerRect.midY {
+                        y = max(y, safeContainerRect.minY)
+                    }
+                    if arrowPoint.y > safeContainerRect.midY {
+                        y = min(y, safeContainerRect.maxY - size.height)
+                    }
                     return y
                 }()
             }
@@ -449,51 +495,52 @@ private extension FSPopoverView {
             popoverContainerView.addSubview(view)
             contentView = view
             var frame = CGRect.zero
-            frame.size = contentSize
+            frame.size = realContentSize
             switch arrowDirection {
             case .up:
-                frame.origin.y =  _Consts.arrowSize.height
+                frame.origin.x = (contentSize.width - realContentSize.width) / 2
+                frame.origin.y = _Consts.arrowSize.height + (contentSize.height - realContentSize.height) / 2
             case .left:
-                frame.origin.x =  _Consts.arrowSize.height
+                frame.origin.x =  _Consts.arrowSize.height + (contentSize.width - realContentSize.width) / 2
+                frame.origin.y = (contentSize.height - realContentSize.height) / 2
             case .down, .right:
-                frame.origin = .zero
+                frame.origin.x = (contentSize.width - realContentSize.width) / 2
+                frame.origin.y = (contentSize.height - realContentSize.height) / 2
             }
             view.frame = frame
         }
         
         // anchor point
-        layer.anchorPoint = {
-            var x: CGFloat = 0.0, y: CGFloat = 0.0
-            let anchorPoint: CGPoint = {
-                guard let containerView = containerView else { return .zero }
-                var point = containerView.convert(arrowPoint, to: self)
-                point.x = max(0.0, min(frame.width, point.x))
-                point.y = max(0.0, min(frame.height, point.y))
-                return point
-            }()
-            switch arrowDirection {
-            case .up:
-                x = anchorPoint.x / frame.width
-            case .down:
-                x = anchorPoint.x / frame.width
-                y = 1.0
-            case .left:
-                y = anchorPoint.y / frame.height
-            case .right:
-                x = 1.0
-                y = anchorPoint.y / frame.height
+        do {
+            defer {
+                // Needs to reset frame again after updating layer.anchorPoint,
+                // or the popover view will be in the wrong place.
+                self.frame = frame
             }
-            return .init(x: x, y: y)
-        }()
-        
-        // Needs to reset frame again after updating layer.anchorPoint,
-        // or the popover view will be in the wrong place.
-        self.frame = frame
+            layer.anchorPoint = {
+                var x: CGFloat = 0.0, y: CGFloat = 0.0
+                let arrowPointInPopover = CGPoint(x: arrowPoint.x - frame.minX,
+                                                  y: arrowPoint.y - frame.minY)
+                switch arrowDirection {
+                case .up:
+                    x = arrowPointInPopover.x / frame.width
+                case .down:
+                    x = arrowPointInPopover.x / frame.width
+                    y = 1.0
+                case .left:
+                    y = arrowPointInPopover.y / frame.height
+                case .right:
+                    x = 1.0
+                    y = arrowPointInPopover.y / frame.height
+                }
+                return .init(x: x, y: y)
+            }()
+        }
         
         // draw popover view
-        if let containerView = containerView {
-            
-            let arrowPointInPopover = containerView.convert(arrowPoint, to: self)
+        do {
+            let arrowPointInPopover = CGPoint(x: arrowPoint.x - frame.minX,
+                                              y: arrowPoint.y - frame.minY)
             
             var context = FSPopoverDrawContext()
             context.arrowSize       = _Consts.arrowSize
@@ -539,9 +586,6 @@ private extension FSPopoverView {
                 layer.frame.origin.x = (frame.width - image.size.width) / 2
                 layer.frame.origin.y = (frame.height - image.size.height) / 2
             }
-            
-        } else {
-            
         }
     }
 }
@@ -578,6 +622,4 @@ public extension FSPopoverView {
 private struct _Consts {
     static let cornerRadius: CGFloat = 6.0
     static let arrowSize = CGSize(width: 30.0, height: 14.0)
-    static let minimumSize = CGSize(width: arrowSize.width + cornerRadius * 2 + 10.0,
-                                    height: arrowSize.height + 10.0)
 }
