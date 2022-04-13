@@ -28,10 +28,11 @@ class ViewController: UIViewController {
         guard let button = sender as? UIButton else { return }
         let popoverView = FSPopoverView()
         popoverView.dataSource = self
-        popoverView.borderWidth = 2.0
+//        popoverView.borderWidth = 1.0
         popoverView.borderColor = .red
         popoverView.shadowColor = .green
         popoverView.shadowRadius = 3.0
+        popoverView.shadowOpacity = 0.6
 //        popoverView.arrowDirection = .right
 //        popoverView.autosetsArrowDirection = false
         popoverView.showTo(button)

@@ -95,6 +95,9 @@ open class FSPopoverView: UIView {
     final weak public private(set) var containerView: UIView?
     
     /// The color of the popover view border.
+    ///
+    /// * A reload request will be set when this property is changed.
+    ///
     final public var borderColor: UIColor? {
         didSet {
             setNeedsReload()
@@ -102,6 +105,9 @@ open class FSPopoverView: UIView {
     }
     
     /// The width of the popover view border.
+    ///
+    /// * A reload request will be set when this property is changed.
+    ///
     final public var borderWidth: CGFloat = 0.0 {
         didSet {
             if borderWidth != oldValue {
@@ -111,6 +117,9 @@ open class FSPopoverView: UIView {
     }
     
     /// The color of the popover view shadow.
+    ///
+    /// * A reload request will be set when this property is changed.
+    ///
     final public var shadowColor: UIColor? {
         didSet {
             setNeedsReload()
@@ -118,6 +127,9 @@ open class FSPopoverView: UIView {
     }
     
     /// The radius of the popover view shadow.
+    ///
+    /// * A reload request will be set when this property is changed.
+    ///
     final public var shadowRadius: CGFloat = 0.0 {
         didSet {
             if shadowRadius != oldValue {
@@ -129,6 +141,9 @@ open class FSPopoverView: UIView {
     /// The opacity of the popover view shadow.
     /// The value in this property must be in the range 0.0 (transparent) to 1.0 (opaque).
     /// Defaults to 1.0.
+    ///
+    /// * A reload request will be set when this property is changed.
+    /// 
     final public var shadowOpacity: Float = 1.0 {
         didSet {
             if shadowOpacity != oldValue {
@@ -639,5 +654,5 @@ public extension FSPopoverView {
 
 private struct _Consts {
     static let cornerRadius: CGFloat = 6.0
-    static let arrowSize = CGSize(width: 30.0, height: 14.0)
+    static let arrowSize = CGSize(width: 20.0, height: 10.0)
 }
