@@ -17,6 +17,8 @@ public protocol FSPopoverViewDataSource: AnyObject {
     func contentSize(for popoverView: FSPopoverView) -> CGSize
     
     func containerSafeAreaInsets(for popoverView: FSPopoverView) -> UIEdgeInsets
+    
+    func popoverViewShouldHideOnTapOutside(_ popoverView: FSPopoverView) -> Bool
 }
 
 /// Optional
@@ -27,4 +29,5 @@ public extension FSPopoverViewDataSource {
     func containerSafeAreaInsets(for popoverView: FSPopoverView) -> UIEdgeInsets {
         return .init(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
     }
+    func popoverViewShouldHideOnTapOutside(_ popoverView: FSPopoverView) -> Bool { return true }
 }

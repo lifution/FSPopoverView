@@ -35,6 +35,7 @@ class ViewController: UIViewController {
         popoverView.shadowOpacity = 0.6
 //        popoverView.arrowDirection = .right
 //        popoverView.autosetsArrowDirection = false
+        popoverView.showsDimBackground = true
         popoverView.showTo(button)
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -55,7 +56,7 @@ extension ViewController: FSPopoverViewDataSource {
     
     func backgroundView(for popoverView: FSPopoverView) -> UIView? {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .yellow
         return view
     }
     
