@@ -38,7 +38,7 @@ struct FSPopoverDrawRight: FSPopoverDrawable {
                         clockwise: true)
         }
         // arrow
-        if context.isArrowEnabled {
+        if context.showsArrow {
             let arrowTopPoint = CGPoint(x: contentRect.maxX, y: arrowPoint.y - arrowSize.width / 2).inner.flattedValue
             let arrowBottomPoint = CGPoint(x: contentRect.maxX, y: arrowPoint.y + arrowSize.width / 2).inner.flattedValue
             path.addLine(to: arrowTopPoint)

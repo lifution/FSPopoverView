@@ -37,7 +37,7 @@ struct FSPopoverDrawer {
     // MARK: Internal
     
     func generatePath() -> UIBezierPath {
-        drawable.generatePath(with: context, offset: .zero)
+        return drawable.generatePath(with: context, offset: .zero)
     }
     
     func generateBorderImage() -> UIImage? {
@@ -128,7 +128,7 @@ struct FSPopoverDrawer {
         }
         
         // The shadow area is gradually reduced from the inside to the outside,
-        // and the shadow visually seen is a little larger than the set `shadowRadius`,
+        // and the visible part of the shadow is a bit larger than the set `shadowRadius`,
         // so it is increased here to avoid clipping the shadow.
         let radius = context.shadowRadius + context.borderWidth
         let inset  = radius + 10.0

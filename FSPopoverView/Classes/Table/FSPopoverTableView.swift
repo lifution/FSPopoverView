@@ -26,15 +26,6 @@ open class FSPopoverTableView: FSPopoverView {
     }
 }
 
-// MARK: - Override
-
-extension FSPopoverTableView {
-    
-    open override func setNeedsReload() {
-        
-    }
-}
-
 // MARK: - Private
 
 private extension FSPopoverTableView {

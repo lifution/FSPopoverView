@@ -47,7 +47,7 @@ struct FSPopoverDrawDown: FSPopoverDrawable {
                         clockwise: true)
         }
         // arrow
-        if context.isArrowEnabled {
+        if context.showsArrow {
             let arrowLeftPoint = CGPoint(x: arrowPoint.x - arrowSize.width / 2, y: contentRect.maxY).inner.flattedValue
             let arrowRightPoint = CGPoint(x: arrowPoint.x + arrowSize.width / 2, y: contentRect.maxY).inner.flattedValue
             path.addLine(to: arrowRightPoint)

@@ -25,7 +25,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onDidTap(_ sender: Any) {
-        guard let button = sender as? UIButton else { return }
+        
+        guard let button = sender as? UIButton else {
+            return
+        }
+        
         let popoverView = FSPopoverView()
         popoverView.dataSource = self
 //        popoverView.borderWidth = 1.0
@@ -36,14 +40,20 @@ class ViewController: UIViewController {
 //        popoverView.arrowDirection = .right
 //        popoverView.autosetsArrowDirection = false
         popoverView.showsDimBackground = true
-        popoverView.showTo(button)
+        popoverView.show(from: button, in: view, displayIn: view, animated: true)
+//        popoverView.show(from: .init(x: 10.0, y: 100.0), animated: true)
+//        popoverView.show(from: .init(x: 100.0, y: 200.0, width: 0.0, height: 0.0), animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            popoverView.hide()
+        }
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
 //            popoverView.arrowDirection = .left
-////            popoverView.isArrowEnabled = false
+////            popoverView.showsArrow = false
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
 //                popoverView.arrowDirection = .down
-////                popoverView.isArrowEnabled = true
+////                popoverView.showsArrow = true
 //                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
 //                    popoverView.arrowDirection = .up
 //                }
