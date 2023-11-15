@@ -22,7 +22,7 @@ open class FSPopoverView: UIView {
     ///
     /// * The data source must adopt the FSPopoverViewDataSource protocol.
     /// * The data source is not retained.
-    /// * A reload request will be set when this property is changed.
+    /// * A reload request will be set when this property is set.
     ///
     weak open var dataSource: FSPopoverViewDataSource? {
         didSet {
@@ -30,11 +30,11 @@ open class FSPopoverView: UIView {
         }
     }
     
-    /// The direction the arrow points to.
+    /// The direction of the popover's arrow.
     ///
     /// * You can change this property even though the popover view is displaying.
     /// * A reload request will be set when this property is changed.
-    /// * View `autosetsArrowDirection` property for more information about this
+    /// * See `autosetsArrowDirection` property for more information about this
     ///   property.
     ///
     open var arrowDirection = FSPopoverView.ArrowDirection.up {
@@ -70,20 +70,20 @@ open class FSPopoverView: UIView {
     ///
     /// * A reload request will be set when this property is changed.
     ///
-    final public var isArrowEnabled = true {
+    final public var showsArrow = true {
         didSet {
-            if isArrowEnabled != oldValue {
+            if showsArrow != oldValue {
                 setNeedsReload()
             }
         }
     }
     
-    /// The vertex of the arrow.
+    /// The location of the arrow's vertex.
     /// Defaults to (0, 0).
     ///
     /// * This point is in the coordinate system of `containerView`. (same as the popover view)
     /// * This point will be recalculated on reload operation.
-    /// * The value of `isArrowEnabled` has no effect on this property.
+    /// * The value of `showsArrow` has no effect on this property.
     ///
     final public private(set) var arrowPoint: CGPoint = .zero
     
@@ -96,6 +96,7 @@ open class FSPopoverView: UIView {
     }
     
     /// The container view displaying the popover view.
+    /// This view will be created when the popover view needs to be displayed.
     ///
     /// If popover view is displaying in a specific view, the specific view will be the superview
     /// of the container view. Otherwise, a window will be created automatically inside the popover
@@ -103,11 +104,24 @@ open class FSPopoverView: UIView {
     /// current screen. And either the specific view or the window created automatically, they are
     /// just the superview of the container view.
     ///
+    /// The popover view is added to the container view.
+    /// The view hierarchy is:
+    /// ```
+    /// specific view / window
+    ///   - container view
+    ///     - dim background view
+    ///     - user interaction view
+    ///     - popover view
+    ///       - popover container view
+    ///         - background view
+    ///         - content view
+    /// ```
+    ///
     final weak public private(set) var containerView: UIView?
     
     /// The color of the popover view border.
     ///
-    /// * A reload request will be set when this property is changed.
+    /// * A reload request will be set when this property is set.
     ///
     final public var borderColor: UIColor? {
         didSet {
@@ -129,7 +143,7 @@ open class FSPopoverView: UIView {
     
     /// The color of the popover view shadow.
     ///
-    /// * A reload request will be set when this property is changed.
+    /// * A reload request will be set when this property is set.
     ///
     final public var shadowColor: UIColor? {
         didSet {
@@ -219,7 +233,7 @@ open class FSPopoverView: UIView {
         return view
     }()
     
-    /// The view that receives user taps.
+    /// The view that receives user interaction.
     private lazy var userInteractionView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
@@ -250,7 +264,14 @@ open class FSPopoverView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Functions/Open
+    // MARK: Methods/Override
+    
+    override open func layoutSubviews() {
+        super.layoutSubviews()
+        reloadDataIfNeeded()
+    }
+    
+    // MARK: Methods/Open
     
     /// Tells the popover view to reload all of its contents.
     ///
@@ -266,7 +287,7 @@ open class FSPopoverView: UIView {
     ///       performance.
     ///     * You should call this method on the main thread.
     ///
-    @objc dynamic open func setNeedsReload() {
+    open func setNeedsReload() {
         guard Thread.isMainThread else {
             #if DEBUG
             fatalError("You should call this method on the main thread.")
@@ -278,19 +299,19 @@ open class FSPopoverView: UIView {
         setNeedsLayout()
     }
     
-    /// Reload the contents immediately if content reloads are pending.
+    /// Reload the contents immediately if the reload operation is pending.
     ///
     /// - Requires
     ///     * Subclasses **must** call `super.reloadDataIfNeeded()` when overriding this method,
     ///       otherwise some bugs may occur.
     ///
     /// - Note
-    ///     * Use this method to force the view to reload its contents immediately, but If no
-    ///       content reloads are pending, this method exits without modifying the contents or
-    ///       calling any content-related callbacks.
+    ///     * Use this method to force the popover view to reload its contents immediately, but if
+    ///       the reload operation is not pending, this method exits without modifying the contents
+    ///       or calling any content-related callbacks.
     ///     * You should call this method on the main thread.
     ///
-    @objc dynamic open func reloadDataIfNeeded() {
+    open func reloadDataIfNeeded() {
         guard Thread.isMainThread else {
             #if DEBUG
             fatalError("You should call this method on the main thread.")
@@ -314,22 +335,12 @@ open class FSPopoverView: UIView {
     ///       changed, like size of content and direction of arrow and so on.
     ///     * You should call this method on the main thread.
     ///
-    @objc dynamic open func reloadData() {
+    open func reloadData() {
         p_reloadData()
     }
 }
 
-// MARK: - Override
-
-extension FSPopoverView {
-    
-    override open func layoutSubviews() {
-        super.layoutSubviews()
-        reloadDataIfNeeded()
-    }
-}
-
-// MARK: - Private
+// MARK: - Methods/Private
 
 private extension FSPopoverView {
     
@@ -371,6 +382,8 @@ private extension FSPopoverView {
         isFreezing = true
         // remove from super view
         removeFromSuperview()
+        // remove container view if exists.
+        containerView?.removeFromSuperview()
         // destroy old display window
         p_destroyDisplayWindow()
     }
@@ -417,10 +430,7 @@ private extension FSPopoverView {
             #endif
         }
         
-        guard
-            containerSize.width > 0,
-            containerSize.height > 0
-        else {
+        guard containerSize.width > 0, containerSize.height > 0 else {
             return
         }
         
@@ -438,7 +448,7 @@ private extension FSPopoverView {
         let contentSize: CGSize
         
         // arrow size
-        let arrowSize = isArrowEnabled ? _Consts.arrowSize : .zero
+        let arrowSize = showsArrow ? _Consts.arrowSize : .zero
         
         // arrow direction
         do {
@@ -632,14 +642,13 @@ private extension FSPopoverView {
         // anchor point
         do {
             defer {
-                // Needs to reset frame again after updating layer.anchorPoint,
+                // Needs to reset frame again after updating `layer.anchorPoint`,
                 // or the popover view will be in the wrong place.
                 self.frame = frame
             }
             layer.anchorPoint = {
                 var x: CGFloat = 0.0, y: CGFloat = 0.0
-                let arrowPointInPopover = CGPoint(x: arrowPoint.x - frame.minX,
-                                                  y: arrowPoint.y - frame.minY)
+                let arrowPointInPopover = CGPoint(x: arrowPoint.x - frame.minX, y: arrowPoint.y - frame.minY)
                 switch arrowDirection {
                 case .up:
                     x = arrowPointInPopover.x / frame.width
@@ -658,11 +667,10 @@ private extension FSPopoverView {
         
         // draw popover view
         do {
-            let arrowPointInPopover = CGPoint(x: arrowPoint.x - frame.minX,
-                                              y: arrowPoint.y - frame.minY)
+            let arrowPointInPopover = CGPoint(x: arrowPoint.x - frame.minX, y: arrowPoint.y - frame.minY)
             
             var context = FSPopoverDrawContext()
-            context.isArrowEnabled  = isArrowEnabled
+            context.showsArrow      = showsArrow
             context.arrowSize       = arrowSize
             context.arrowPoint      = arrowPointInPopover
             context.arrowDirection  = arrowDirection
@@ -709,69 +717,41 @@ private extension FSPopoverView {
         }
     }
     
-    func p_hide() {
-        
-        // Can not do anything when the popover view begins disappearing.
-        isFreezing = true
-        
-        containerView?.isUserInteractionEnabled = false
-        
-        UIView.animate(withDuration: 0.18, delay: 0.0, options: .curveEaseOut) {
-            self.alpha = 0.0
-            self.transform = .init(scaleX: 0.01, y: 0.01)
-            self.dimBackgroundView.alpha = 0.0
-        } completion: { _ in
-            self.removeFromSuperview()
-            self.p_destroyDisplayWindow()
-            self.containerView?.removeFromSuperview()
-        }
-    }
-}
-
-// MARK: - Private/Actions
-
-private extension FSPopoverView {
-    
-    @objc func p_handleTap() {
-        guard
-            !isFreezing, // Can not do anything as the popover view is freezing.
-            dataSource?.popoverViewShouldHideOnTapOutside(self) ?? true
-        else {
-            return
-        }
-        p_hide()
-    }
-}
-
-// MARK: - Public
-
-public extension FSPopoverView {
-    
-    #warning("TEST")
-    func showTo(_ view: UIView) {
+    func p_show(from rect: CGRect,
+                in view: UIView? = nil,
+                displayIn specificView: UIView? = nil,
+                animated: Bool = true,
+                completion: (() -> Void)? = nil) {
         
         p_prepareForDisplaying()
         
-        let window = p_createDisplayWindow()
-        do {
+        let displayView: UIView = {
+            if let view = specificView {
+                return view
+            }
+            let window = p_createDisplayWindow()
             window.bounds = .init(origin: .zero, size: UIScreen.main.bounds.size)
             window.isHidden = false
             displayWindow = window
-        }
+            return window
+        }()
+        
+        arrowReferRect = {
+            if let view = view {
+                return view.convert(rect, to: displayView)
+            }
+            return rect
+        }()
         
         let containerView = p_createContainerView()
         do {
             p_setContainerView(containerView)
-            window.addSubview(containerView)
-            containerView.inner.makeMarginConstraints(to: window)
-            window.layoutIfNeeded()
+            displayView.addSubview(containerView)
+            containerView.inner.makeMarginConstraints(to: displayView)
+            displayView.layoutIfNeeded()
         }
         
         containerSize = containerView.bounds.size
-        arrowReferRect = {
-            guard let superview = view.superview else { return .zero }
-            return superview.convert(view.frame, to: containerView)
-        }()
         
         setNeedsReload()
         
@@ -782,16 +762,57 @@ public extension FSPopoverView {
         
         transform = .init(scaleX: 0.01, y: 0.01)
         dimBackgroundView.alpha = 0.0
-        UIView.animate(withDuration: 0.18, delay: 0.0, options: .curveEaseOut) {
+        UIView.animate(withDuration: (animated ? 0.18 : 0.0), delay: 0.0, options: .curveEaseOut) {
             self.transform = .identity
             self.dimBackgroundView.alpha = 1.0
         } completion: { _ in
             self.isFreezing = false
+            completion?()
         }
     }
     
-    /// Call this method if you want to bring the popover view to the front of the view
-    /// displaying the popover view.
+    func p_hide(animated: Bool = true, completion: (() -> Void)? = nil) {
+        
+        // Can not do anything when the popover view begins disappearing.
+        isFreezing = true
+        
+        containerView?.isUserInteractionEnabled = false
+        
+        UIView.animate(withDuration: (animated ? 0.18 : 0.0), delay: 0.0, options: .curveEaseOut) {
+            self.alpha = 0.0
+            self.transform = .init(scaleX: 0.01, y: 0.01)
+            self.dimBackgroundView.alpha = 0.0
+        } completion: { _ in
+            self.isFreezing = false
+            self.removeFromSuperview()
+            self.p_destroyDisplayWindow()
+            self.containerView?.removeFromSuperview()
+            completion?()
+        }
+    }
+}
+
+// MARK: - Methods/Actions
+
+private extension FSPopoverView {
+    
+    @objc func p_handleTap() {
+        guard
+            !isFreezing, // Can not do anything while the popover view is freezing.
+            dataSource?.popoverViewShouldHideOnTapOutside(self) ?? true
+        else {
+            return
+        }
+        p_hide()
+    }
+}
+
+// MARK: - Methods/Public
+
+public extension FSPopoverView {
+    
+    /// Call this method if you want to bring the popover view to the front of
+    /// the view displaying the popover view.
     func moveToFront() {
         guard
             let containerView = containerView,
@@ -801,9 +822,52 @@ public extension FSPopoverView {
         }
         superview.bringSubviewToFront(containerView)
     }
+    
+    /// Display popover view with target view as the reference.
+    func show(from targetView: UIView,
+              displayIn specificView: UIView? = nil,
+              animated: Bool = true,
+              completion: (() -> Void)? = nil) {
+        p_show(from: targetView.frame, 
+               in: targetView.superview,
+               displayIn: specificView,
+               animated: animated,
+               completion: completion)
+    }
+    
+    /// Display popover view with the point as the reference.
+    func show(from point: CGPoint,
+              in view: UIView? = nil,
+              displayIn specificView: UIView? = nil,
+              animated: Bool = true,
+              completion: (() -> Void)? = nil) {
+        p_show(from: .init(origin: point, size: .zero), 
+               in: view,
+               displayIn: specificView,
+               animated: animated,
+               completion: completion)
+    }
+    
+    /// Display popover view with the rect as the reference.
+    func show(from rect: CGRect,
+              in view: UIView? = nil,
+              displayIn specificView: UIView? = nil,
+              animated: Bool = true,
+              completion: (() -> Void)? = nil) {
+        p_show(from: rect, 
+               in: view,
+               displayIn: specificView,
+               animated: animated,
+               completion: completion)
+    }
+    
+    /// Hide popover view.
+    func hide(animated: Bool = true, completion: (() -> Void)? = nil) {
+        p_hide(animated: animated, completion: completion)
+    }
 }
 
-// MARK: - Consts
+// MARK: - Consts/Private
 
 private struct _Consts {
     static let cornerRadius: CGFloat = 6.0

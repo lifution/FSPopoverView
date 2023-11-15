@@ -1,6 +1,6 @@
 {
   "name": "FSPopoverView",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "summary": "`FSPopoverView` is an iOS customizable view that displays a bubble style view.",
   "homepage": "https://github.com/lifution/Popover",
   "authors": "Sheng",
@@ -9,18 +9,19 @@
     "file": "LICENSE"
   },
   "source": {
-    "git": "git@github.com:lifution/Popover.git",
-    "tag": "1.0.0"
+    "git": "https://github.com/lifution/Popover.git",
+    "tag": "3.0.0"
+  },
+  "requires_arc": true,
+  "swift_versions": "5",
+  "platforms": {
+    "ios": "11.0"
   },
   "frameworks": [
     "UIKit",
     "Foundation",
     "CoreGraphics"
   ],
-  "swift_versions": "5",
-  "platforms": {
-    "ios": "11.0"
-  },
   "source_files": "FSPopoverView/Classes/**/*",
   "swift_version": "5"
 }

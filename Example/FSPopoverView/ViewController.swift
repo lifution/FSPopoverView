@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     
     @IBAction func onDidTap(_ sender: Any) {
         
-        guard let button = sender as? UIButton else {
+        guard let targetView = sender as? UIView else {
             return
         }
         
@@ -37,15 +37,19 @@ class ViewController: UIViewController {
         popoverView.shadowColor = .green
         popoverView.shadowRadius = 3.0
         popoverView.shadowOpacity = 0.6
-//        popoverView.arrowDirection = .right
+        popoverView.arrowDirection = .down
 //        popoverView.autosetsArrowDirection = false
         popoverView.showsDimBackground = true
-        popoverView.show(from: button, in: view, displayIn: view, animated: true)
-//        popoverView.show(from: .init(x: 10.0, y: 100.0), animated: true)
-//        popoverView.show(from: .init(x: 100.0, y: 200.0, width: 0.0, height: 0.0), animated: true)
+        popoverView.show(from: targetView, displayIn: view, animated: true) {
+            print("popover view display finished.")
+        }
+//        popoverView.show(from: view.center, animated: true)
+//        popoverView.show(from: .init(x: 100.0, y: 200.0, width: 10.0, height: 10.0), animated: true) {
+//            print("popover view display finished.")
+//        }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            popoverView.hide()
+//            popoverView.hide(animated: false)
         }
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -80,8 +84,8 @@ extension ViewController: FSPopoverViewDataSource {
     
     func containerSafeAreaInsets(for popoverView: FSPopoverView) -> UIEdgeInsets {
         var insets = view.safeAreaInsets
-        insets.left = 15.0
-        insets.right = 15.0
+        insets.left = 10.0
+        insets.right = 10.0
         return insets
     }
 }

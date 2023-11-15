@@ -2,12 +2,15 @@
 
 ## Requirements
 
-iOS 11+, Swift 5+, Xcode 11+
+iOS 11+
+Swift 5
 
 ## Installation
 
-FSPopoverView is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+### CocoaPods
+
+FSPopoverView is available through [CocoaPods](https://cocoapods.org). 
+To install it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'FSPopoverView'
