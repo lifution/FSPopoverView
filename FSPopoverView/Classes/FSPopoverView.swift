@@ -822,13 +822,18 @@ public extension FSPopoverView {
         }
         superview.bringSubviewToFront(containerView)
     }
+}
+
+// MARK: - Methods/Public/Display
+
+public extension FSPopoverView {
     
     /// Display popover view with target view as the reference.
     func show(from targetView: UIView,
               displayIn specificView: UIView? = nil,
               animated: Bool = true,
               completion: (() -> Void)? = nil) {
-        p_show(from: targetView.frame, 
+        p_show(from: targetView.frame,
                in: targetView.superview,
                displayIn: specificView,
                animated: animated,
@@ -841,7 +846,7 @@ public extension FSPopoverView {
               displayIn specificView: UIView? = nil,
               animated: Bool = true,
               completion: (() -> Void)? = nil) {
-        p_show(from: .init(origin: point, size: .zero), 
+        p_show(from: .init(origin: point, size: .zero),
                in: view,
                displayIn: specificView,
                animated: animated,
@@ -854,7 +859,7 @@ public extension FSPopoverView {
               displayIn specificView: UIView? = nil,
               animated: Bool = true,
               completion: (() -> Void)? = nil) {
-        p_show(from: rect, 
+        p_show(from: rect,
                in: view,
                displayIn: specificView,
                animated: animated,
