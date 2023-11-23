@@ -11,6 +11,8 @@ import FSPopoverView
 
 class ViewController: UIViewController {
     
+    private let customTransition = FSPopoverViewTransitionTranslate()
+    
     private lazy var ghostView: UIView = {
         let label = UILabel()
         label.text = "👻"
@@ -37,20 +39,23 @@ class ViewController: UIViewController {
         popoverView.shadowColor = .green
         popoverView.shadowRadius = 3.0
         popoverView.shadowOpacity = 0.6
-        popoverView.arrowDirection = .down
+        popoverView.arrowDirection = .right
 //        popoverView.autosetsArrowDirection = false
         popoverView.showsDimBackground = true
-        popoverView.show(from: targetView, displayIn: view, animated: true) {
-            print("popover view display finished.")
+//        popoverView.transitioningDelegate = customTransition
+        popoverView.present(from: targetView, displayIn: view, animated: true) {
+            print("popover view present finished.")
         }
-//        popoverView.show(from: view.center, animated: true)
-//        popoverView.show(from: .init(x: 100.0, y: 200.0, width: 10.0, height: 10.0), animated: true) {
+//        popoverView.present(from: view.center, animated: true)
+//        popoverView.present(from: .init(x: 100.0, y: 200.0, width: 10.0, height: 10.0), animated: true) {
 //            print("popover view display finished.")
 //        }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-//            popoverView.hide(animated: false)
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//            popoverView.dismiss(animated: true) {
+//                print("popover view dismiss finished.")
+//            }
+//        }
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
 //            popoverView.arrowDirection = .left
