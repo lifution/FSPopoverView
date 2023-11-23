@@ -13,9 +13,12 @@ public final class FSPopoverViewTransitionContext {
     // MARK: Sence
     
     public enum Scene {
+        
         case present
-        case dismiss
-        case selection
+        
+        /// - Prameters:
+        ///   - isSelection: This value is usually used in a list.
+        case dismiss(_ isSelection: Bool = false)
     }
     
     // MARK: Properties/Public

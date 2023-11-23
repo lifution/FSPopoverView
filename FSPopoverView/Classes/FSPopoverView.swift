@@ -3,7 +3,7 @@
 //  FSPopoverView
 //
 //  Created by Sheng on 2022/4/2.
-//  Copyright (c) 2022 Sheng. All rights reserved.
+//  Copyright © 2023 Sheng. All rights reserved.
 //
 
 import UIKit
@@ -298,21 +298,14 @@ open class FSPopoverView: UIView {
     ///       otherwise some bugs may occur.
     ///
     /// - Note
-    ///     * This method makes a note of the request and returns immediately. Because this
-    ///       method does not force an immediate reload, all of the contents will reload in
-    ///       view's next layout update cycle. This behavior allows you to consolidate all
-    ///       of your content reloads to one layout update cycle, which is usually better for
-    ///       performance.
+    ///     * This method makes a note of the request and returns immediately. This method
+    ///       does not force an immediate reload, all of the contents will reload in view's
+    ///       next layout update cycle. This behavior allows you to consolidate all of your
+    ///       content reloads to one layout update cycle, which is usually better for performance.
     ///     * You should call this method on the main thread.
     ///
     open func setNeedsReload() {
-        guard Thread.isMainThread else {
-            #if DEBUG
-            fatalError("You should call this method on the main thread.")
-            #else
-            return
-            #endif
-        }
+        p_mainThreadCheck()
         needsReload = true
         setNeedsLayout()
     }
@@ -330,13 +323,7 @@ open class FSPopoverView: UIView {
     ///     * You should call this method on the main thread.
     ///
     open func reloadDataIfNeeded() {
-        guard Thread.isMainThread else {
-            #if DEBUG
-            fatalError("You should call this method on the main thread.")
-            #else
-            return
-            #endif
-        }
+        p_mainThreadCheck()
         if needsReload {
             reloadData()
         }
@@ -354,7 +341,60 @@ open class FSPopoverView: UIView {
     ///     * You should call this method on the main thread.
     ///
     open func reloadData() {
+        p_mainThreadCheck()
         p_reloadData()
+    }
+    
+    /// Get the transition context for the specific scene.
+    open func transitionContext(for scene: FSPopoverViewTransitionContext.Scene) -> FSPopoverViewTransitionContext {
+        return FSPopoverViewTransitionContext(scene: scene,
+                                              arrowDirection: arrowDirection,
+                                              arrowPoint: arrowPoint,
+                                              popoverView: self,
+                                              dimBackgroundView: dimBackgroundView)
+    }
+    
+    /// Present popover view with target view as the reference.
+    open func present(from targetView: UIView,
+                      displayIn specificView: UIView? = nil,
+                      animated: Bool = true,
+                      completion: (() -> Void)? = nil) {
+        p_present(from: targetView.frame,
+                  in: targetView.superview,
+                  displayIn: specificView,
+                  animated: animated,
+                  completion: completion)
+    }
+    
+    /// Present popover view with the point as the reference.
+    open func present(from point: CGPoint,
+                      in view: UIView? = nil,
+                      displayIn specificView: UIView? = nil,
+                      animated: Bool = true,
+                      completion: (() -> Void)? = nil) {
+        p_present(from: .init(origin: point, size: .zero),
+                  in: view,
+                  displayIn: specificView,
+                  animated: animated,
+                  completion: completion)
+    }
+    
+    /// Present popover view with the rect as the reference.
+    open func present(from rect: CGRect,
+                      in view: UIView? = nil,
+                      displayIn specificView: UIView? = nil,
+                      animated: Bool = true,
+                      completion: (() -> Void)? = nil) {
+        p_present(from: rect,
+                  in: view,
+                  displayIn: specificView,
+                  animated: animated,
+                  completion: completion)
+    }
+    
+    /// Dismiss popover view.
+    open func dismiss(animated: Bool = true, isSelection: Bool = false, completion: (() -> Void)? = nil) {
+        p_dismiss(animated: animated, isSelection: isSelection, completion: completion)
     }
 }
 
@@ -383,6 +423,14 @@ private extension FSPopoverView {
         
         scaleTransition = FSPopoverViewTransitionScale()
         transitioningDelegate = scaleTransition
+    }
+    
+    func p_mainThreadCheck() {
+        #if DEBUG
+        if !Thread.isMainThread {
+            fatalError("You must call this method on the main thread.")
+        }
+        #endif
     }
     
     func p_createContainerView() -> UIView {
@@ -718,6 +766,7 @@ private extension FSPopoverView {
                    animated: Bool = true,
                    completion: (() -> Void)? = nil) {
         
+        p_mainThreadCheck()
         p_prepareForDisplaying()
         
         let displayView: UIView = {
@@ -771,7 +820,9 @@ private extension FSPopoverView {
         }
     }
     
-    func p_dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
+    func p_dismiss(animated: Bool = true, isSelection: Bool = false, completion: (() -> Void)? = nil) {
+        
+        p_mainThreadCheck()
         
         // Can not do anything when the popover view begins disappearing.
         isFreezing = true
@@ -787,7 +838,7 @@ private extension FSPopoverView {
         }
         
         if animated, let transitioning = transitioningDelegate {
-            let context = transitionContext(for: .dismiss)
+            let context = transitionContext(for: .dismiss(isSelection))
             context.onDidCompleteTransition = completeHandler
             transitioning.animateTransition(transitionContext: context)
         } else {
@@ -825,62 +876,6 @@ public extension FSPopoverView {
             return
         }
         superview.bringSubviewToFront(containerView)
-    }
-    
-    func transitionContext(for scene: FSPopoverViewTransitionContext.Scene) -> FSPopoverViewTransitionContext {
-        return FSPopoverViewTransitionContext(scene: scene,
-                                              arrowDirection: arrowDirection,
-                                              arrowPoint: arrowPoint,
-                                              popoverView: self,
-                                              dimBackgroundView: dimBackgroundView)
-    }
-}
-
-// MARK: - Methods/Public/Display
-
-public extension FSPopoverView {
-    
-    /// Present popover view with target view as the reference.
-    func present(from targetView: UIView,
-                 displayIn specificView: UIView? = nil,
-                 animated: Bool = true,
-                 completion: (() -> Void)? = nil) {
-        p_present(from: targetView.frame,
-                  in: targetView.superview,
-                  displayIn: specificView,
-                  animated: animated,
-                  completion: completion)
-    }
-    
-    /// Present popover view with the point as the reference.
-    func present(from point: CGPoint,
-                 in view: UIView? = nil,
-                 displayIn specificView: UIView? = nil,
-                 animated: Bool = true,
-                 completion: (() -> Void)? = nil) {
-        p_present(from: .init(origin: point, size: .zero),
-                  in: view,
-                  displayIn: specificView,
-                  animated: animated,
-                  completion: completion)
-    }
-    
-    /// Present popover view with the rect as the reference.
-    func present(from rect: CGRect,
-                 in view: UIView? = nil,
-                 displayIn specificView: UIView? = nil,
-                 animated: Bool = true,
-                 completion: (() -> Void)? = nil) {
-        p_present(from: rect,
-                  in: view,
-                  displayIn: specificView,
-                  animated: animated,
-                  completion: completion)
-    }
-    
-    /// Dismiss popover view.
-    func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
-        p_dismiss(animated: animated, completion: completion)
     }
 }
 

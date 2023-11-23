@@ -53,18 +53,13 @@ public final class FSPopoverViewTransitionScale: FSPopoverViewAnimatedTransition
             } completion: { _ in
                 context.completeTransition()
             }
-        case .dismiss:
-            UIView.animate(withDuration: 0.18, delay: 0.0, options: .curveEaseOut) {
-                popoverView.alpha = 0.0
-                popoverView.transform = .init(scaleX: 0.01, y: 0.01)
-                dimBackgroundView.alpha = 0.0
-            } completion: { _ in
-                context.completeTransition()
-            }
-        case .selection:
-            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut) {
+        case .dismiss(let isSelection):
+            UIView.animate(withDuration: isSelection ? 0.25 : 0.18, delay: 0.0, options: .curveEaseOut) {
                 popoverView.alpha = 0.0
                 dimBackgroundView.alpha = 0.0
+                if !isSelection {
+                    popoverView.transform = .init(scaleX: 0.01, y: 0.01)
+                }
             } completion: { _ in
                 context.completeTransition()
             }

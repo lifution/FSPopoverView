@@ -1,14 +1,14 @@
 //
-//  FSPopoverTableView.swift
+//  FSPopoverListView.swift
 //  FSPopoverView
 //
-//  Created by Sheng on 2022/4/2.
-//  Copyright (c) 2022 Sheng. All rights reserved.
+//  Created by Sheng on 2023/11/20.
+//  Copyright © 2023 Sheng. All rights reserved.
 //
 
 import UIKit
 
-open class FSPopoverTableView: FSPopoverView {
+open class FSPopoverListView: FSPopoverView {
     
     // MARK: Properties/Public
     
@@ -28,7 +28,7 @@ open class FSPopoverTableView: FSPopoverView {
 
 // MARK: - Private
 
-private extension FSPopoverTableView {
+private extension FSPopoverListView {
     
     /// Invoked after initialization.
     func p_didInitialize() {

@@ -27,8 +27,7 @@ public final class FSPopoverViewTransitionFade: FSPopoverViewAnimatedTransitioni
             } completion: { _ in
                 context.completeTransition()
             }
-        case .dismiss: fallthrough
-        case .selection:
+        case .dismiss(_):
             UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut) {
                 popoverView.alpha = 0.0
                 dimBackgroundView.alpha = 0.0

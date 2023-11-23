@@ -49,16 +49,13 @@ public final class FSPopoverViewTransitionTranslate: FSPopoverViewAnimatedTransi
             } completion: { _ in
                 context.completeTransition()
             }
-        case .dismiss:
+        case .dismiss(let isSelection):
             UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut) {
-                popoverView.frame = popoverInitialFrame
-                dimBackgroundView.alpha = 0.0
-            } completion: { _ in
-                context.completeTransition()
-            }
-        case .selection:
-            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut) {
-                popoverView.alpha = 0.0
+                if isSelection {
+                    popoverView.alpha = 0.0
+                } else {
+                    popoverView.frame = popoverInitialFrame
+                }
                 dimBackgroundView.alpha = 0.0
             } completion: { _ in
                 context.completeTransition()
