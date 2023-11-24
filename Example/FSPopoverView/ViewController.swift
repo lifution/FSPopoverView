@@ -53,18 +53,21 @@ class ViewController: UIViewController {
             item.separatorColor = .red
             item.isSeparatorHidden = false
             item.updateLayout()
+            item.selectedHandler = { [weak item] i in
+                print("选中了：[\(item?.title ?? "")]")
+            }
             return item
         })
         (popoverView.items?.last as? FSPopoverListTextItem)?.isSeparatorHidden = true
         
         popoverView.present(from: targetView, displayIn: view, animated: true) {
             print("popover view present finished.")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                if let item = popoverView.items?.last as? FSPopoverListTextItem {
-                    item.isSeparatorHidden = false
-                    item.reload()
-                }
-            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//                if let item = popoverView.items?.last as? FSPopoverListTextItem {
+//                    item.isSeparatorHidden = false
+//                    item.reload()
+//                }
+//            }
         }
 //        popoverView.present(from: view.center, animated: true)
 //        popoverView.present(from: .init(x: 100.0, y: 200.0, width: 10.0, height: 10.0), animated: true) {

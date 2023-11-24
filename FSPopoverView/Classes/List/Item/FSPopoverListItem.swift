@@ -45,6 +45,10 @@ open class FSPopoverListItem {
     
     public let scrollDireciton: FSPopoverListView.ScrollDirection
     
+    /// A closure to execute when the user selects the item.
+    /// This closure has no return value and takes the selected item object as its only parameter.
+    public final var selectedHandler: ((_ item: FSPopoverListItem) -> Void)?
+    
     public final var separatorInset: UIEdgeInsets = .init(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
     
     /// The color of separator. Defaults to nil.
@@ -56,6 +60,9 @@ open class FSPopoverListItem {
     /// - The separator is on the right when scroll direction is horizontal.
     ///
     public final var isSeparatorHidden = true
+    
+    /// The color of separator. Defaults to nil.
+    public final var highlightedColor: UIColor? = .black.withAlphaComponent(0.1)
     
     // MARK: Properties/Internal
     

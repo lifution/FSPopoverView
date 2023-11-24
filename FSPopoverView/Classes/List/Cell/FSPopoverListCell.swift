@@ -11,6 +11,14 @@ import UIKit
 /// Abstract base class, cannot be used directly, must be inherited for use.
 open class FSPopoverListCell: UIView {
     
+    // MARK: Properties/Open
+    
+    open var isHighlighted = false {
+        didSet {
+            highlightedView.isHidden = !isHighlighted
+        }
+    }
+    
     // MARK: Properties/Public
     
     public let item: FSPopoverListItem
@@ -18,6 +26,8 @@ open class FSPopoverListCell: UIView {
     // MARK: Properties/Private
     
     private let separatorView = _FSSeparatorView()
+    
+    private let highlightedView = UIView()
     
     private var separatorConstraints = [NSLayoutConstraint]()
     
@@ -44,6 +54,7 @@ open class FSPopoverListCell: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
+        sendSubviewToBack(highlightedView)
         bringSubviewToFront(separatorView)
     }
     
@@ -55,8 +66,19 @@ open class FSPopoverListCell: UIView {
         }
         backgroundColor = .clear
         separatorView.isHidden = true
+        highlightedView.isHidden = true
         separatorView.translatesAutoresizingMaskIntoConstraints = false
+        highlightedView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(separatorView)
+        addSubview(highlightedView)
+        do {
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",
+                                                          metrics: nil,
+                                                          views: ["view": highlightedView]))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",
+                                                          metrics: nil,
+                                                          views: ["view": highlightedView]))
+        }
     }
     
     // MARK: Open
@@ -77,6 +99,7 @@ open class FSPopoverListCell: UIView {
         defer { p_remakeConstraints() }
         separatorView.color = item.separatorColor
         separatorView.isHidden = item.isSeparatorHidden
+        highlightedView.backgroundColor = item.highlightedColor
     }
 }
 
