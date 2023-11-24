@@ -1,6 +1,6 @@
 # FSPopoverView
 
-The new version is not yet finished. 
+The new version is coming soon. 
 
 ## Requirements
 
