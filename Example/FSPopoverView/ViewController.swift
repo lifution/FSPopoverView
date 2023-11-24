@@ -32,19 +32,39 @@ class ViewController: UIViewController {
             return
         }
         
-        let popoverView = FSPopoverView()
-        popoverView.dataSource = self
+//        let popoverView = FSPopoverView()
+        let popoverView = FSPopoverListView(scrollDirection: .vertical)
+//        popoverView.dataSource = self
 //        popoverView.borderWidth = 1.0
         popoverView.borderColor = .red
         popoverView.shadowColor = .green
         popoverView.shadowRadius = 3.0
         popoverView.shadowOpacity = 0.6
+//        popoverView.showsArrow = false
         popoverView.arrowDirection = .right
 //        popoverView.autosetsArrowDirection = false
         popoverView.showsDimBackground = true
 //        popoverView.transitioningDelegate = customTransition
+        
+        popoverView.items = ["扫一扫", "添加好友", "加入群聊吧"].compactMap({ text in
+            let item = FSPopoverListTextItem(scrollDireciton: popoverView.scrollDirection)
+            item.title = text
+            item.image = .init(named: "qr_light")
+            item.separatorColor = .red
+            item.isSeparatorHidden = false
+            item.updateLayout()
+            return item
+        })
+        (popoverView.items?.last as? FSPopoverListTextItem)?.isSeparatorHidden = true
+        
         popoverView.present(from: targetView, displayIn: view, animated: true) {
             print("popover view present finished.")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if let item = popoverView.items?.last as? FSPopoverListTextItem {
+                    item.isSeparatorHidden = false
+                    item.reload()
+                }
+            }
         }
 //        popoverView.present(from: view.center, animated: true)
 //        popoverView.present(from: .init(x: 100.0, y: 200.0, width: 10.0, height: 10.0), animated: true) {

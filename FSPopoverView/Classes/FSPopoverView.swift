@@ -54,7 +54,7 @@ open class FSPopoverView: UIView {
     ///
     open var arrowDirection = FSPopoverView.ArrowDirection.up {
         didSet {
-            if arrowDirection != oldValue {
+            if arrowDirection != oldValue, !autosetsArrowDirection, !isReloading {
                 setNeedsReload()
             }
         }
@@ -76,7 +76,13 @@ open class FSPopoverView: UIView {
     ///       space in the container for the popover view to appear, otherwise the popover
     ///       view may be in the wrong place.
     ///
-    open var autosetsArrowDirection = true
+    open var autosetsArrowDirection = true {
+        didSet {
+            if autosetsArrowDirection != oldValue {
+                setNeedsReload()
+            }
+        }
+    }
     
     // MARK: Properties/Public
     
@@ -96,7 +102,7 @@ open class FSPopoverView: UIView {
     /// The location of the arrow's vertex.
     /// Defaults to (0, 0).
     ///
-    /// * This point is in the coordinate system of `containerView`. (same as the popover view)
+    /// * This point is in the coordinate system of `containerView`.
     /// * This point will be recalculated on reload operation.
     /// * The value of `showsArrow` has no effect on this property.
     ///
@@ -116,8 +122,7 @@ open class FSPopoverView: UIView {
     /// If popover view is displaying in a specific view, the specific view will be the superview
     /// of the container view. Otherwise, a window will be created automatically inside the popover
     /// view as the superview of the container view, and this window will be the same size as the
-    /// current screen. And either the specific view or the window created automatically, they are
-    /// just the superview of the container view.
+    /// current screen.
     ///
     /// The popover view is added to the container view.
     /// The view hierarchy is:
@@ -129,7 +134,7 @@ open class FSPopoverView: UIView {
     ///     - popover view
     ///       - popover container view
     ///         - background view
-    ///         - content view
+    ///         - content view (from data source)
     /// ```
     ///
     final weak public private(set) var containerView: UIView?
@@ -196,12 +201,10 @@ open class FSPopoverView: UIView {
     
     /// It's objected to use this property to set the background color of popover view.
     /// Use `backgroundView` of `dataSource` instead.
+    @available(*, unavailable)
     final public override var backgroundColor: UIColor? {
-        get { return popoverContainerView.backgroundColor }
-        set {
-            super.backgroundColor = .clear
-            popoverContainerView.backgroundColor = newValue
-        }
+        get { return nil }
+        set {}
     }
     
     // MARK: Properties/Private
@@ -209,6 +212,8 @@ open class FSPopoverView: UIView {
     private var needsReload = false
     
     private var isFreezing = false
+    
+    private var isReloading = false
     
     private let delegateRouter = FSPopoverViewDelegateRouter()
     
@@ -342,7 +347,9 @@ open class FSPopoverView: UIView {
     ///
     open func reloadData() {
         p_mainThreadCheck()
+        isReloading = true
         p_reloadData()
+        isReloading = false
     }
     
     /// Get the transition context for the specific scene.
@@ -405,7 +412,7 @@ private extension FSPopoverView {
     /// Invoked after initialization.
     func p_didInitialize() {
         
-        backgroundColor = .clear
+        popoverContainerView.backgroundColor = .clear
         
         delegateRouter.gestureRecognizerShouldBeginHandler = { [unowned self] gestureRecognizer in
             if let view = gestureRecognizer.view, view === self.userInteractionView {
@@ -491,13 +498,7 @@ private extension FSPopoverView {
     /// Reload all contents and recalculate the position and size of the popover view.
     func p_reloadData() {
         
-        guard Thread.isMainThread else {
-            #if DEBUG
-            fatalError("You should call this method on the main thread.")
-            #else
-            return
-            #endif
-        }
+        p_mainThreadCheck()
         
         guard containerSize.width > 0, containerSize.height > 0 else {
             return
