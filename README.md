@@ -1,5 +1,7 @@
 # FSPopoverView
 
+The new version is not yet finished. 
+
 ## Requirements
 
 iOS 11+
