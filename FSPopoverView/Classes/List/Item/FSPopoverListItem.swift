@@ -49,6 +49,9 @@ open class FSPopoverListItem {
     /// This closure has no return value and takes the selected item object as its only parameter.
     public final var selectedHandler: ((_ item: FSPopoverListItem) -> Void)?
     
+    /// Whether the item is enabled. Defaults to true.
+    public final var isEnabled = true
+    
     public final var separatorInset: UIEdgeInsets = .init(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
     
     /// The color of separator. Defaults to nil.

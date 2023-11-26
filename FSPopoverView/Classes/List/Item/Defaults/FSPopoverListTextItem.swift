@@ -45,10 +45,10 @@ public final class FSPopoverListTextItem: FSPopoverListItem {
     /// This value will not work if one of image and title is nil.
     public var spacing: CGFloat = 6.0
     
-    /// If nil, use system font of size 18.
+    /// If nil, use a default font.
     public var titleFont: UIFont?
     
-    /// If nil, use black.
+    /// If nil, use a default color.
     public var titleColor: UIColor?
     
     // MARK: Properties/Override
@@ -151,6 +151,7 @@ private class FSPopoverListTextCell: FSPopoverListCell {
             return
         }
         stackView.axis = item.scrollDireciton == .vertical ? .horizontal : .vertical
+        stackView.alpha = item.isEnabled ? 1.0 : 0.5
         stackView.spacing = item.spacing
         do {
             let views = stackView.arrangedSubviews

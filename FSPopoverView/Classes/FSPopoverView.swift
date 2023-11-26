@@ -454,13 +454,11 @@ private extension FSPopoverView {
     }
     
     func p_prepareForDisplaying() {
-        // Freezes the popover view before the popover view finishes displaying operation.
+        // freezes the popover view before the popover view finishes displaying operation.
         isFreezing = true
-        // remove from super view
         removeFromSuperview()
-        // remove container view if exists.
+        containerSize = .zero
         containerView?.removeFromSuperview()
-        // destroy old display window
         p_destroyDisplayWindow()
     }
     
@@ -523,8 +521,7 @@ private extension FSPopoverView {
         // arrow direction
         do {
             let horizontalContentSize: CGSize = {
-                var size = CGSize(width: _Consts.cornerRadius * 2 + 20.0,
-                                  height: arrowSize.width + _Consts.cornerRadius * 2 + 20.0)
+                var size = CGSize(width: _Consts.cornerRadius * 2 + 10.0, height: arrowSize.height + _Consts.cornerRadius * 2 + 10.0)
                 if realContentSize.width > size.width {
                     size.width = realContentSize.width
                 }
@@ -534,8 +531,7 @@ private extension FSPopoverView {
                 return size
             }()
             let verticalContentSize: CGSize = {
-                var size = CGSize(width: arrowSize.width + _Consts.cornerRadius * 2 + 20.0,
-                                  height: _Consts.cornerRadius * 2 + 20.0)
+                var size = CGSize(width: arrowSize.width + _Consts.cornerRadius * 2 + 10.0, height: _Consts.cornerRadius * 2 + 10.0)
                 if realContentSize.width > size.width {
                     size.width = realContentSize.width
                 }
@@ -807,17 +803,17 @@ private extension FSPopoverView {
         // Layout the popover view for the animation of the next step.
         containerView.layoutIfNeeded()
         
-        let completeHandler: (() -> Void) = {
+        let completedHandler: (() -> Void) = {
             self.isFreezing = false
             completion?()
         }
         
         if animated, let transitioning = transitioningDelegate {
             let context = transitionContext(for: .present)
-            context.onDidCompleteTransition = completeHandler
+            context.onDidCompleteTransition = completedHandler
             transitioning.animateTransition(transitionContext: context)
         } else {
-            completeHandler()
+            completedHandler()
         }
     }
     
@@ -830,7 +826,7 @@ private extension FSPopoverView {
         
         containerView?.isUserInteractionEnabled = false
         
-        let completeHandler: (() -> Void) = {
+        let completedHandler: (() -> Void) = {
             self.isFreezing = false
             self.removeFromSuperview()
             self.p_destroyDisplayWindow()
@@ -840,10 +836,10 @@ private extension FSPopoverView {
         
         if animated, let transitioning = transitioningDelegate {
             let context = transitionContext(for: .dismiss(isSelection))
-            context.onDidCompleteTransition = completeHandler
+            context.onDidCompleteTransition = completedHandler
             transitioning.animateTransition(transitionContext: context)
         } else {
-            completeHandler()
+            completedHandler()
         }
     }
 }
@@ -877,6 +873,41 @@ public extension FSPopoverView {
             return
         }
         superview.bringSubviewToFront(containerView)
+    }
+    
+    /// Call this method to get the maximum size in the direction.
+    ///
+    /// Sometimes, the size of your content view may need to be adjusted to fit the popover view.
+    /// Such as your content view is a table view with a lot of cells, and the popover view doesn't
+    /// have enough space for the table view to show all of the cells, this requires the data source
+    /// object to return a proper content size. In this time, you need a size as a reference, and
+    /// this is where this method in handy.
+    ///
+    /// - Important:
+    ///   * This method will return nil if the popover view is not yet ready for presenting.
+    ///     So it's recommended that you call this method in the content size method of data source object.
+    ///
+    func maximumContentSizeOf(direction: FSPopoverView.ArrowDirection) -> CGSize? {
+        
+        guard let _ = containerView, containerSize.width > 0, containerSize.height > 0 else {
+            return nil
+        }
+        
+        let arrowSize = showsArrow ? _Consts.arrowSize : .zero
+        let referRect = arrowReferRect.insetBy(dx: -arrowSize.height, dy: -arrowSize.height)
+        let safeAreaInsets = dataSource?.containerSafeAreaInsets(for: self) ?? .zero
+        let safeContainerRect = CGRect(origin: .zero, size: containerSize).inset(by: safeAreaInsets)
+        
+        switch direction {
+        case .up:
+            return CGSize(width: safeContainerRect.width, height: max(0.0, safeContainerRect.maxY - referRect.maxY))
+        case .down:
+            return CGSize(width: safeContainerRect.width, height: max(0.0, referRect.minY - safeContainerRect.minY))
+        case .left:
+            return CGSize(width: max(0.0, safeContainerRect.maxX - referRect.maxX), height: safeContainerRect.height)
+        case .right:
+            return CGSize(width: max(0.0, referRect.minX - safeContainerRect.minX), height: safeContainerRect.height)
+        }
     }
 }
 

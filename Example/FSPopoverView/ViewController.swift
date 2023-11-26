@@ -45,8 +45,9 @@ class ViewController: UIViewController {
 //        popoverView.autosetsArrowDirection = false
         popoverView.showsDimBackground = true
 //        popoverView.transitioningDelegate = customTransition
+//        popoverView.maximumCountOfVisibleItems = 3
         
-        popoverView.items = ["扫一扫", "添加好友", "加入群聊吧"].compactMap({ text in
+        popoverView.items = ["扫一扫", "添加好友", "加入群聊"].compactMap({ text in
             let item = FSPopoverListTextItem(scrollDireciton: popoverView.scrollDirection)
             item.title = text
             item.image = .init(named: "qr_light")
@@ -56,9 +57,17 @@ class ViewController: UIViewController {
             item.selectedHandler = { [weak item] i in
                 print("选中了：[\(item?.title ?? "")]")
             }
+//            if #available(iOS 13.0, *) {
+//                item.separatorColor = UIColor(dynamicProvider: { trait in
+//                    return trait.userInterfaceStyle == .dark ? .cyan : .red
+//                })
+//            } else {
+//                item.separatorColor = .red
+//            }
             return item
         })
         (popoverView.items?.last as? FSPopoverListTextItem)?.isSeparatorHidden = true
+        (popoverView.items?.last as? FSPopoverListTextItem)?.isEnabled = false
         
         popoverView.present(from: targetView, displayIn: view, animated: true) {
             print("popover view present finished.")
