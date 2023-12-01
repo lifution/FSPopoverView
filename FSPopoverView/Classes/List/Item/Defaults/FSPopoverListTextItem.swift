@@ -5,9 +5,9 @@
 //  Created by Sheng on 2023/11/23.
 //  Copyright © 2023 Sheng. All rights reserved.
 //
-// > FSPopoverListTextItem looks like：
-//   vertical: contents center in vertical
-//   NOTE: This mode is compatible with Right-to-Left language.
+//  FSPopoverListTextItem looks like：
+//    vertical: contents center in vertical
+//    NOTE: This mode is compatible with Right-to-Left language.
 // ┌────────────────────────────────┬──────────────────────────────────────┐
 // │                         <contentInset.top>                            │
 // │                                │                                      │
@@ -15,7 +15,7 @@
 // │                                │                                      │
 // │                        <contentInset.bottom>                          │
 // └────────────────────────────────┴──────────────────────────────────────┘
-//   horizontal: contents center in horizontal
+//    horizontal: contents center in horizontal
 // ┌─────────────────────────┬──────────────────────────┐
 // │                  <contentInset.top>                │
 // │                         │                          │

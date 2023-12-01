@@ -25,10 +25,6 @@ public final class FSPopoverViewTransitionContext {
     
     public let scene: FSPopoverViewTransitionContext.Scene
     
-    public let arrowDirection: FSPopoverView.ArrowDirection
-    
-    public let arrowPoint: CGPoint
-    
     public let popoverView: FSPopoverView
     
     public let dimBackgroundView: UIView
@@ -39,14 +35,8 @@ public final class FSPopoverViewTransitionContext {
     
     // MARK: Initialization
     
-    init(scene: FSPopoverViewTransitionContext.Scene,
-         arrowDirection: FSPopoverView.ArrowDirection,
-         arrowPoint: CGPoint,
-         popoverView: FSPopoverView,
-         dimBackgroundView: UIView) {
+    init(scene: FSPopoverViewTransitionContext.Scene, popoverView: FSPopoverView, dimBackgroundView: UIView) {
         self.scene = scene
-        self.arrowDirection = arrowDirection
-        self.arrowPoint = arrowPoint
         self.popoverView = popoverView
         self.dimBackgroundView = dimBackgroundView
     }

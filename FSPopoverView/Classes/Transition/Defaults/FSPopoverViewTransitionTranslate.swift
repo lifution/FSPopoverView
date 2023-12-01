@@ -26,7 +26,7 @@ public final class FSPopoverViewTransitionTranslate: FSPopoverViewAnimatedTransi
         let containerFrame = containerView.frame
         let popoverInitialFrame: CGRect = {
             var frame = popoverFrame
-            switch context.arrowDirection {
+            switch popoverView.arrowDirection {
             case .up:
                 frame.origin.y = containerFrame.maxY
             case .down:

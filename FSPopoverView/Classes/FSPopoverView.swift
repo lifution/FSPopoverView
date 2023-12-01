@@ -68,9 +68,10 @@ open class FSPopoverView: UIView {
     /// * When this property is false, The popover view will calculate it's position
     ///   according to the `arrowDirection` property, and the `arrowDirection` property
     ///   will never be changed by inside.
+    /// * A reload request will be set when this property is changed.
     ///
     /// - Important
-    ///     - When this property is true, the popover view will calculate the appropriate
+    ///     * When this property is true, the popover view will calculate the appropriate
     ///       position based on the size of it's container and the position of the arrow.
     ///       So, when you set this property to false, you should ensure that there is enough
     ///       space in the container for the popover view to appear, otherwise the popover
@@ -119,7 +120,7 @@ open class FSPopoverView: UIView {
     /// The container view displaying the popover view.
     /// This view will be created when the popover view needs to be displayed.
     ///
-    /// If popover view is displaying in a specific view, the specific view will be the superview
+    /// If popover view is displaying in a specified view, the specified view will be the superview
     /// of the container view. Otherwise, a window will be created automatically inside the popover
     /// view as the superview of the container view, and this window will be the same size as the
     /// current screen.
@@ -127,8 +128,8 @@ open class FSPopoverView: UIView {
     /// The popover view is added to the container view.
     /// The view hierarchy is:
     /// ```
-    /// specific view / window
-    ///   - container view (same size as specific view / window)
+    /// specified view / window
+    ///   - container view (same size as specified view / window)
     ///     - dim background view (same size as container view)
     ///     - user interaction view (same size as container view)
     ///     - popover view
@@ -240,7 +241,7 @@ open class FSPopoverView: UIView {
     /// This rect is in the coordinate system of `containerView`.
     private var arrowReferRect: CGRect = .zero
     
-    /// If there is no specific view to display popover view,
+    /// If there is no specified view to display popover view,
     /// this window will be created.
     private var displayWindow: UIWindow?
     
@@ -352,49 +353,60 @@ open class FSPopoverView: UIView {
         isReloading = false
     }
     
-    /// Get the transition context for the specific scene.
+    /// Get the transition context for the specified scene.
     open func transitionContext(for scene: FSPopoverViewTransitionContext.Scene) -> FSPopoverViewTransitionContext {
-        return FSPopoverViewTransitionContext(scene: scene,
-                                              arrowDirection: arrowDirection,
-                                              arrowPoint: arrowPoint,
-                                              popoverView: self,
-                                              dimBackgroundView: dimBackgroundView)
+        return FSPopoverViewTransitionContext(scene: scene, popoverView: self, dimBackgroundView: dimBackgroundView)
     }
     
-    /// Present popover view with target view as the reference.
-    open func present(from targetView: UIView,
-                      displayIn specificView: UIView? = nil,
+    /// Presents the popover and anchors it to the specified view.
+    open func present(fromView view: UIView,
+                      displayIn specifiedView: UIView? = nil,
                       animated: Bool = true,
                       completion: (() -> Void)? = nil) {
-        p_present(from: targetView.frame,
-                  in: targetView.superview,
-                  displayIn: specificView,
+        p_present(from: view.frame,
+                  in: view.superview,
+                  displayIn: specifiedView,
                   animated: animated,
                   completion: completion)
     }
     
-    /// Present popover view with the point as the reference.
-    open func present(from point: CGPoint,
+    /// Presents the popover and anchors it to the specified location.
+    open func present(fromPoint point: CGPoint,
                       in view: UIView? = nil,
-                      displayIn specificView: UIView? = nil,
+                      displayIn specifiedView: UIView? = nil,
                       animated: Bool = true,
                       completion: (() -> Void)? = nil) {
         p_present(from: .init(origin: point, size: .zero),
                   in: view,
-                  displayIn: specificView,
+                  displayIn: specifiedView,
                   animated: animated,
                   completion: completion)
     }
     
-    /// Present popover view with the rect as the reference.
-    open func present(from rect: CGRect,
+    /// Presents the popover and anchors it to the specified rect.
+    open func present(fromRect rect: CGRect,
                       in view: UIView? = nil,
-                      displayIn specificView: UIView? = nil,
+                      displayIn specifiedView: UIView? = nil,
                       animated: Bool = true,
                       completion: (() -> Void)? = nil) {
         p_present(from: rect,
                   in: view,
-                  displayIn: specificView,
+                  displayIn: specifiedView,
+                  animated: animated,
+                  completion: completion)
+    }
+    
+    /// Presents the popover and anchors it to the specified bar item.
+    open func present(fromBarItem barItem: UIBarItem, animated: Bool = true, completion: (() -> Void)? = nil) {
+        guard let view = barItem.value(forKey: "view") as? UIView else {
+            #if DEBUG
+            fatalError("The value of UIBarItem has been changed, this method can not use anymore.")
+            #else
+            return
+            #endif
+        }
+        p_present(from: view.frame,
+                  in: view.superview,
                   animated: animated,
                   completion: completion)
     }
@@ -498,14 +510,14 @@ private extension FSPopoverView {
         
         p_mainThreadCheck()
         
-        guard containerSize.width > 0, containerSize.height > 0 else {
-            return
-        }
-        
         needsReload = false
         
         // clear old contents
         p_resetContents()
+        
+        guard containerSize.width > 0, containerSize.height > 0 else {
+            return
+        }
         
         // container safe area insets
         let safeAreaInsets = dataSource?.containerSafeAreaInsets(for: self) ?? .zero
@@ -759,7 +771,7 @@ private extension FSPopoverView {
     
     func p_present(from rect: CGRect,
                    in view: UIView? = nil,
-                   displayIn specificView: UIView? = nil,
+                   displayIn specifiedView: UIView? = nil,
                    animated: Bool = true,
                    completion: (() -> Void)? = nil) {
         
@@ -767,7 +779,7 @@ private extension FSPopoverView {
         p_prepareForDisplaying()
         
         let displayView: UIView = {
-            if let view = specificView {
+            if let view = specifiedView {
                 return view
             }
             let window = p_createDisplayWindow()
@@ -803,7 +815,7 @@ private extension FSPopoverView {
         // Layout the popover view for the animation of the next step.
         containerView.layoutIfNeeded()
         
-        let completedHandler: (() -> Void) = {
+        let completedHandler: (() -> Void) = { [unowned self] in
             self.isFreezing = false
             completion?()
         }
@@ -826,7 +838,7 @@ private extension FSPopoverView {
         
         containerView?.isUserInteractionEnabled = false
         
-        let completedHandler: (() -> Void) = {
+        let completedHandler: (() -> Void) = { [unowned self] in
             self.isFreezing = false
             self.removeFromSuperview()
             self.p_destroyDisplayWindow()
@@ -884,12 +896,12 @@ public extension FSPopoverView {
     /// this is where this method in handy.
     ///
     /// - Important:
-    ///   * This method will return nil if the popover view is not yet ready for presenting.
-    ///     So it's recommended that you call this method in the content size method of data source object.
+    ///   * Return nil if the popover view is not yet ready for presenting, so it's recommended that
+    ///     call this method in the content size method of data source object.
     ///
     func maximumContentSizeOf(direction: FSPopoverView.ArrowDirection) -> CGSize? {
         
-        guard let _ = containerView, containerSize.width > 0, containerSize.height > 0 else {
+        guard containerSize.width > 0, containerSize.height > 0 else {
             return nil
         }
         

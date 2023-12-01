@@ -9,7 +9,7 @@
 import UIKit
 import FSPopoverView
 
-class ViewController: UIViewController {
+class ViewController: UITableViewController {
     
     private let customTransition = FSPopoverViewTransitionTranslate()
     
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func onDidTap(_ sender: Any) {
+    func onDidTap(_ sender: Any) {
         
         guard let targetView = sender as? UIView else {
             return
@@ -69,15 +69,15 @@ class ViewController: UIViewController {
         (popoverView.items?.last as? FSPopoverListTextItem)?.isSeparatorHidden = true
         (popoverView.items?.last as? FSPopoverListTextItem)?.isEnabled = false
         
-        popoverView.present(from: targetView, displayIn: view, animated: true) {
-            print("popover view present finished.")
+//        popoverView.present(from: targetView, displayIn: view, animated: true) {
+//            print("popover view present finished.")
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
 //                if let item = popoverView.items?.last as? FSPopoverListTextItem {
 //                    item.isSeparatorHidden = false
 //                    item.reload()
 //                }
 //            }
-        }
+//        }
 //        popoverView.present(from: view.center, animated: true)
 //        popoverView.present(from: .init(x: 100.0, y: 200.0, width: 10.0, height: 10.0), animated: true) {
 //            print("popover view display finished.")
@@ -124,5 +124,16 @@ extension ViewController: FSPopoverViewDataSource {
         insets.left = 10.0
         insets.right = 10.0
         return insets
+    }
+}
+
+extension ViewController {
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.001
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.001
     }
 }

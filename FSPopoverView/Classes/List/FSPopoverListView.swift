@@ -66,11 +66,7 @@ open class FSPopoverListView: FSPopoverView, FSPopoverViewDataSource {
     
     // MARK: Properties/Private
     
-    private lazy var scrollView: _ListScrollView = {
-        let view = _ListScrollView()
-        view.backgroundColor = .clear
-        return view
-    }()
+    private let scrollView = _ListScrollView()
     
     private let backgroundView = UIView()
     
@@ -120,11 +116,11 @@ open class FSPopoverListView: FSPopoverView, FSPopoverViewDataSource {
             scrollView.addSubview(cell)
             scrollView.cells.append(cell)
             lastCell = cell
-            item.reloadHandler = { [weak cell, weak self] _, type in
+            item.reloadHandler = { [unowned cell, unowned self] _, type in
                 if type == .reload {
-                    self?.setNeedsReload()
+                    self.setNeedsReload()
                 } else {
-                    cell?.renderContents()
+                    cell.renderContents()
                 }
             }
         }
@@ -324,7 +320,6 @@ private class _ListScrollView: UIScrollView {
                 selectedCellHandler?(highlightedCell)
             }
         }
-        highlightedCell?.isHighlighted = false
         highlightedCell = nil
     }
     

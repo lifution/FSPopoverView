@@ -14,8 +14,8 @@ public final class FSPopoverViewTransitionScale: FSPopoverViewAnimatedTransition
     
     public func animateTransition(transitionContext context: FSPopoverViewTransitionContext) {
         
-        let arrowPoint = context.arrowPoint
         let popoverView = context.popoverView
+        let arrowPoint = popoverView.arrowPoint
         let dimBackgroundView = context.dimBackgroundView
         
         // anchor point
@@ -24,7 +24,7 @@ public final class FSPopoverViewTransitionScale: FSPopoverViewAnimatedTransition
             popoverView.layer.anchorPoint = {
                 var x: CGFloat = 0.0, y: CGFloat = 0.0
                 let arrowPointInPopover = CGPoint(x: arrowPoint.x - frame.minX, y: arrowPoint.y - frame.minY)
-                switch context.arrowDirection {
+                switch popoverView.arrowDirection {
                 case .up:
                     x = arrowPointInPopover.x / frame.width
                 case .down:
