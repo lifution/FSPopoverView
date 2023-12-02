@@ -338,6 +338,13 @@ open class FSPopoverView: UIView {
         reloadDataIfNeeded()
     }
     
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if #available(iOS 17, *) {} else {
+            setNeedsReload()
+        }
+    }
+    
     @available(*, unavailable)
     open override class func appearance() -> Self {
         return super.appearance()
@@ -498,6 +505,12 @@ private extension FSPopoverView {
                 return !self.frame.contains(location)
             }
             return false
+        }
+        
+        if #available(iOS 17, *) {
+            registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, previousTraitCollection: UITraitCollection) in
+                self.setNeedsReload()
+            }
         }
         
         addSubview(popoverContainerView)
