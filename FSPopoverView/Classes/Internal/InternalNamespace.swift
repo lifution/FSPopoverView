@@ -40,6 +40,7 @@ extension FSPopoverViewInternalCompatibleValue {
 }
 
 extension UIView: FSPopoverViewInternalCompatible {}
+extension UIColor: FSPopoverViewInternalCompatible {}
 extension NSAttributedString: FSPopoverViewInternalCompatible {}
 
 extension CGRect: FSPopoverViewInternalCompatibleValue {}

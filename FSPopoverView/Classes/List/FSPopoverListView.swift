@@ -78,7 +78,7 @@ open class FSPopoverListView: FSPopoverView, FSPopoverViewDataSource {
     
     public init(scrollDirection: FSPopoverListView.ScrollDirection = .vertical) {
         self.scrollDirection = scrollDirection
-        super.init(frame: .zero)
+        super.init()
         p_didInitialize()
     }
     
@@ -252,15 +252,9 @@ private extension FSPopoverListView {
     /// Invoked after initialization.
     func p_didInitialize() {
         dataSource = self
+        backgroundView.backgroundColor = FSPopoverView.fs_appearance().backgroundColor
         scrollView.selectedCellHandler = { [unowned self] cell in
             self.didSelectItem(cell.item)
-        }
-        if #available(iOS 13.0, *) {
-            backgroundView.backgroundColor = UIColor(dynamicProvider: { trait in
-                return trait.userInterfaceStyle == .dark ? .black : .white
-            })
-        } else {
-            backgroundView.backgroundColor = .white
         }
     }
 }

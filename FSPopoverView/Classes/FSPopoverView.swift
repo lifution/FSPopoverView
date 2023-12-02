@@ -87,19 +87,6 @@ open class FSPopoverView: UIView {
     
     // MARK: Properties/Public
     
-    /// Arrow will be hidden when this property is set to false.
-    /// Defaults to true.
-    ///
-    /// * A reload request will be set when this property is changed.
-    ///
-    final public var showsArrow = true {
-        didSet {
-            if showsArrow != oldValue {
-                setNeedsReload()
-            }
-        }
-    }
-    
     /// The location of the arrow's vertex.
     /// Defaults to (0, 0).
     ///
@@ -108,14 +95,6 @@ open class FSPopoverView: UIView {
     /// * The value of `showsArrow` has no effect on this property.
     ///
     final public private(set) var arrowPoint: CGPoint = .zero
-    
-    /// Whether needs to show a dim background on container view.
-    /// Defaults to false.
-    final public var showsDimBackground = false {
-        didSet {
-            dimBackgroundView.isHidden = !showsDimBackground
-        }
-    }
     
     /// The container view displaying the popover view.
     /// This view will be created when the popover view needs to be displayed.
@@ -140,7 +119,68 @@ open class FSPopoverView: UIView {
     ///
     final weak public private(set) var containerView: UIView?
     
+    /// Arrow will be hidden when this property is set to false.
+    /// Default value see `FSPopoverViewAppearance`. 
+    ///
+    /// * A reload request will be set when this property is changed.
+    ///
+    final public var showsArrow: Bool {
+        didSet {
+            if showsArrow != oldValue {
+                setNeedsReload()
+            }
+        }
+    }
+    
+    /// Whether needs to show a dim background on container view.
+    /// Default value see `FSPopoverViewAppearance`.
+    final public var showsDimBackground: Bool {
+        didSet {
+            dimBackgroundView.isHidden = !showsDimBackground
+        }
+    }
+    
+    /// The corner radius of the popover view.
+    /// Default value see `FSPopoverViewAppearance`.
+    ///
+    /// * A reload request will be set when this property is set.
+    ///
+    final public var cornerRadius: CGFloat {
+        didSet {
+            if cornerRadius != oldValue {
+                setNeedsReload()
+            }
+        }
+    }
+    
+    /// The size of the arrow.
+    /// Default value see `FSPopoverViewAppearance`.
+    ///
+    /// * A reload request will be set when this property is set.
+    ///
+    final public var arrowSize: CGSize {
+        didSet {
+            if arrowSize != oldValue {
+                setNeedsReload()
+            }
+        }
+    }
+    
+    /// The width of the popover view border.
+    /// Default value see `FSPopoverViewAppearance`.
+    ///
+    /// * A reload request will be set when this property is changed.
+    ///
+    final public var borderWidth: CGFloat {
+        didSet {
+            if borderWidth != oldValue {
+                setNeedsReload()
+            }
+        }
+    }
+    
     /// The color of the popover view border.
+    /// Default value see `FSPopoverViewAppearance`.
     ///
     /// * A reload request will be set when this property is set.
     ///
@@ -150,19 +190,8 @@ open class FSPopoverView: UIView {
         }
     }
     
-    /// The width of the popover view border.
-    ///
-    /// * A reload request will be set when this property is changed.
-    ///
-    final public var borderWidth: CGFloat = 0.0 {
-        didSet {
-            if borderWidth != oldValue {
-                setNeedsReload()
-            }
-        }
-    }
-    
     /// The color of the popover view shadow.
+    /// Default value see `FSPopoverViewAppearance`.
     ///
     /// * A reload request will be set when this property is set.
     ///
@@ -173,10 +202,11 @@ open class FSPopoverView: UIView {
     }
     
     /// The radius of the popover view shadow.
+    /// Default value see `FSPopoverViewAppearance`.
     ///
     /// * A reload request will be set when this property is changed.
     ///
-    final public var shadowRadius: CGFloat = 0.0 {
+    final public var shadowRadius: CGFloat {
         didSet {
             if shadowRadius != oldValue {
                 setNeedsReload()
@@ -186,11 +216,11 @@ open class FSPopoverView: UIView {
     
     /// The opacity of the popover view shadow.
     /// The value in this property must be in the range 0.0 (transparent) to 1.0 (opaque).
-    /// Defaults to 1.0.
+    /// Default value see `FSPopoverViewAppearance`.
     ///
     /// * A reload request will be set when this property is changed.
     /// 
-    final public var shadowOpacity: Float = 1.0 {
+    final public var shadowOpacity: Float {
         didSet {
             if shadowOpacity != oldValue {
                 setNeedsReload()
@@ -278,8 +308,21 @@ open class FSPopoverView: UIView {
     
     // MARK: Initialization
     
-    override public init(frame: CGRect) {
-        super.init(frame: frame)
+    public init() {
+        do {
+            // appearance
+            let appearance = FSPopoverViewAppearance.shared
+            showsArrow = appearance.showsArrow
+            showsDimBackground = appearance.showsDimBackground
+            cornerRadius = appearance.cornerRadius
+            arrowSize = appearance.arrowSize
+            borderWidth = appearance.borderWidth
+            borderColor = appearance.borderColor
+            shadowColor = appearance.shadowColor
+            shadowRadius = appearance.shadowRadius
+            shadowOpacity = appearance.shadowOpacity
+        }
+        super.init(frame: .zero)
         p_didInitialize()
     }
     
@@ -452,6 +495,16 @@ private extension FSPopoverView {
         #endif
     }
     
+    func p_getArrowSize() -> CGSize {
+        guard showsArrow else {
+            return .zero
+        }
+        var size = arrowSize
+        size.width = max(size.width, 0)
+        size.height = max(size.height, 0)
+        return size
+    }
+    
     func p_createContainerView() -> UIView {
         let view = UIView()
         view.backgroundColor = .clear
@@ -528,12 +581,12 @@ private extension FSPopoverView {
         let contentSize: CGSize
         
         // arrow size
-        let arrowSize = showsArrow ? _Consts.arrowSize : .zero
+        let arrowSize = p_getArrowSize()
         
         // arrow direction
         do {
             let horizontalContentSize: CGSize = {
-                var size = CGSize(width: _Consts.cornerRadius * 2 + 10.0, height: arrowSize.height + _Consts.cornerRadius * 2 + 10.0)
+                var size = CGSize(width: cornerRadius * 2 + 10.0, height: arrowSize.height + cornerRadius * 2 + 10.0)
                 if realContentSize.width > size.width {
                     size.width = realContentSize.width
                 }
@@ -543,7 +596,7 @@ private extension FSPopoverView {
                 return size
             }()
             let verticalContentSize: CGSize = {
-                var size = CGSize(width: arrowSize.width + _Consts.cornerRadius * 2 + 10.0, height: _Consts.cornerRadius * 2 + 10.0)
+                var size = CGSize(width: arrowSize.width + cornerRadius * 2 + 10.0, height: cornerRadius * 2 + 10.0)
                 if realContentSize.width > size.width {
                     size.width = realContentSize.width
                 }
@@ -613,7 +666,7 @@ private extension FSPopoverView {
             }
             // If the point is on the edge, a little adjustment is required for improving the visual effect.
             let arrowPointSafeRect: CGRect = {
-                var rect = safeContainerRect.insetBy(dx: _Consts.cornerRadius, dy: _Consts.cornerRadius)
+                var rect = safeContainerRect.insetBy(dx: cornerRadius, dy: cornerRadius)
                 rect = rect.insetBy(dx: 3.0, dy: 3.0)
                 rect = rect.insetBy(dx: arrowSize.width / 2, dy: arrowSize.width / 2)
                 return rect
@@ -726,7 +779,7 @@ private extension FSPopoverView {
             context.arrowSize       = arrowSize
             context.arrowPoint      = arrowPointInPopover
             context.arrowDirection  = arrowDirection
-            context.cornerRadius    = _Consts.cornerRadius
+            context.cornerRadius    = cornerRadius
             context.contentSize     = contentSize
             context.popoverSize     = frame.size
             context.borderWidth     = borderWidth
@@ -905,7 +958,7 @@ public extension FSPopoverView {
             return nil
         }
         
-        let arrowSize = showsArrow ? _Consts.arrowSize : .zero
+        let arrowSize = p_getArrowSize()
         let referRect = arrowReferRect.insetBy(dx: -arrowSize.height, dy: -arrowSize.height)
         let safeAreaInsets = dataSource?.containerSafeAreaInsets(for: self) ?? .zero
         let safeContainerRect = CGRect(origin: .zero, size: containerSize).inset(by: safeAreaInsets)
@@ -921,11 +974,4 @@ public extension FSPopoverView {
             return CGSize(width: max(0.0, referRect.minX - safeContainerRect.minX), height: safeContainerRect.height)
         }
     }
-}
-
-// MARK: - Consts/Private
-
-private struct _Consts {
-    static let cornerRadius: CGFloat = 6.0
-    static let arrowSize = CGSize(width: 22.0, height: 10.0)
 }

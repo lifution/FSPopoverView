@@ -43,7 +43,7 @@ open class FSPopoverListItem {
     
     // MARK: Properties/Public
     
-    public let scrollDireciton: FSPopoverListView.ScrollDirection
+    public let scrollDirection: FSPopoverListView.ScrollDirection
     
     /// A closure to execute when the user selects the item.
     /// This closure has no return value and takes the selected item object as its only parameter.
@@ -52,10 +52,12 @@ open class FSPopoverListItem {
     /// Whether the item is enabled. Defaults to true.
     public final var isEnabled = true
     
-    public final var separatorInset: UIEdgeInsets = .init(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
+    /// Default value see `FSPopoverViewAppearance`.
+    public final var separatorInset: UIEdgeInsets = FSPopoverViewAppearance.shared.separatorInset
     
-    /// The color of separator. Defaults to nil.
-    public final var separatorColor: UIColor?
+    /// The color of separator.
+    /// Default value see `FSPopoverViewAppearance`.
+    public final var separatorColor: UIColor? = FSPopoverViewAppearance.shared.separatorColor
     
     /// Whether needs hide separator, defaults to true.
     ///
@@ -64,8 +66,9 @@ open class FSPopoverListItem {
     ///
     public final var isSeparatorHidden = true
     
-    /// The color of separator. Defaults to nil.
-    public final var highlightedColor: UIColor? = .black.withAlphaComponent(0.1)
+    /// The color of separator.
+    /// Default value see `FSPopoverViewAppearance`.
+    public final var highlightedColor: UIColor? = FSPopoverViewAppearance.shared.highlightedColor
     
     // MARK: Properties/Internal
     
@@ -78,14 +81,14 @@ open class FSPopoverListItem {
     
     // MARK: Initialization
     
-    public init(scrollDireciton: FSPopoverListView.ScrollDirection = .vertical) {
+    public init(scrollDirection: FSPopoverListView.ScrollDirection = .vertical) {
         #if DEBUG
         let abstractName = String(describing: FSPopoverListItem.self)
         if "\(type(of: self))" == abstractName {
             fatalError("\(abstractName) is abstract base class, cannot be used directly, must be inherited for use.")
         }
         #endif
-        self.scrollDireciton = scrollDireciton
+        self.scrollDirection = scrollDirection
     }
     
     // MARK: Public

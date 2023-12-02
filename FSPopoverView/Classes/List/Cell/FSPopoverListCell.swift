@@ -110,7 +110,7 @@ private extension FSPopoverListCell {
     func p_remakeConstraints() {
         NSLayoutConstraint.deactivate(separatorConstraints)
         separatorConstraints.removeAll()
-        switch item.scrollDireciton {
+        switch item.scrollDirection {
         case .vertical:
             let hConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-left-[view]-right-|",
                                                               metrics: [

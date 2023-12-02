@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0435F3F42B1A454200FC0F58 /* CustomContentViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0435F3F32B1A454200FC0F58 /* CustomContentViewViewController.swift */; };
+		0435F3F42B1A454200FC0F58 /* CustomizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0435F3F32B1A454200FC0F58 /* CustomizationViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0435F3F32B1A454200FC0F58 /* CustomContentViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContentViewViewController.swift; sourceTree = "<group>"; };
+		0435F3F32B1A454200FC0F58 /* CustomizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationViewController.swift; sourceTree = "<group>"; };
 		0DD018B33F3ABBA7A17EB4B5 /* Pods-FSPopoverView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSPopoverView_Tests.debug.xcconfig"; path = "Target Support Files/Pods-FSPopoverView_Tests/Pods-FSPopoverView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		1FAE422140AAD8063AFE21CF /* Pods-FSPopoverView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSPopoverView_Example.release.xcconfig"; path = "Target Support Files/Pods-FSPopoverView_Example/Pods-FSPopoverView_Example.release.xcconfig"; sourceTree = "<group>"; };
 		23896AF24814C6497D8DF462 /* Pods-FSPopoverView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSPopoverView_Tests.release.xcconfig"; path = "Target Support Files/Pods-FSPopoverView_Tests/Pods-FSPopoverView_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		0435F3F22B1A451F00FC0F58 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
-				0435F3F32B1A454200FC0F58 /* CustomContentViewViewController.swift */,
+				0435F3F32B1A454200FC0F58 /* CustomizationViewController.swift */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -253,7 +253,7 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				0435F3F42B1A454200FC0F58 /* CustomContentViewViewController.swift in Sources */,
+				0435F3F42B1A454200FC0F58 /* CustomizationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

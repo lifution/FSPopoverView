@@ -1,5 +1,5 @@
 //
-//  CustomContentViewViewController.swift
+//  CustomizationViewController.swift
 //  FSPopoverView_Example
 //
 //  Created by Sheng on 2023/12/2.
@@ -9,7 +9,7 @@
 import UIKit
 import FSPopoverView
 
-class CustomContentViewViewController: UIViewController {
+class CustomizationViewController: UIViewController {
     
     private var hiddenArrow = false
     private var showsDimBackground = false
@@ -89,7 +89,6 @@ class CustomContentViewViewController: UIViewController {
         let items: [FSPopoverListItem] = ["Scale", "Fade", "Translate"].compactMap({ text in
             let item = FSPopoverListTextItem()
             item.title = text
-            item.separatorColor = .lightGray
             item.isSeparatorHidden = false
             item.updateLayout()
             item.selectedHandler = { [unowned self] item in
@@ -113,19 +112,17 @@ class CustomContentViewViewController: UIViewController {
         
         let listView = FSPopoverListView(scrollDirection: .vertical)
         listView.items = items
-        listView.borderWidth = 1.0
-        listView.borderColor = .lightGray
-        listView.shadowColor = .lightGray
-        listView.shadowRadius = 3.0
-        listView.shadowOpacity = 0.5
+        listView.showsArrow = !hiddenArrow
+        listView.arrowDirection = .down
         listView.showsDimBackground = showsDimBackground
         listView.transitioningDelegate = transition
+        listView.autosetsArrowDirection = false
         listView.shouldDismissOnTapOutside = shouldDismissOnTapOutside
         listView.present(fromRect: sender.frame.insetBy(dx: 0.0, dy: -6.0), in: sender.superview)
     }
 }
 
-extension CustomContentViewViewController: FSPopoverViewDataSource {
+extension CustomizationViewController: FSPopoverViewDataSource {
     
     func backgroundView(for popoverView: FSPopoverView) -> UIView? {
         let view = UIView()

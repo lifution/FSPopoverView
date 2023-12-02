@@ -93,10 +93,10 @@
             </objects>
             <point key="canvasLocation" x="468" y="44.527736131934034"/>
         </scene>
-        <!--Custom-->
+        <!--Customization-->
         <scene sceneID="Yal-yL-gGm">
             <objects>
-                <viewController id="MyX-6E-oZF" customClass="CustomContentViewViewController" customModule="FSPopoverView_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="MyX-6E-oZF" customClass="CustomizationViewController" customModule="FSPopoverView_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Sy-me-MtK"/>
                         <viewControllerLayoutGuide type="bottom" id="4tf-P9-8jE"/>
@@ -252,7 +252,7 @@
                             <constraint firstItem="mKD-Pa-7d7" firstAttribute="centerX" secondItem="AdD-Wv-AEU" secondAttribute="centerX" id="wXg-Bx-qkw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Custom" largeTitleDisplayMode="never" id="LQn-RT-Xth">
+                    <navigationItem key="navigationItem" title="Customization" largeTitleDisplayMode="never" id="LQn-RT-Xth">
                         <barButtonItem key="rightBarButtonItem" image="more" style="plain" id="nJM-67-flz">
                             <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>

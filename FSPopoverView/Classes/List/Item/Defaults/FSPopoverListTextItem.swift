@@ -6,27 +6,27 @@
 //  Copyright © 2023 Sheng. All rights reserved.
 //
 //  FSPopoverListTextItem looks like：
-//    vertical: contents center in vertical
-//    NOTE: This mode is compatible with Right-to-Left language.
-// ┌────────────────────────────────┬──────────────────────────────────────┐
-// │                         <contentInset.top>                            │
-// │                                │                                      │
-// │-<contentInset.left>-[icon]-<iconSpacing>-[title]-<contentInset.right>-│
-// │                                │                                      │
-// │                        <contentInset.bottom>                          │
-// └────────────────────────────────┴──────────────────────────────────────┘
-//    horizontal: contents center in horizontal
-// ┌─────────────────────────┬──────────────────────────┐
-// │                  <contentInset.top>                │
-// │                         │                          │
-// │                      [icon]                        │
-// │                         │                          │
-// │                   <iconSpacing>                    │
-// │                         │                          │
-// ├ <contentInset.left> -[title]- <contentInset.right> ┤
-// │                         │                          │
-// │                <contentInset.bottom>               │
-// └─────────────────────────┴──────────────────────────┘
+//  vertical: contents center in vertical
+//  NOTE: This mode is compatible with Right-to-Left language.
+//  ┌────────────────────────────────┬──────────────────────────────────────┐
+//  │                         <contentInset.top>                            │
+//  │                                │                                      │
+//  │-<contentInset.left>-[icon]-<iconSpacing>-[title]-<contentInset.right>-│
+//  │                                │                                      │
+//  │                        <contentInset.bottom>                          │
+//  └────────────────────────────────┴──────────────────────────────────────┘
+//  horizontal: contents center in horizontal
+//  ┌─────────────────────────┬──────────────────────────┐
+//  │                  <contentInset.top>                │
+//  │                         │                          │
+//  │                      [icon]                        │
+//  │                         │                          │
+//  │                   <iconSpacing>                    │
+//  │                         │                          │
+//  ├ <contentInset.left> -[title]- <contentInset.right> ┤
+//  │                         │                          │
+//  │                <contentInset.bottom>               │
+//  └─────────────────────────┴──────────────────────────┘
 //
 
 import UIKit
@@ -35,7 +35,7 @@ public final class FSPopoverListTextItem: FSPopoverListItem {
     
     // MARK: Properties/Public
     
-    public var contentInset: UIEdgeInsets = .init(top: 8.0, left: 12.0, bottom: 8.0, right: 12.0)
+    public var contentInset: UIEdgeInsets
     
     public var image: UIImage?
     
@@ -43,13 +43,16 @@ public final class FSPopoverListTextItem: FSPopoverListItem {
     
     /// The space between image and title.
     /// This value will not work if one of image and title is nil.
-    public var spacing: CGFloat = 6.0
+    /// Default value see `FSPopoverViewAppearance`.
+    public var spacing: CGFloat = FSPopoverViewAppearance.shared.spacing
     
     /// If nil, use a default font.
-    public var titleFont: UIFont?
+    /// Default value see `FSPopoverViewAppearance`.
+    public var titleFont: UIFont? = FSPopoverViewAppearance.shared.textFont
     
     /// If nil, use a default color.
-    public var titleColor: UIColor?
+    /// Default value see `FSPopoverViewAppearance`.
+    public var titleColor: UIColor? = FSPopoverViewAppearance.shared.textColor
     
     // MARK: Properties/Override
     
@@ -57,15 +60,27 @@ public final class FSPopoverListTextItem: FSPopoverListItem {
         return FSPopoverListTextCell.self
     }
     
+    // MARK: Initialization
+    
+    public override init(scrollDirection: FSPopoverListView.ScrollDirection = .vertical) {
+        switch scrollDirection {
+        case .vertical:
+            contentInset = .init(top: 8.0, left: 15.0, bottom: 8.0, right: 15.0)
+        case .horizontal:
+            contentInset = .init(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
+        }
+        super.init(scrollDirection: scrollDirection)
+    }
+    
     // MARK: Public
     
     /// You need to call this method if you change any contents.
     public func updateLayout() {
         
-        titleFont = titleFont ?? .systemFont(ofSize: 18.0)
-        titleColor = titleColor ?? .black
+        titleFont = titleFont ?? FSPopoverViewAppearance.shared.textFont
+        titleColor = titleColor ?? FSPopoverViewAppearance.shared.textColor
         
-        switch scrollDireciton {
+        switch scrollDirection {
         case .vertical:
             p_updateLayoutForVertical()
         case .horizontal:
@@ -113,7 +128,7 @@ public final class FSPopoverListTextItem: FSPopoverListItem {
         guard let title = title, !title.isEmpty else {
             return nil
         }
-        let titleFont = titleFont ?? .systemFont(ofSize: 18.0)
+        let titleFont = titleFont ?? FSPopoverViewAppearance.shared.textFont
         let attributedTitle = NSAttributedString(string: title, attributes: [.font: titleFont])
         return NSAttributedString.inner.size(of: attributedTitle)
     }
@@ -150,7 +165,7 @@ private class FSPopoverListTextCell: FSPopoverListCell {
         guard let item = item as? FSPopoverListTextItem else {
             return
         }
-        stackView.axis = item.scrollDireciton == .vertical ? .horizontal : .vertical
+        stackView.axis = item.scrollDirection == .vertical ? .horizontal : .vertical
         stackView.alpha = item.isEnabled ? 1.0 : 0.5
         stackView.spacing = item.spacing
         do {
@@ -178,7 +193,7 @@ private class FSPopoverListTextCell: FSPopoverListCell {
         }
         NSLayoutConstraint.deactivate(stackConstraints)
         stackConstraints.removeAll()
-        switch item.scrollDireciton {
+        switch item.scrollDirection {
         case .vertical:
             let leading = NSLayoutConstraint(item: stackView,
                                              attribute: .leading,
