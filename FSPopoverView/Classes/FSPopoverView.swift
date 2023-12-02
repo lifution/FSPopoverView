@@ -120,7 +120,7 @@ open class FSPopoverView: UIView {
     final weak public private(set) var containerView: UIView?
     
     /// Arrow will be hidden when this property is set to false.
-    /// Default value see `FSPopoverViewAppearance`. 
+    /// Default value see `FSPopoverViewAppearance`.
     ///
     /// * A reload request will be set when this property is changed.
     ///
@@ -336,6 +336,26 @@ open class FSPopoverView: UIView {
     override open func layoutSubviews() {
         super.layoutSubviews()
         reloadDataIfNeeded()
+    }
+    
+    @available(*, unavailable)
+    open override class func appearance() -> Self {
+        return super.appearance()
+    }
+    
+    @available(*, unavailable)
+    open override class func appearance(for trait: UITraitCollection) -> Self {
+        return super.appearance(for: trait)
+    }
+    
+    @available(*, unavailable)
+    open override class func appearance(whenContainedInInstancesOf containerTypes: [UIAppearanceContainer.Type]) -> Self {
+        return super.appearance(whenContainedInInstancesOf: containerTypes)
+    }
+    
+    @available(*, unavailable)
+    open override class func appearance(for trait: UITraitCollection, whenContainedInInstancesOf containerTypes: [UIAppearanceContainer.Type]) -> Self {
+        return super.appearance(for: trait, whenContainedInInstancesOf: containerTypes)
     }
     
     // MARK: Methods/Open
