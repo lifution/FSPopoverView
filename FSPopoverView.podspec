@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
   s.name     = 'FSPopoverView'
   s.version  = '3.0.0'
-  s.summary  = '`FSPopoverView` is an iOS customizable view that displays a bubble style view.'
-  s.homepage = 'https://github.com/lifution/Popover'
+  s.summary  = '`FSPopoverView` is an iOS customizable view that displays a popover view.'
+  s.homepage = 'https://github.com/lifution/FSPopoverView'
   s.author   = 'Sheng'
   s.license  = { :type => 'MIT', :file => 'LICENSE' }
   s.source   = {
-    :git => 'https://github.com/lifution/Popover.git',
+    :git => 'https://github.com/lifution/FSPopoverView.git',
     :tag => s.version.to_s
   }
   

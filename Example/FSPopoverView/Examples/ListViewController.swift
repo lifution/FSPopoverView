@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Photos
 import FSPopoverView
 
 class ListViewController: UIViewController {
