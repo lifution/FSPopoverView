@@ -15,6 +15,9 @@ class MenuViewController: UITableViewController {
         super.viewDidLoad()
         
     }
+}
+
+extension MenuViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.001
