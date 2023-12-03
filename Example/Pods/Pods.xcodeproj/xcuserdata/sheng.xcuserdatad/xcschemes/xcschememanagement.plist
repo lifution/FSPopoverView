@@ -4,10 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>FSPopoverView.xcscheme</key>
+		<key>FSPopoverView.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>Pods-FSPopoverView_Example.xcscheme</key>
 		<dict>

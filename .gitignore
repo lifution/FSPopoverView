@@ -6,6 +6,7 @@
 build/
 DerivedData/
 BuildIPA/
+Carthage/
 
 ## Various settings
 *.pbxuser
