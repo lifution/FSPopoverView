@@ -272,7 +272,8 @@ private class _ListScrollView: UIScrollView {
     
     // MARK: Properties/Private
     
-    private var highlightedCell: FSPopoverListCell?
+    private weak var selectedCell: FSPopoverListCell?
+    private weak var highlightedCell: FSPopoverListCell?
     
     // MARK: Override
     
@@ -283,8 +284,11 @@ private class _ListScrollView: UIScrollView {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         if let cell = p_cell(at: location), cell.item.isEnabled {
-            cell.isHighlighted = true
-            highlightedCell = cell
+            selectedCell = cell
+            if cell.item.selectionStyle != .none {
+                cell.isHighlighted = true
+                highlightedCell = cell
+            }
         }
     }
     
@@ -310,15 +314,17 @@ private class _ListScrollView: UIScrollView {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         if let cell = p_cell(at: location) {
-            if let highlightedCell = highlightedCell, highlightedCell === cell {
-                selectedCellHandler?(highlightedCell)
+            if let selectedCell = selectedCell, selectedCell === cell {
+                selectedCellHandler?(selectedCell)
             }
         }
+        selectedCell = nil
         highlightedCell = nil
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
+        selectedCell = nil
         highlightedCell?.isHighlighted = false
         highlightedCell = nil
     }

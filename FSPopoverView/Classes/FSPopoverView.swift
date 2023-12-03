@@ -441,6 +441,8 @@ open class FSPopoverView: UIView {
     }
     
     /// Presents the popover and anchors it to the specified location.
+    /// - Parameters:
+    ///   - view: The view containing the point.
     open func present(fromPoint point: CGPoint,
                       in view: UIView? = nil,
                       displayIn specifiedView: UIView? = nil,
@@ -454,6 +456,8 @@ open class FSPopoverView: UIView {
     }
     
     /// Presents the popover and anchors it to the specified rect.
+    /// - Parameters:
+    ///   - view: The view containing the rectangle.
     open func present(fromRect rect: CGRect,
                       in view: UIView? = nil,
                       displayIn specifiedView: UIView? = nil,
@@ -554,9 +558,13 @@ private extension FSPopoverView {
     func p_prepareForDisplaying() {
         // freezes the popover view before the popover view finishes displaying operation.
         isFreezing = true
+        alpha = 1.0
+        transform = .identity
         removeFromSuperview()
         containerSize = .zero
         containerView?.removeFromSuperview()
+        dimBackgroundView.alpha = 1.0
+        dimBackgroundView.transform = .identity
         p_destroyDisplayWindow()
     }
     
@@ -927,8 +935,8 @@ private extension FSPopoverView {
         let completedHandler: (() -> Void) = { [unowned self] in
             self.isFreezing = false
             self.removeFromSuperview()
-            self.p_destroyDisplayWindow()
             self.containerView?.removeFromSuperview()
+            self.p_destroyDisplayWindow()
             completion?()
         }
         

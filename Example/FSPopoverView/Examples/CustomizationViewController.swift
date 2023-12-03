@@ -86,11 +86,10 @@ class CustomizationViewController: UIViewController {
     }
     
     @IBAction func onDidTapChangeTransitionButton(_ sender: UIButton) {
-        let items: [FSPopoverListItem] = ["Scale", "Fade", "Translate"].compactMap({ text in
+        let items: [FSPopoverListItem] = ["Scale", "Fade", "Translate"].map { text in
             let item = FSPopoverListTextItem()
             item.title = text
             item.isSeparatorHidden = false
-            item.updateLayout()
             item.selectedHandler = { [unowned self] item in
                 guard let item = item as? FSPopoverListTextItem else {
                     return
@@ -106,8 +105,9 @@ class CustomizationViewController: UIViewController {
                     self.transition = FSPopoverViewTransitionScale()
                 }
             }
+            item.updateLayout()
             return item
-        })
+        }
         items.last?.isSeparatorHidden = true
         
         let listView = FSPopoverListView(scrollDirection: .vertical)

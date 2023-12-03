@@ -61,6 +61,9 @@ public final class FSPopoverViewTransitionScale: FSPopoverViewAnimatedTransition
                     popoverView.transform = .init(scaleX: 0.01, y: 0.01)
                 }
             } completion: { _ in
+                popoverView.alpha = 1.0
+                popoverView.transform = .identity
+                dimBackgroundView.alpha = 1.0
                 context.completeTransition()
             }
         }

@@ -19,6 +19,13 @@ open class FSPopoverListItem {
         case reload
     }
     
+    public enum SelectionStyle {
+        /// The cell has no distinct style for when it’s selected.
+        case none
+        /// The cell has a gray background when it’s selected.
+        case gray
+    }
+    
     // MARK: Properties/Open
     
     /// The size of item.
@@ -44,6 +51,8 @@ open class FSPopoverListItem {
     // MARK: Properties/Public
     
     public let scrollDirection: FSPopoverListView.ScrollDirection
+    
+    public final var selectionStyle: FSPopoverListItem.SelectionStyle = .gray
     
     /// A closure to execute when the user selects the item.
     /// This closure has no return value and takes the selected item object as its only parameter.

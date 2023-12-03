@@ -58,6 +58,8 @@ public final class FSPopoverViewTransitionTranslate: FSPopoverViewAnimatedTransi
                 }
                 dimBackgroundView.alpha = 0.0
             } completion: { _ in
+                popoverView.alpha = 1.0
+                dimBackgroundView.alpha = 1.0
                 context.completeTransition()
             }
         }
