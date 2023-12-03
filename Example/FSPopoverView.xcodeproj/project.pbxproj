@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		040A8F622B1C815F00A3915A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A8F612B1C815F00A3915A /* extensions.swift */; };
 		041EE2042B1CB2FA002CB57A /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041EE2032B1CB2FA002CB57A /* Feature.swift */; };
 		0435F3F42B1A454200FC0F58 /* CustomizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0435F3F32B1A454200FC0F58 /* CustomizationViewController.swift */; };
 		048ABDCF2B1B94A4002823EF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048ABDCE2B1B94A4002823EF /* ListViewController.swift */; };
@@ -21,7 +20,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		040A8F612B1C815F00A3915A /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		041EE2032B1CB2FA002CB57A /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		0435F3F32B1A454200FC0F58 /* CustomizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationViewController.swift; sourceTree = "<group>"; };
 		048ABDCE2B1B94A4002823EF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				041EE2032B1CB2FA002CB57A /* Feature.swift */,
-				040A8F612B1C815F00A3915A /* extensions.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -269,7 +266,6 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				048ABDCF2B1B94A4002823EF /* ListViewController.swift in Sources */,
 				0435F3F42B1A454200FC0F58 /* CustomizationViewController.swift in Sources */,
-				040A8F622B1C815F00A3915A /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
