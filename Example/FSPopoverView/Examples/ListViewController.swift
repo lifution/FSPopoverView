@@ -66,45 +66,6 @@ class ListViewController: UIViewController {
     }
 }
 
-private enum Feature {
-    
-    case copy
-    case message
-    case db
-    case qr
-    case settings
-    
-    var image: UIImage? {
-        switch self {
-        case .copy:
-            return .init(named: "copy")
-        case .message:
-            return .init(named: "message")
-        case .db:
-            return .init(named: "db")
-        case .qr:
-            return .init(named: "qr")
-        case .settings:
-            return .init(named: "settings")
-        }
-    }
-    
-    var title: String {
-        switch self {
-        case .copy:
-            return "Copy Contents"
-        case .message:
-            return "Message"
-        case .db:
-            return "DataBase"
-        case .qr:
-            return "QR Code"
-        case .settings:
-            return "Settings"
-        }
-    }
-}
-
 // MARK: - Custom List Item
 
 private class SelectableItem: FSPopoverListItem {

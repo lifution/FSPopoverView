@@ -300,12 +300,6 @@ open class FSPopoverView: UIView {
     /// The default value of transitioning delegate.
     private var scaleTransition: FSPopoverViewTransitionScale?
     
-    // MARK: Deinitialization
-    
-    deinit {
-        print("\(type(of: self)) deinit")
-    }
-    
     // MARK: Initialization
     
     public init() {
@@ -873,7 +867,10 @@ private extension FSPopoverView {
         p_prepareForDisplaying()
         
         let displayView: UIView = {
-            if let view = specifiedView {
+            /// NOTE:
+            ///   When displaying in the UIScrollView, container view can not get the correct size.
+            ///   So ignore scroll view here.
+            if let view = specifiedView, !(view is UIScrollView), view.bounds.width > 0, view.bounds.height > 0.0 {
                 return view
             }
             let window = p_createDisplayWindow()

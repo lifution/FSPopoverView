@@ -10,6 +10,8 @@ import UIKit
 
 public final class FSPopoverViewTransitionScale: FSPopoverViewAnimatedTransitioning {
     
+    public var usingSpring = true
+    
     public init() {}
     
     public func animateTransition(transitionContext context: FSPopoverViewTransitionContext) {
@@ -45,11 +47,16 @@ public final class FSPopoverViewTransitionScale: FSPopoverViewAnimatedTransition
         
         switch context.scene {
         case .present:
-            popoverView.transform = .init(scaleX: 0.01, y: 0.01)
             dimBackgroundView.alpha = 0.0
             UIView.animate(withDuration: 0.18, delay: 0.0, options: .curveEaseOut) {
-                popoverView.transform = .identity
                 dimBackgroundView.alpha = 1.0
+            }
+            
+            popoverView.transform = .init(scaleX: 0.01, y: 0.01)
+            let duration: TimeInterval = usingSpring ? 0.38 : 0.18
+            let spring: CGFloat = usingSpring ? 0.68 : 1.0
+            UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: spring, initialSpringVelocity: 0.5) {
+                popoverView.transform = .identity
             } completion: { _ in
                 context.completeTransition()
             }
