@@ -113,6 +113,18 @@ let listView = FSPopoverListView()
 listView.items = items
 listView.present(fromRect: sender.frame.insetBy(dx: 0.0, dy: -6.0), in: view)
 ```
+* Use `FSPopoverView.fs_appearance()` to customize default values for popover view.
+```Swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    do {
+        let appearance = FSPopoverView.fs_appearance()
+        appearance.showsArrow = false
+        appearance.showsDimBackground = true
+        ...
+    }
+    return true
+}
+```
 * For more information on how to use, see the example project under the repository.
 
 ## License

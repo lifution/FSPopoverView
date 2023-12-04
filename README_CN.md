@@ -59,7 +59,72 @@ github "lifution/FSPopoverView"
 ## 使用
 
 * 如果需要自定义内容，使用 FSPopoverView，实现 dataSource，按照 dataSource 的需求返回对应的内容即可。
+```Swift
+let popoverView = FSPopoverView()
+popoverView.dataSource = self
+popoverView.present(fromBarItem: barItem)
+
+// data source
+extension viewController: FSPopoverViewDataSource {
+    
+    func backgroundView(for popoverView: FSPopoverView) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .yellow
+        return view
+    }
+    
+    func contentView(for popoverView: FSPopoverView) -> UIView? {
+        return contentView
+    }
+    
+    func contentSize(for popoverView: FSPopoverView) -> CGSize {
+        return .init(width: 100.0, height: 100.0)
+    }
+    
+    func containerSafeAreaInsets(for popoverView: FSPopoverView) -> UIEdgeInsets {
+        return view.safeAreaInsets
+    }
+    
+    func popoverViewShouldDismissOnTapOutside(_ popoverView: FSPopoverView) -> Bool {
+        return true
+    }
+}
+
+```
 * 如果需要显示一个列表，使用 FSPopoverListView，FSPopoverView 默认提供了 FSPopoverListTextItem，如果需要自定义 item 则需要继承 FSPopoverListItem 和 FSPopoverListCell。
+```Swift
+let features: [Feature] = [.copy, .message, .db, .qr, .settings]
+let items: [FSPopoverListItem] = features.map { feature in
+    let item = FSPopoverListTextItem()
+    item.image = feature.image
+    item.title = feature.title
+    item.isSeparatorHidden = false
+    item.selectedHandler = { item in
+        guard let item = item as? FSPopoverListTextItem else {
+            return
+        }
+        print(item.title ?? "")
+    }
+    item.updateLayout()
+    return item
+}
+items.last?.isSeparatorHidden = true
+let listView = FSPopoverListView()
+listView.items = items
+listView.present(fromRect: sender.frame.insetBy(dx: 0.0, dy: -6.0), in: view)
+```
+* 可通过 `FSPopoverView.fs_appearance()` 来给全局的 popover view 设置默认值。
+```Swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    do {
+        let appearance = FSPopoverView.fs_appearance()
+        appearance.showsArrow = false
+        appearance.showsDimBackground = true
+        ...
+    }
+    return true
+}
+```
 * 详细的使用方法可查看仓库中附带的 Example 项目。
 
 ## License
