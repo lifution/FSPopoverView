@@ -56,7 +56,7 @@ github "lifution/FSPopoverView"
 
 Download or clone the repository, drag the folder `FSPopoverView` into your project, and tick `Copy items if needed` and `Create groups`.
 
-## 使用
+## Usage
 
 * If you need to customize the content, use FSPopoverView, implements the dataSource and return the corresponding content.
 * If you need to display a list, use FSPopoverListView, which provides FSPopoverListTextItem by default. Inherits FSPopoverListItem and FSPopoverListCell if you need to customize the item.
