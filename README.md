@@ -27,7 +27,7 @@ A library to present popovers.
 - [x] Custom shadow
 - [x] Custom transition animation
 - [x] Custom list item
-- [x] Dark mode
+- [x] Dark mode (>= iOS13)
 - [x] Global appearance
 - [ ] Arrow direction priority
 - [ ] List appends/removes item

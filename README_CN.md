@@ -27,7 +27,7 @@ FSPopoverView 是一个 popover 风格的弹窗，可自定义弹窗内容，类
 - [x] 自定义阴影
 - [x] 自定义显示/隐藏的转场动画
 - [x] 自定义列表 item
-- [x] Dark Mode
+- [x] Dark Mode（iOS13 及以上）
 - [x] 全局外观设置
 - [ ] 箭头方向优先级设定
 - [ ] 列表添加/删除 item
