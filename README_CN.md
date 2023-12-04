@@ -10,9 +10,23 @@ FSPopoverView 是一个 popover 风格的弹窗，可自定义弹窗内容，类
 
 ## Demo
 
-#### 自定义内容
-<p align="left"><img src="https://github.com/lifution/FSPopoverView/Screenshots/custom.PNG" width=20%/></p>
-<p align="left"><img src="Screenshots/custom.PNG" width=20%/></p>
+|<div style="width: 25%"><img src="Screenshots/custom.PNG"></div>|<div style="width: 25%"><img src="Screenshots/list_light.PNG"></div>|<div style="width: 25%"><img src="Screenshots/list_dark.PNG"></div>|<div style="width: 25%"><img src="Screenshots/custom_item.PNG"></div>|
+|:--:|:--:|:--:|:--:|
+|<div style="width: 25%">**自定义内容**</div>|<div style="width: 25%">**自列表（Light）**</div>|<div style="width: 25%">**列表（Dark）**</div>|<div style="width: 25%">**列表（自定义 item）**</div>|
+
+#### 1. 自定义内容 2. 列表（Light）、列表（Dark）、列表（自定义 item）
+
+<p float="left">
+  <img src="Screenshots/custom.PNG" width=25% >
+  <img src="Screenshots/list_light.PNG" width=25% > 
+  <img src="Screenshots/list_dark.PNG" width=26% >
+  <img src="Screenshots/custom_item.PNG" width=22% >
+</p>
+
+#### 列表（横向布局）
+<p float="left">
+  <img src="Screenshots/menu.PNG" width=40% >
+</p>
 
 ## Requirements
 
