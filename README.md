@@ -109,6 +109,7 @@ let items: [FSPopoverListItem] = features.map { feature in
     return item
 }
 items.last?.isSeparatorHidden = true
+let listView = FSPopoverListView()
 listView.items = items
 listView.present(fromRect: sender.frame.insetBy(dx: 0.0, dy: -6.0), in: view)
 ```
