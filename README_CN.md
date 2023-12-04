@@ -10,13 +10,13 @@ FSPopoverView 是一个 popover 风格的弹窗，可自定义弹窗内容，类
 
 ## Demo
 
-|<div style="width: 150px">**自定义内容**</div>|<div style="width: 25%">**列表（Light）**</div>|<div style="width: 25%">**列表（Dark）**</div>|<div style="width: 25%">**列表（自定义 item）**</div>|
+|<div style="width: 25%">**自定义内容**</div>|<div style="width: 25%">**列表（Light）**</div>|<div style="width: 25%">**列表（Dark）**</div>|<div style="width: 25%">**列表（自定义 item）**</div>|
 |:--:|:--:|:--:|:--:|
-|<div style="width: 150px"><img src="Screenshots/custom.PNG"></div>|<div style="width: 25%"><img src="Screenshots/list_light.PNG"></div>|<div style="width: 25%"><img src="Screenshots/list_dark.PNG"></div>|<div style="width: 25%"><img src="Screenshots/custom_item.PNG"></div>|
+|<div style="width: 25%"><img src="Screenshots/custom.PNG"></div>|<div style="width: 25%"><img src="Screenshots/list_light.PNG"></div>|<div style="width: 25%"><img src="Screenshots/list_dark.PNG"></div>|<div style="width: 25%"><img src="Screenshots/custom_item.PNG"></div>|
 
-|<div style="width: 300px">**列表（横向布局）**</div>|
+|**列表（横向布局）**|
 |:--:|
-|<div style="width: 300px"><img src="Screenshots/menu.PNG"></div>|
+|<img src="Screenshots/menu.PNG">|
 
 ## Requirements
 
