@@ -8,7 +8,7 @@
 
 FSPopoverView 是一个 popover 风格的弹窗，可自定义弹窗内容，类似 UITableView 的 data source，实现对应的协议即可自定义内容。FSPopoverView 同时提供了常用的列表功能：FSPopoverListView，该控件支持纵向和横向两个方向的布局。FSPopoverListView 中的 item 使用的是 model 驱动模式，和传统的 UITableViewCell 不一样，你只要定义 FSPopoverListItem 即可使用。
 
-## Demo
+## 示例
 
 |<div style="width: 25%">**自定义内容**</div>|<div style="width: 25%">**列表（Light）**</div>|<div style="width: 25%">**列表（Dark）**</div>|<div style="width: 25%">**列表（自定义 item）**</div>|
 |:--:|:--:|:--:|:--:|
@@ -18,15 +18,29 @@ FSPopoverView 是一个 popover 风格的弹窗，可自定义弹窗内容，类
 |:--:|
 |<img src="Screenshots/menu.PNG">|
 
-## Requirements
+## 功能
+
+- [x] Supports customization
+- [x] Supports arrow direction
+- [x] Supports hidden Arrow
+- [x] Supports custom border
+- [x] Supports custom shadow
+- [x] Supports custom transition animation
+- [x] Supports custom list item
+- [x] Supports dark mode
+- [x] Supports global appearance
+- [ ] Supports arrow direction priority
+- [ ] Supports list appends item
+
+## 要求
 
 * iOS 11+
 * Swift 5
 * Xcode 14+
 
-## Installation
+## 安装
 
-#### [CocoaPods](http://cocoapods.org) (recommended)
+#### [CocoaPods](http://cocoapods.org) (推荐)
 
 ```ruby
 pod 'FSPopoverView'
@@ -38,6 +52,10 @@ pod 'FSPopoverView'
 github "lifution/FSPopoverView"
 ````
 
+#### 手动复制
+
+下载仓库后把目录下的 `FSPopoverView` 文件夹拖入你的项目中，并且勾选 `Copy items if needed` 和 `Create groups`。
+
 ## License
 
-FSPopoverView is available under the MIT license. [See the LICENSE](https://github.com/lifution/Popover/blob/master/LICENSE) file for more info.
+FSPopoverView 基于 MIT 许可开源，更多开源许可信息可 [查看该文件](https://github.com/lifution/Popover/blob/master/LICENSE)。
