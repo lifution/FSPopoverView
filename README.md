@@ -52,7 +52,7 @@ pod 'FSPopoverView'
 github "lifution/FSPopoverView"
 ````
 
-#### Copy manual
+#### Copy manually
 
 Download or clone the repository, drag the folder `FSPopoverView` into your project, and tick `Copy items if needed` and `Create groups`.
 
