@@ -59,7 +59,59 @@ Download or clone the repository, drag the folder `FSPopoverView` into your proj
 ## Usage
 
 * If you need to customize the content, use FSPopoverView, implements the dataSource and return the corresponding content.
+```Swift
+let popoverView = FSPopoverView()
+popoverView.dataSource = self
+popoverView.present(fromBarItem: barItem)
+
+// data source
+extension viewController: FSPopoverViewDataSource {
+    
+    func backgroundView(for popoverView: FSPopoverView) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .yellow
+        return view
+    }
+    
+    func contentView(for popoverView: FSPopoverView) -> UIView? {
+        return contentView
+    }
+    
+    func contentSize(for popoverView: FSPopoverView) -> CGSize {
+        return .init(width: 100.0, height: 100.0)
+    }
+    
+    func containerSafeAreaInsets(for popoverView: FSPopoverView) -> UIEdgeInsets {
+        return view.safeAreaInsets
+    }
+    
+    func popoverViewShouldDismissOnTapOutside(_ popoverView: FSPopoverView) -> Bool {
+        return true
+    }
+}
+
+```
 * If you need to display a list, use FSPopoverListView, which provides FSPopoverListTextItem by default. Inherits FSPopoverListItem and FSPopoverListCell if you need to customize the item.
+```Swift
+let features: [Feature] = [.copy, .message, .db, .qr, .settings]
+let items: [FSPopoverListItem] = features.map { feature in
+    let item = FSPopoverListTextItem()
+    item.image = feature.image
+    item.title = feature.title
+    item.isSeparatorHidden = false
+    item.selectedHandler = { item in
+        guard let item = item as? FSPopoverListTextItem else {
+            return
+        }
+        print(item.title ?? "")
+    }
+    item.updateLayout()
+    return item
+}
+items.last?.isSeparatorHidden = true
+listView.items = items
+listView.present(fromRect: sender.frame.insetBy(dx: 0.0, dy: -6.0), in: view)
+```
 * For more information on how to use, see the example project under the repository.
 
 ## License
