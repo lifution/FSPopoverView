@@ -49,7 +49,7 @@ struct FSPopoverDrawer {
             return nil
         }
         
-        // The border is clipped in half after drawing, so double here.
+        // The border is clipped in half after drawing, so make it double here.
         let borderWidth = context.borderWidth * 2
         let size = CGSize(width: context.popoverSize.width + borderWidth * 2,
                           height: context.popoverSize.height + borderWidth * 2)
@@ -94,10 +94,10 @@ struct FSPopoverDrawer {
             return nil
         }
         
-        let bytesPerRow  = cgimage.bytesPerRow
-        let bitsPerPixel = cgimage.bitsPerPixel
         let width = cgimage.width
         let height = cgimage.height
+        let bytesPerRow = cgimage.bytesPerRow
+        let bitsPerPixel = cgimage.bitsPerPixel
         let bitsPerComponent = cgimage.bitsPerComponent
         
         guard
@@ -186,10 +186,10 @@ struct FSPopoverDrawer {
             return nil
         }
         
-        let bytesPerRow  = cgimage.bytesPerRow
-        let bitsPerPixel = cgimage.bitsPerPixel
         let width = cgimage.width
         let height = cgimage.height
+        let bytesPerRow = cgimage.bytesPerRow
+        let bitsPerPixel = cgimage.bitsPerPixel
         let bitsPerComponent = cgimage.bitsPerComponent
         
         guard

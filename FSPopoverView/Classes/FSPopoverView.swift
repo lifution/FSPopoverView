@@ -468,7 +468,7 @@ open class FSPopoverView: UIView {
     open func present(fromBarItem barItem: UIBarItem, animated: Bool = true, completion: (() -> Void)? = nil) {
         guard let view = barItem.value(forKey: "view") as? UIView else {
             #if DEBUG
-            fatalError("The value of UIBarItem has been changed, this method can not use anymore.")
+            fatalError("The value of UIBarItem has been changed, this method can not be used anymore.")
             #else
             return
             #endif
