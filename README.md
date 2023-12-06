@@ -31,6 +31,7 @@ A library to present popovers.
 - [x] Global appearance
 - [ ] Arrow direction priority
 - [ ] List appends/removes item
+- [ ] Compatible with screen rotation
 
 ## Requirements
 
