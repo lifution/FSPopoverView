@@ -12,7 +12,7 @@ A library to present popovers.
 
 ## Demo
 
-|<div style="width: 25%">**Custome content**</div>|<div style="width: 25%">**List (Light)**</div>|<div style="width: 25%">**List (Dark)**</div>|<div style="width: 25%">**List (Custom item)**</div>|
+|<div style="width: 25%">**Custom content**</div>|<div style="width: 25%">**List (Light)**</div>|<div style="width: 25%">**List (Dark)**</div>|<div style="width: 25%">**List (Custom item)**</div>|
 |:--:|:--:|:--:|:--:|
 |<div style="width: 25%"><img src="Screenshots/custom.PNG"></div>|<div style="width: 25%"><img src="Screenshots/list_light.PNG"></div>|<div style="width: 25%"><img src="Screenshots/list_dark.PNG"></div>|<div style="width: 25%"><img src="Screenshots/custom_item.PNG"></div>|
 |**List (Horizontal layout)**|
