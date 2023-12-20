@@ -92,7 +92,7 @@ extension viewController: FSPopoverViewDataSource {
 }
 
 ```
-* 如果需要显示一个列表，使用 FSPopoverListView，FSPopoverView 默认提供了 FSPopoverListTextItem，如果需要自定义 item 则需要继承 FSPopoverListItem 和 FSPopoverListCell。
+* 如果需要显示一个列表，使用 FSPopoverListView。FSPopoverListView 默认提供了 FSPopoverListTextItem。FSPopoverListView 是由数据驱动的，所以你如果需要自定义 item 则需要继承 FSPopoverListItem 和 FSPopoverListCell 定制你的 item，然后把 item 传入 FSPopoverListView 即可。
 ```Swift
 let features: [Feature] = [.copy, .message, .db, .qr, .settings]
 let items: [FSPopoverListItem] = features.map { feature in

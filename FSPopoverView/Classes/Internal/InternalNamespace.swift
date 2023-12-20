@@ -17,11 +17,11 @@ struct FSPopoverViewInternalWrapper<Base> {
 
 protocol FSPopoverViewInternalCompatible: AnyObject {}
 extension FSPopoverViewInternalCompatible {
-    public static var inner: FSPopoverViewInternalWrapper<Self>.Type {
+    static var inner: FSPopoverViewInternalWrapper<Self>.Type {
         get { return FSPopoverViewInternalWrapper<Self>.self }
         set {}
     }
-    public var inner: FSPopoverViewInternalWrapper<Self> {
+    var inner: FSPopoverViewInternalWrapper<Self> {
         get { return FSPopoverViewInternalWrapper(self) }
         set {}
     }
