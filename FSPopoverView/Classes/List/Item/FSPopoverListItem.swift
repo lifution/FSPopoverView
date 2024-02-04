@@ -20,9 +20,9 @@ open class FSPopoverListItem {
     }
     
     public enum SelectionStyle {
-        /// The cell has no distinct style for when it’s selected.
+        /// The cell has no distinct style for when it's selected.
         case none
-        /// The cell has a gray background when it’s selected.
+        /// The cell has a gray background when it's selected.
         case gray
     }
     
@@ -81,7 +81,7 @@ open class FSPopoverListItem {
     
     // MARK: Properties/Internal
     
-    /// Use for reload operation.
+    /// Used for reload operation.
     ///
     /// - Warning:
     ///   * ⚠️ Leave this closure alone, you should never use it.
@@ -102,7 +102,7 @@ open class FSPopoverListItem {
     
     // MARK: Public
     
-    /// Reqests a reload operation for current item.
+    /// Requests a reload operation for current item.
     /// This method will not work if the cell has not been added to list view.
     public final func reload(_ type: FSPopoverListItem.ReloadType = .rerender) {
         reloadHandler?(self, type)
