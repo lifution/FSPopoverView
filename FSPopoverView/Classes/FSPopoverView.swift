@@ -334,7 +334,7 @@ open class FSPopoverView: UIView {
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        if #available(iOS 17, *) {} else {
+        if #unavailable(iOS 17) {
             setNeedsReload()
         }
     }
