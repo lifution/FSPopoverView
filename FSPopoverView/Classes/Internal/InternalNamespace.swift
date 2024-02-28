@@ -10,7 +10,7 @@ import UIKit
 
 struct FSPopoverViewInternalWrapper<Base> {
     let base: Base
-    init(_ base: Base) {
+    fileprivate init(_ base: Base) {
         self.base = base
     }
 }

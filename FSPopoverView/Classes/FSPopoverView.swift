@@ -987,7 +987,7 @@ public extension FSPopoverView {
     /// this is where this method in handy.
     ///
     /// - Important:
-    ///   * Return nil if the popover view is not yet ready for presenting, so it's recommended that
+    ///   * Returns nil if the popover view is not yet ready for presenting, so it's recommended that
     ///     call this method in the content size method of data source object.
     ///
     func maximumContentSizeOf(direction: FSPopoverView.ArrowDirection) -> CGSize? {

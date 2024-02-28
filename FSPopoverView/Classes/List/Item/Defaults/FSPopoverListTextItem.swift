@@ -76,10 +76,8 @@ public final class FSPopoverListTextItem: FSPopoverListItem {
     
     /// You need to call this method if you change any contents.
     public func updateLayout() {
-        
         titleFont = titleFont ?? FSPopoverViewAppearance.shared.textFont
         titleColor = titleColor ?? FSPopoverViewAppearance.shared.textColor
-        
         switch scrollDirection {
         case .vertical:
             p_updateLayoutForVertical()

@@ -10,7 +10,7 @@ import UIKit
 
 final class _FSSeparatorView: UIView {
     
-    // MARK: Properties/Open
+    // MARK: Properties/Internal
     
     var color: UIColor? {
         didSet {
@@ -28,7 +28,7 @@ final class _FSSeparatorView: UIView {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        if #available(iOS 17, *) {} else {
+        if #unavailable(iOS 17) {
             colorLayer.backgroundColor = color?.cgColor
         }
     }
