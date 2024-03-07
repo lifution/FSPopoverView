@@ -59,7 +59,7 @@ Download or clone the repository, drag the folder `FSPopoverView` into your proj
 
 ## Usage
 
-* If you need to customize the content, use FSPopoverView, implements the dataSource and return the content.
+* If you need to customize the content, use FSPopoverView, implements the dataSource and return the contents.
 ```Swift
 let popoverView = FSPopoverView()
 popoverView.dataSource = self
@@ -92,7 +92,7 @@ extension viewController: FSPopoverViewDataSource {
 }
 
 ```
-* If you need to display a list, use FSPopoverListView, which provides FSPopoverListTextItem by default. FSPopoverListView is data-driven, inherits FSPopoverListItem and FSPopoverListCell if you need to customize the item.
+* If you need to display a list, use `FSPopoverListView`, which provides `FSPopoverListTextItem` by default. `FSPopoverListView` is data-driven. Inherits `FSPopoverListItem` and `FSPopoverListCell` if you need to customize the item.
 ```Swift
 let features: [Feature] = [.copy, .message, .db, .qr, .settings]
 let items: [FSPopoverListItem] = features.map { feature in

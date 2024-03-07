@@ -11,11 +11,10 @@ import Foundation
 
 extension FSPopoverViewInternalWrapper where Base: NSAttributedString {
     
-    static func size(of attributedString: NSAttributedString?, limitedSize: CGSize? = .zero, limitedNumberOfLines: Int = 0) -> CGSize {
+    static func size(of attributedString: NSAttributedString?, limitedSize: CGSize? = .zero) -> CGSize {
         guard let att_string = attributedString, !att_string.string.isEmpty else {
             return .zero
         }
-		_ = max(limitedNumberOfLines, 0)
         let constraints: CGSize = {
             if let size = limitedSize, size.width > 0, size.height > 0 {
                 return .init(width: ceil(size.width), height: ceil(size.height))
