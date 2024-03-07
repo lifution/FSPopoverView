@@ -1,11 +1,6 @@
-
-platform:ios, '11.0'
+platform:ios, '13.0'
 use_frameworks!
 
 target 'FSPopoverView_Example' do
   pod 'FSPopoverView', :path => '../'
-end
-
-post_install do |installer|
-  installer.pods_project.root_object.attributes["ORGANIZATIONNAME"] = "Sheng"
 end
