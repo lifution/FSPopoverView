@@ -40,8 +40,8 @@ extension FSPopoverViewInternalWrapper where Base: UIColor {
                 return 0.0
             }
             let fullHex = (length == 2) ? substring : (substring + substring)
-            var hexValue: UInt32 = 0
-            if Scanner(string: fullHex).scanHexInt32(&hexValue) {
+            var hexValue: UInt64 = 0
+            if Scanner(string: fullHex).scanHexInt64(&hexValue) {
                 return CGFloat(hexValue) / 255.0
             }
             return 0.0

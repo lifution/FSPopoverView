@@ -1,5 +1,5 @@
 PODS:
-  - FSPopoverView (3.0.0)
+  - FSPopoverView (3.1.0)
 
 DEPENDENCIES:
   - FSPopoverView (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FSPopoverView: 026c53a62ac1b5a41ad648e02607ad7a19658c25
+  FSPopoverView: 9398cb8c9344b0aeaa9d7148ae2f57f402ebb4e5
 
-PODFILE CHECKSUM: e0fd199e201e3fdd2641a223abfdf14495729940
+PODFILE CHECKSUM: 49919976bc7ab4daf56a4a3bb51ce224b5cc5545
 
 COCOAPODS: 1.14.2
