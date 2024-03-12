@@ -9,6 +9,5 @@
 import UIKit
 
 protocol FSPopoverDrawable {
-    
     func generatePath(with context: FSPopoverDrawContext, offset: CGPoint) -> UIBezierPath
 }
