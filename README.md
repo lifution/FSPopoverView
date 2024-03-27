@@ -20,7 +20,7 @@ A library to present popovers.
 
 ## Support
 
-- [x] Customization
+- [x] Custom content
 - [x] Arrow direction
 - [x] Hidden Arrow
 - [x] Custom border
