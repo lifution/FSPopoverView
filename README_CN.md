@@ -55,6 +55,14 @@ pod 'FSPopoverView'
 github "lifution/FSPopoverView"
 ````
 
+#### [Swift Package Manager](https://swift.org/package-manager/)
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/lifution/FSPopoverView.git")
+]
+```
+
 #### 手动复制
 
 下载仓库后把目录下的 `Sources` 文件夹拖入你的项目中，并且勾选 `Copy items if needed` 和 `Create groups`。

@@ -55,6 +55,18 @@ pod 'FSPopoverView'
 github "lifution/FSPopoverView"
 ````
 
+#### [Swift Package Manager](https://swift.org/package-manager/)
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler.
+
+Once you have your Swift package set up, adding FSPopoverView as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift` or the Package list in Xcode.
+
+```Swift
+dependencies: [
+    .package(url: "https://github.com/lifution/FSPopoverView.git")
+]
+```
+
 #### Copy manually
 
 Download or clone the repository, drag the folder `Sources` into your project, and tick `Copy items if needed` and `Create groups`.
