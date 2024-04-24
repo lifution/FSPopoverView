@@ -6,8 +6,7 @@ import PackageDescription
 let package = Package(name: "FSPopoverView",
                       platforms: [.iOS(.v12)],
                       products: [
-                          .library(name: "FSPopoverView", targets: ["FSPopoverView"]),
-                          .library(name: "FSPopoverViewDynamic", type: .dynamic, targets: ["FSPopoverView"])
+                          .library(name: "FSPopoverView", targets: ["FSPopoverView"])
                       ],
 	                    targets: [
 	                        .target(name: "FSPopoverView", path: "Sources")
