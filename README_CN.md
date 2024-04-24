@@ -39,7 +39,7 @@ FSPopoverView 是一个 popover 风格的弹窗，可自定义弹窗内容，类
 
 * iOS 11+
 * Swift 5
-* Xcode 14+
+* Xcode 15+
 
 ## 安装
 

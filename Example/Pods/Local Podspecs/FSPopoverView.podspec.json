@@ -15,7 +15,7 @@
   "requires_arc": true,
   "swift_versions": "5",
   "platforms": {
-    "ios": "13.0"
+    "ios": "11.0"
   },
   "frameworks": [
     "UIKit",

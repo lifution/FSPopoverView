@@ -50,43 +50,43 @@ public final class FSPopoverViewAppearance {
         if #available(iOS 13.0, *) {
             borderColor = UIColor(dynamicProvider: { trait in
                 if trait.userInterfaceStyle == .dark {
-                    return .inner.color(hexed: "423E55")!
+                    return .inner.color(hexed: "423E55") ?? .black
                 }
-                return .inner.color(hexed: "CFCFCF")!
+                return .inner.color(hexed: "CFCFCF") ?? .black
             })
             shadowColor = UIColor(dynamicProvider: { trait in
                 if trait.userInterfaceStyle == .dark {
-                    return .inner.color(hexed: "E8E8E8")!
+                    return .inner.color(hexed: "E8E8E8") ?? .black
                 }
-                return .inner.color(hexed: "696969")!
+                return .inner.color(hexed: "696969") ?? .black
             })
             backgroundColor = UIColor(dynamicProvider: { trait in
                 if trait.userInterfaceStyle == .dark {
-                    return .inner.color(hexed: "1A172B")!
+                    return .inner.color(hexed: "1A172B") ?? .black
                 }
                 return .white
             })
             textColor = UIColor(dynamicProvider: { trait in
                 if trait.userInterfaceStyle == .dark {
-                    return .inner.color(hexed: "E8E8E8")!
+                    return .inner.color(hexed: "E8E8E8") ?? .black
                 }
                 return .black
             })
             separatorColor = UIColor(dynamicProvider: { trait in
                 if trait.userInterfaceStyle == .dark {
-                    return .inner.color(hexed: "4E4A64")!
+                    return .inner.color(hexed: "4E4A64") ?? .black
                 }
                 return .lightGray
             })
             highlightedColor = UIColor(dynamicProvider: { trait in
                 if trait.userInterfaceStyle == .dark {
-                    return .inner.color(hexed: "#322F47")!
+                    return .inner.color(hexed: "#322F47") ?? .black
                 }
                 return .black.withAlphaComponent(0.1)
             })
         } else {
-            borderColor = .inner.color(hexed: "CFCFCF")!
-            shadowColor = .inner.color(hexed: "696969")!
+            borderColor = .inner.color(hexed: "CFCFCF") ?? .black
+            shadowColor = .inner.color(hexed: "696969") ?? .black
             backgroundColor = .white
             textColor = .black
             separatorColor = .lightGray
