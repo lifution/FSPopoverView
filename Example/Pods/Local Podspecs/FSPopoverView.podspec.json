@@ -1,6 +1,6 @@
 {
   "name": "FSPopoverView",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "summary": "`FSPopoverView` is an iOS customizable view that displays a popover view.",
   "homepage": "https://github.com/lifution/FSPopoverView",
   "authors": "Sheng",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/lifution/FSPopoverView.git",
-    "tag": "3.1.0"
+    "tag": "3.1.1"
   },
   "requires_arc": true,
   "swift_versions": "5",
