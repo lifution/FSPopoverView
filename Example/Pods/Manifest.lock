@@ -1,5 +1,5 @@
 PODS:
-  - FSPopoverView (3.1.2)
+  - FSPopoverView (3.1.3)
 
 DEPENDENCIES:
   - FSPopoverView (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FSPopoverView: ee5ba97bb3d2b8326ea0a81f52015296a5ccd7f1
+  FSPopoverView: 0f1a29ba7a7b87b01c7ed292d0cf785bbd340837
 
 PODFILE CHECKSUM: 4050e8f4b7f2ae257551e677332cd97d0f0c9aaa
 

@@ -546,6 +546,9 @@ private extension FSPopoverView {
         let window = UIWindow()
         window.windowLevel = .statusBar - 1
         window.backgroundColor = .clear
+        if #available(iOS 13.0, *), let scene = UIApplication.shared.connectedScenes.filter({ $0.activationState == .foregroundActive }).first as? UIWindowScene {
+            window.windowScene = scene
+        }
         return window
     }
     
