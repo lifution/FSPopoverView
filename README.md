@@ -37,7 +37,7 @@ A library to present popovers.
 
 ## Requirements
 
-* iOS 11+
+* iOS 12+
 * Swift 5
 * Xcode 15+
 
