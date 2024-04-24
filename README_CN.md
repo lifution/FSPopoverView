@@ -1,9 +1,11 @@
 # FSPopoverView
 
+[![Platform](https://img.shields.io/badge/Platform-iOS-yellowgreen)](https://img.shields.io/badge/Platform-iOS-yellowgreen)
+[![Swift 5.x](https://img.shields.io/badge/Swift-5.x-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![ObjC incompatible](https://img.shields.io/badge/ObjC-incompatible-red)](https://img.shields.io/badge/ObjC-incompatible-red)
 [![Version Status](https://img.shields.io/cocoapods/v/FSPopoverView.svg)](https://cocoapods.org/pods/FSPopoverView)
-[![Swift 5.0](https://img.shields.io/badge/Swift-5.x-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![Platform](https://img.shields.io/cocoapods/p/FSPopoverView.svg)](https://github.com/lifution/FSPopoverView/blob/master/README.md)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange)](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange)
 [![license MIT](https://img.shields.io/cocoapods/l/FSPopoverView.svg)](https://github.com/lifution/FSPopoverView/blob/master/LICENSE)
 
 FSPopoverView 是一个 popover 风格的弹窗，可自定义弹窗内容，类似 UITableView 的 data source，实现对应的协议即可自定义内容。FSPopoverView 同时提供了常用的列表功能：FSPopoverListView，该控件支持纵向和横向两个方向的布局。FSPopoverListView 中的 item 使用的是 model 驱动模式，和传统的 UITableViewCell 不一样，你只要定义 FSPopoverListItem 即可使用。

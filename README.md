@@ -1,9 +1,11 @@
 # FSPopoverView
 
-[![Version Status](https://img.shields.io/cocoapods/v/FSPopoverView.svg)](https://cocoapods.org/pods/FSPopoverView)
+[![Platform](https://img.shields.io/badge/Platform-iOS-yellowgreen)](https://img.shields.io/badge/Platform-iOS-yellowgreen)
 [![Swift 5.x](https://img.shields.io/badge/Swift-5.x-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![Platform](https://img.shields.io/cocoapods/p/FSPopoverView.svg)](https://github.com/lifution/FSPopoverView/blob/master/README.md)
+[![ObjC incompatible](https://img.shields.io/badge/ObjC-incompatible-red)](https://img.shields.io/badge/ObjC-incompatible-red)
+[![Version Status](https://img.shields.io/cocoapods/v/FSPopoverView.svg)](https://cocoapods.org/pods/FSPopoverView)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange)](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange)
 [![license MIT](https://img.shields.io/cocoapods/l/FSPopoverView.svg)](https://github.com/lifution/FSPopoverView/blob/master/LICENSE)
 
 ### [中文介绍](https://github.com/lifution/FSPopoverView/blob/master/README_CN.md)
@@ -35,7 +37,7 @@ A library to present popovers.
 
 ## Requirements
 
-* iOS 13+
+* iOS 11+
 * Swift 5
 * Xcode 15+
 
