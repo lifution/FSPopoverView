@@ -22,6 +22,11 @@
     "Foundation",
     "CoreGraphics"
   ],
-  "source_files": "Sources/**/*.swift",
+  "source_files": "Source/**/*.swift",
+  "resource_bundles": {
+    "FSPopoverView": [
+      "Source/Assets/PrivacyInfo.xcprivacy"
+    ]
+  },
   "swift_version": "5"
 }
