@@ -69,7 +69,7 @@ dependencies: [
 
 #### Copy manually
 
-Download or clone the repository, drag the folder `Sources` into your project, and tick `Copy items if needed` and `Create groups`.
+Download or clone the repository, drag the folder `Source` into your project, and tick `Copy items if needed` and `Create groups`.
 
 ## Usage
 

@@ -65,7 +65,7 @@ dependencies: [
 
 #### 手动复制
 
-下载仓库后把目录下的 `Sources` 文件夹拖入你的项目中，并且勾选 `Copy items if needed` 和 `Create groups`。
+下载仓库后把目录下的 `Source` 文件夹拖入你的项目中，并且勾选 `Copy items if needed` 和 `Create groups`。
 
 ## 使用
 
