@@ -49,7 +49,7 @@ open class FSPopoverView: UIView {
     ///
     /// * You can change this property even though the popover view is displaying.
     /// * A reload request will be set when this property is changed.
-    /// * See `autosetsArrowDirection` property for more information about this
+    /// * See ``autosetsArrowDirection`` property for more information about this
     ///   property.
     ///
     open var arrowDirection = FSPopoverView.ArrowDirection.up {
@@ -64,9 +64,9 @@ open class FSPopoverView: UIView {
     /// Defaults to true.
     ///
     /// * When this property is true, the popover view will determine the direction
-    ///   of the arrow and update the `arrowDirection` property automatically.
+    ///   of the arrow and update the ``arrowDirection`` property automatically.
     /// * When this property is false, The popover view will calculate it's position
-    ///   according to the `arrowDirection` property, and the `arrowDirection` property
+    ///   according to the ``arrowDirection`` property, and the ``arrowDirection`` property
     ///   will never be changed by inside.
     /// * A reload request will be set when this property is changed.
     ///
@@ -92,7 +92,7 @@ open class FSPopoverView: UIView {
     ///
     /// * This point is in the coordinate system of `containerView`.
     /// * This point will be recalculated on reload operation.
-    /// * The value of `showsArrow` has no effect on this property.
+    /// * The value of ``showsArrow`` has no effect on this property.
     ///
     final public private(set) var arrowPoint: CGPoint = .zero
     
@@ -133,7 +133,7 @@ open class FSPopoverView: UIView {
     }
     
     /// Whether needs to show a dim background on container view.
-    /// Default value see `FSPopoverViewAppearance`.
+    /// Default value see ``FSPopoverViewAppearance``.
     final public var showsDimBackground: Bool {
         didSet {
             dimBackgroundView.isHidden = !showsDimBackground
@@ -141,7 +141,7 @@ open class FSPopoverView: UIView {
     }
     
     /// The corner radius of the popover view.
-    /// Default value see `FSPopoverViewAppearance`.
+    /// Default value see ``FSPopoverViewAppearance``.
     ///
     /// * A reload request will be set when this property is set.
     ///
@@ -154,7 +154,7 @@ open class FSPopoverView: UIView {
     }
     
     /// The size of the arrow.
-    /// Default value see `FSPopoverViewAppearance`.
+    /// Default value see ``FSPopoverViewAppearance``.
     ///
     /// * A reload request will be set when this property is set.
     ///
@@ -167,7 +167,7 @@ open class FSPopoverView: UIView {
     }
     
     /// The width of the popover view border.
-    /// Default value see `FSPopoverViewAppearance`.
+    /// Default value see ``FSPopoverViewAppearance``.
     ///
     /// * A reload request will be set when this property is changed.
     ///
@@ -180,7 +180,7 @@ open class FSPopoverView: UIView {
     }
     
     /// The color of the popover view border.
-    /// Default value see `FSPopoverViewAppearance`.
+    /// Default value see ``FSPopoverViewAppearance``.
     ///
     /// * A reload request will be set when this property is set.
     ///
@@ -191,7 +191,7 @@ open class FSPopoverView: UIView {
     }
     
     /// The color of the popover view shadow.
-    /// Default value see `FSPopoverViewAppearance`.
+    /// Default value see ``FSPopoverViewAppearance``.
     ///
     /// * A reload request will be set when this property is set.
     ///
@@ -202,7 +202,7 @@ open class FSPopoverView: UIView {
     }
     
     /// The radius of the popover view shadow.
-    /// Default value see `FSPopoverViewAppearance`.
+    /// Default value see ``FSPopoverViewAppearance``.
     ///
     /// * A reload request will be set when this property is changed.
     ///
@@ -216,7 +216,7 @@ open class FSPopoverView: UIView {
     
     /// The opacity of the popover view shadow.
     /// The value in this property must be in the range 0.0 (transparent) to 1.0 (opaque).
-    /// Default value see `FSPopoverViewAppearance`.
+    /// Default value see ``FSPopoverViewAppearance``.
     ///
     /// * A reload request will be set when this property is changed.
     /// 
@@ -231,7 +231,7 @@ open class FSPopoverView: UIView {
     // MARK: Properties/Override
     
     /// It's objected to use this property to set the background color of popover view.
-    /// Use `backgroundView` of `dataSource` instead.
+    /// Use ``backgroundView`` of ``dataSource`` instead.
     @available(*, unavailable)
     final public override var backgroundColor: UIColor? {
         get { return nil }
@@ -252,7 +252,7 @@ open class FSPopoverView: UIView {
     
     weak private var contentView: UIView?
     
-    /// `backgroundView` and `contentView` will be added to this view.
+    /// ``backgroundView`` and ``contentView`` will be added to this view.
     ///
     /// * This view will be the same size as the popover view.
     ///
@@ -268,7 +268,7 @@ open class FSPopoverView: UIView {
     /// Size of `containerView`.
     private var containerSize: CGSize = .zero
     
-    /// This rect is in the coordinate system of `containerView`.
+    /// This rect is in the coordinate system of ``containerView``.
     private var arrowReferRect: CGRect = .zero
     
     /// If there is no specified view to display popover view,
