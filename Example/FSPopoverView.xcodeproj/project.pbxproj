@@ -175,7 +175,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = ZQ8LWY9Q7T;
+						DevelopmentTeam = V8YJ6B47JV;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 					};
@@ -408,7 +408,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = ZQ8LWY9Q7T;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = V8YJ6B47JV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FSPopoverView/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FSPopoverView;
@@ -425,7 +425,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sheng.FSPopoverView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Wildcard Development Profile";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = dev_wildcard_provision;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
