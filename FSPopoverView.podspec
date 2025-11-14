@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'FSPopoverView'
-  s.version  = '3.1.3'
+  s.version  = '3.1.4'
   s.summary  = '`FSPopoverView` is an iOS customizable view that displays a popover view.'
   s.homepage = 'https://github.com/lifution/FSPopoverView'
   s.author   = 'Sheng'

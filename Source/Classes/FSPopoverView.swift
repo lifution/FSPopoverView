@@ -624,7 +624,10 @@ private extension FSPopoverView {
         // arrow direction
         do {
             let horizontalContentSize: CGSize = {
-                var size = CGSize(width: cornerRadius * 2 + 10.0, height: arrowSize.height + cornerRadius * 2 + 10.0)
+                var size = CGSize(
+                    width: cornerRadius * 2,
+                    height: cornerRadius * 2 + (showsArrow ? arrowSize.height : 0.0)
+                )
                 if realContentSize.width > size.width {
                     size.width = realContentSize.width
                 }
@@ -634,7 +637,10 @@ private extension FSPopoverView {
                 return size
             }()
             let verticalContentSize: CGSize = {
-                var size = CGSize(width: arrowSize.width + cornerRadius * 2 + 10.0, height: cornerRadius * 2 + 10.0)
+                var size = CGSize(
+                    width: cornerRadius * 2 + (showsArrow ? arrowSize.width : 0.0),
+                    height: cornerRadius * 2
+                )
                 if realContentSize.width > size.width {
                     size.width = realContentSize.width
                 }
