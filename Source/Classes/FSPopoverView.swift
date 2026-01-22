@@ -110,7 +110,6 @@ open class FSPopoverView: UIView {
     /// specified view / window
     ///   - container view (same size as specified view / window)
     ///     - dim background view (same size as container view)
-    ///     - user interaction view (same size as container view)
     ///     - popover view
     ///       - popover container view
     ///         - background view
@@ -284,21 +283,10 @@ open class FSPopoverView: UIView {
         return view
     }()
     
-    /// The view that receives user interaction.
-    private lazy var userInteractionView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        view.isUserInteractionEnabled = true
-        do {
-            let tap = UITapGestureRecognizer(target: self, action: #selector(p_handleTap))
-            tap.delegate = delegateRouter
-            view.addGestureRecognizer(tap)
-        }
-        return view
-    }()
-    
     /// The default value of transitioning delegate.
     private var scaleTransition: FSPopoverViewTransitionScale?
+    
+    private let tap = UITapGestureRecognizer()
     
     // MARK: Initialization
     
@@ -494,13 +482,14 @@ private extension FSPopoverView {
         
         popoverContainerView.backgroundColor = .clear
         
-        delegateRouter.gestureRecognizerShouldBeginHandler = { [unowned self] gestureRecognizer in
-            if let view = gestureRecognizer.view, view === self.userInteractionView {
-                if self.isFreezing {
-                    return true
-                }
-                let location = gestureRecognizer.location(in: view)
-                return !self.frame.contains(location)
+        tap.delegate = delegateRouter
+        tap.delaysTouchesBegan = false
+        tap.cancelsTouchesInView = false
+        
+        delegateRouter.gestureRecognizerShouldReceiveTouchHandler = { [weak self] gestureRecognizer, touch in
+            guard let self else { return false }
+            if !(touch.view?.isDescendant(of: self) ?? false) {
+                self.p_handleTouchOutside()
             }
             return false
         }
@@ -537,16 +526,27 @@ private extension FSPopoverView {
     }
     
     func p_createContainerView() -> UIView {
-        let view = UIView()
+        let view = _ContainerView()
+        view.popoverView = self
         view.backgroundColor = .clear
         return view
     }
     
     func p_createDisplayWindow() -> UIWindow {
-        let window = UIWindow()
+        let window = _DisplayWindow()
+        window.popoverView = self
         window.windowLevel = .statusBar - 1
         window.backgroundColor = .clear
-        if #available(iOS 13.0, *), let scene = UIApplication.shared.connectedScenes.filter({ $0.activationState == .foregroundActive }).first as? UIWindowScene {
+        window.onTouchOutside = { [weak self] in
+            guard let self else { return }
+            self.p_handleTouchOutside()
+        }
+        if #available(iOS 13.0, *),
+           let scene = UIApplication.shared
+            .connectedScenes
+            .filter({ $0.activationState == .foregroundActive })
+            .first as? UIWindowScene {
+            // -
             window.windowScene = scene
         }
         return window
@@ -572,10 +572,6 @@ private extension FSPopoverView {
         dimBackgroundView.removeFromSuperview()
         view.addSubview(dimBackgroundView)
         dimBackgroundView.inner.makeMarginConstraints(to: view)
-        
-        userInteractionView.removeFromSuperview()
-        view.addSubview(userInteractionView)
-        userInteractionView.inner.makeMarginConstraints(to: view)
     }
     
     func p_destroyDisplayWindow() {
@@ -880,6 +876,11 @@ private extension FSPopoverView {
             ///   When displaying in the UIScrollView, container view can not get the correct size.
             ///   So ignore scroll view here.
             if let view = specifiedView, !(view is UIScrollView), view.bounds.width > 0, view.bounds.height > 0.0 {
+                if let window = view.window {
+                    window.addGestureRecognizer(tap)
+                } else {
+                    view.addGestureRecognizer(tap)
+                }
                 return view
             }
             let window = p_createDisplayWindow()
@@ -938,6 +939,10 @@ private extension FSPopoverView {
         
         containerView?.isUserInteractionEnabled = false
         
+        if let view = tap.view {
+            view.removeGestureRecognizer(tap)
+        }
+        
         let completedHandler: (() -> Void) = { [unowned self] in
             self.isFreezing = false
             self.removeFromSuperview()
@@ -960,9 +965,8 @@ private extension FSPopoverView {
 
 private extension FSPopoverView {
     
-    @objc func p_handleTap() {
+    @objc func p_handleTouchOutside() {
         guard
-            !isFreezing, // Can not do anything while the popover view is freezing.
             dataSource?.popoverViewShouldDismissOnTapOutside(self) ?? true
         else {
             return
@@ -1020,5 +1024,29 @@ public extension FSPopoverView {
         case .right:
             return CGSize(width: max(0.0, referRect.minX - safeContainerRect.minX), height: safeContainerRect.height)
         }
+    }
+}
+
+fileprivate final class _ContainerView: UIView {
+    weak var popoverView: UIView?
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if let popoverView, popoverView.frame.contains(point) {
+            let point = convert(point, to: popoverView)
+            return popoverView.hitTest(point, with: event)
+        }
+        return nil
+    }
+}
+
+fileprivate final class _DisplayWindow: UIWindow {
+    weak var popoverView: UIView?
+    var onTouchOutside: (() -> Void)?
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if let popoverView, popoverView.frame.contains(point) {
+            let point = convert(point, to: popoverView)
+            return popoverView.hitTest(point, with: event)
+        }
+        onTouchOutside?()
+        return nil
     }
 }

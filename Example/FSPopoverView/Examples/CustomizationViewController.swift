@@ -132,7 +132,11 @@ class CustomizationViewController: UIViewController {
         listView.transitioningDelegate = transitioning
         listView.autosetsArrowDirection = false
         listView.shouldDismissOnTapOutside = shouldDismissOnTapOutside
-        listView.present(fromRect: sender.frame.insetBy(dx: 0.0, dy: -6.0), in: sender.superview)
+        listView.present(
+            fromRect: sender.frame.insetBy(dx: 0.0, dy: -6.0),
+            in: sender.superview,
+            displayIn: view
+        )
     }
 }
 
