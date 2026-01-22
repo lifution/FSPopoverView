@@ -65,7 +65,7 @@ class CustomizationViewController: UIViewController {
     
     @IBAction func onDidTapRightBarItem(_ sender: UIBarButtonItem) {
         let popoverView = p_createPopoverView()
-        popoverView.present(fromBarItem: sender)
+        popoverView.present(fromBarItem: sender, offset: .init(x: 0.0, y: 20.0))
     }
     
     @IBAction func onDidTapPrecentButton(_ sender: UIButton) {
@@ -77,7 +77,7 @@ class CustomizationViewController: UIViewController {
         let popoverView = p_createPopoverView()
         popoverView.arrowDirection = .down
         popoverView.autosetsArrowDirection = false
-        popoverView.present(fromView: sender)
+        popoverView.present(fromView: sender, offset: .init(x: 0.0, y: -10.0))
     }
     
     @IBAction func onDidTapPrecentUpButton(_ sender: UIButton) {

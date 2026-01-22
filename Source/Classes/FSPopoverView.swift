@@ -411,49 +411,68 @@ open class FSPopoverView: UIView {
     }
     
     /// Presents the popover and anchors it to the specified view.
-    open func present(fromView view: UIView,
-                      displayIn specifiedView: UIView? = nil,
-                      animated: Bool = true,
-                      completion: (() -> Void)? = nil) {
-        p_present(from: view.frame,
-                  in: view.superview,
-                  displayIn: specifiedView,
-                  animated: animated,
-                  completion: completion)
+    open func present(
+        fromView view: UIView,
+        offset: CGPoint = .zero,
+        displayIn specifiedView: UIView? = nil,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil
+    ) {
+        p_present(
+            from: view.frame,
+            offset: offset,
+            in: view.superview,
+            displayIn: specifiedView,
+            animated: animated,
+            completion: completion
+        )
     }
     
     /// Presents the popover and anchors it to the specified location.
     /// - Parameters:
     ///   - view: The view containing the point.
-    open func present(fromPoint point: CGPoint,
-                      in view: UIView? = nil,
-                      displayIn specifiedView: UIView? = nil,
-                      animated: Bool = true,
-                      completion: (() -> Void)? = nil) {
-        p_present(from: .init(origin: point, size: .zero),
-                  in: view,
-                  displayIn: specifiedView,
-                  animated: animated,
-                  completion: completion)
+    open func present(
+        fromPoint point: CGPoint,
+        in view: UIView? = nil,
+        displayIn specifiedView: UIView? = nil,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil
+    ) {
+        p_present(
+            from: .init(origin: point, size: .zero),
+            in: view,
+            displayIn: specifiedView,
+            animated: animated,
+            completion: completion
+        )
     }
     
     /// Presents the popover and anchors it to the specified rect.
     /// - Parameters:
     ///   - view: The view containing the rectangle.
-    open func present(fromRect rect: CGRect,
-                      in view: UIView? = nil,
-                      displayIn specifiedView: UIView? = nil,
-                      animated: Bool = true,
-                      completion: (() -> Void)? = nil) {
-        p_present(from: rect,
-                  in: view,
-                  displayIn: specifiedView,
-                  animated: animated,
-                  completion: completion)
+    open func present(
+        fromRect rect: CGRect,
+        in view: UIView? = nil,
+        displayIn specifiedView: UIView? = nil,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil
+    ) {
+        p_present(
+            from: rect,
+            in: view,
+            displayIn: specifiedView,
+            animated: animated,
+            completion: completion
+        )
     }
     
     /// Presents the popover and anchors it to the specified bar item.
-    open func present(fromBarItem barItem: UIBarItem, animated: Bool = true, completion: (() -> Void)? = nil) {
+    open func present(
+        fromBarItem barItem: UIBarItem,
+        offset: CGPoint = .zero,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil
+    ) {
         guard let view = barItem.value(forKey: "view") as? UIView else {
             #if DEBUG
             fatalError("The value of UIBarItem has been changed, this method can not be used anymore.")
@@ -461,15 +480,26 @@ open class FSPopoverView: UIView {
             return
             #endif
         }
-        p_present(from: view.frame,
-                  in: view.superview,
-                  animated: animated,
-                  completion: completion)
+        p_present(
+            from: view.frame,
+            offset: offset,
+            in: view.superview,
+            animated: animated,
+            completion: completion
+        )
     }
     
     /// Dismiss popover view.
-    open func dismiss(animated: Bool = true, isSelection: Bool = false, completion: (() -> Void)? = nil) {
-        p_dismiss(animated: animated, isSelection: isSelection, completion: completion)
+    open func dismiss(
+        animated: Bool = true,
+        isSelection: Bool = false,
+        completion: (() -> Void)? = nil
+    ) {
+        p_dismiss(
+            animated: animated,
+            isSelection: isSelection,
+            completion: completion
+        )
     }
 }
 
@@ -862,12 +892,14 @@ private extension FSPopoverView {
         }
     }
     
-    func p_present(from rect: CGRect,
-                   in view: UIView? = nil,
-                   displayIn specifiedView: UIView? = nil,
-                   animated: Bool = true,
-                   completion: (() -> Void)? = nil) {
-        
+    func p_present(
+        from rect: CGRect,
+        offset: CGPoint = .zero,
+        in view: UIView? = nil,
+        displayIn specifiedView: UIView? = nil,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil
+    ) {
         p_mainThreadCheck()
         p_prepareForDisplaying()
         
@@ -891,7 +923,8 @@ private extension FSPopoverView {
         }()
         
         arrowReferRect = {
-            if let view = view {
+            var rect = rect.offsetBy(dx: offset.x, dy: offset.y)
+            if let view {
                 return view.convert(rect, to: displayView)
             }
             return rect
@@ -930,8 +963,11 @@ private extension FSPopoverView {
         }
     }
     
-    func p_dismiss(animated: Bool = true, isSelection: Bool = false, completion: (() -> Void)? = nil) {
-        
+    func p_dismiss(
+        animated: Bool = true,
+        isSelection: Bool = false,
+        completion: (() -> Void)? = nil
+    ) {
         p_mainThreadCheck()
         
         // Can not do anything when the popover view begins disappearing.
